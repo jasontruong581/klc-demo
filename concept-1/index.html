@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 1: Industrial Dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171a;
+    --ink-2:#1c2126;
+    --ink-3:#262c33;
+    --steel:#b9c2cb;
+    --steel-bright:#e5eaef;
+    --green:#23a04f;
+    --green-deep:#157238;
+    --line:#333a42;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--steel);font-family:'Be Vietnam Pro',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+  .display{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(20,23,26,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo-mark{width:40px;height:40px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Oswald';font-weight:700;color:#fff;font-size:15px;clip-path:polygon(0 0,100% 0,100% 78%,78% 100%,0 100%)}
+  .logo-name{font-family:'Oswald';font-weight:600;font-size:19px;color:var(--steel-bright);text-transform:uppercase;letter-spacing:.06em}
+  .logo-name span{color:var(--green)}
+  nav ul{display:flex;gap:34px;list-style:none}
+  nav a{color:var(--steel);text-decoration:none;font-size:13px;text-transform:uppercase;letter-spacing:.12em;transition:color .2s}
+  nav a:hover,nav a:focus-visible{color:var(--green)}
+  .nav-cta{background:var(--green);color:#fff!important;padding:10px 22px;font-weight:500}
+  .nav-cta:hover{background:var(--green-deep);color:#fff!important}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:120px 40px 60px;position:relative;gap:40px;max-width:1400px;margin:0 auto}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:24px}
+  .hero-eyebrow::before{content:'';width:34px;height:2px;background:var(--green)}
+  h1{font-family:'Oswald';font-weight:700;font-size:clamp(56px,8.5vw,118px);line-height:.98;text-transform:uppercase;color:var(--steel-bright)}
+  h1 .hollow{color:transparent;-webkit-text-stroke:2px var(--steel);display:block}
+  h1 .accent{color:var(--green)}
+  .hero-sub{max-width:520px;margin-top:28px;font-size:16px;color:#8d979f}
+  .hero-actions{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 34px;font-family:'Oswald';font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:14px;text-decoration:none;transition:.2s}
+  .btn-solid{background:var(--green);color:#fff;clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,0 100%)}
+  .btn-solid:hover{background:var(--green-deep)}
+  .btn-ghost{border:1px solid var(--line);color:var(--steel-bright)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+  /* Coil graphic */
+  .coil{position:relative;width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+  .coil svg{width:100%;height:100%;animation:spin 60s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){.coil svg{animation:none}}
+  .coil-core{position:absolute;text-align:center}
+  .coil-core .num{font-family:'Oswald';font-weight:700;font-size:44px;color:var(--steel-bright)}
+  .coil-core .lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green)}
+
+  /* Ticker */
+  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--ink-2)}
+  .ticker-track{display:flex;gap:0;width:max-content;animation:scroll 30s linear infinite}
+  @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .ticker-item{padding:16px 36px;font-family:'Oswald';font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:#7d8790;border-right:1px solid var(--line);white-space:nowrap}
+  .ticker-item b{color:var(--green);font-weight:600}
+
+  /* Sections */
+  section{padding:110px 40px;max-width:1400px;margin:0 auto}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;gap:30px;flex-wrap:wrap}
+  h2{font-family:'Oswald';font-weight:600;font-size:clamp(34px,4.5vw,56px);text-transform:uppercase;color:var(--steel-bright);line-height:1.05}
+  h2 em{font-style:normal;color:var(--green)}
+  .sec-note{max-width:380px;font-size:14px;color:#8d979f}
+
+  /* Products */
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
+  .prod{background:var(--ink-2);padding:44px 36px;position:relative;transition:background .25s;min-height:380px;display:flex;flex-direction:column}
+  .prod:hover{background:var(--ink-3)}
+  .prod-tag{font-size:11px;letter-spacing:.2em;color:var(--green);text-transform:uppercase}
+  .prod h3{font-family:'Oswald';font-weight:600;font-size:28px;text-transform:uppercase;color:var(--steel-bright);margin:14px 0 18px}
+  .prod p{font-size:14px;color:#8d979f;flex:1}
+  .prod-spec{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .prod-spec div{font-size:12px;color:#78828b}
+  .prod-spec b{display:block;font-family:'Oswald';font-size:17px;color:var(--steel-bright);font-weight:500}
+  .prod::after{content:'→';position:absolute;top:40px;right:36px;font-size:22px;color:var(--line);transition:.25s}
+  .prod:hover::after{color:var(--green);transform:translateX(4px)}
+
+  /* Partner band */
+  .partner{background:var(--green-deep);position:relative;overflow:hidden}
+  .partner-inner{max-width:1400px;margin:0 auto;padding:70px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .partner h3{font-family:'Oswald';font-size:clamp(24px,3vw,36px);text-transform:uppercase;color:#fff;font-weight:600}
+  .partner p{color:#c8ead4;max-width:520px;margin-top:10px;font-size:15px}
+  .partner .btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+  .partner .btn-ghost:hover{border-color:#fff;color:#fff}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line)}
+  .stat{background:var(--ink);padding:40px 30px}
+  .stat .n{font-family:'Oswald';font-weight:700;font-size:52px;color:var(--steel-bright)}
+  .stat .n span{color:var(--green)}
+  .stat .l{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#78828b;margin-top:6px}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:60px 40px 40px;background:var(--ink-2)}
+  .foot-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px}
+  footer h4{font-family:'Oswald';text-transform:uppercase;font-size:14px;letter-spacing:.15em;color:var(--steel-bright);margin-bottom:18px}
+  footer p,footer a{font-size:14px;color:#8d979f;text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:var(--green)}
+  .copyright{max-width:1400px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:#5c656d}
+
+  @media(max-width:960px){
+    .hero{grid-template-columns:1fr;padding-top:100px}
+    .coil{max-width:340px;margin:0 auto}
+    .prod-grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .foot-inner{grid-template-columns:1fr}
+    nav ul{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">KLC</div>
+    <div class="logo-name">KLC <span>Steel</span></div>
+  </div>
+  <ul>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#partner">Đối tác</a></li>
+    <li><a href="#stats">Năng lực</a></li>
+    <li><a href="#contact" class="nav-cta">Báo giá</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow display">Nhà cung cấp thép công nghiệp</div>
+    <h1>
+      Thép cán<br>
+      <span class="hollow">Chuẩn từng</span>
+      <span class="accent">Milimét</span>
+    </h1>
+    <p class="hero-sub">KLC Steel chuyên cung cấp thép cán nguội, thép cán nóng và tôn lạnh cho nhà máy, công trình và xưởng gia công trên toàn quốc. Hàng sẵn kho — cắt theo quy cách — giao đúng tiến độ.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#contact">Yêu cầu báo giá</a>
+      <a class="btn btn-ghost" href="#products">Xem quy cách</a>
+    </div>
+  </div>
+  <div class="coil" aria-hidden="true">
+    <svg viewBox="0 0 400 400">
+      <g fill="none" stroke="#333a42" stroke-width="1.5">
+        <circle cx="200" cy="200" r="190"/>
+        <circle cx="200" cy="200" r="170"/>
+        <circle cx="200" cy="200" r="150"/>
+        <circle cx="200" cy="200" r="130"/>
+        <circle cx="200" cy="200" r="110" stroke="#23a04f" stroke-width="2"/>
+        <circle cx="200" cy="200" r="90"/>
+        <circle cx="200" cy="200" r="70"/>
+      </g>
+      <g stroke="#4a545e" stroke-width="1">
+        <line x1="200" y1="10" x2="200" y2="30"/>
+        <line x1="200" y1="370" x2="200" y2="390"/>
+        <line x1="10" y1="200" x2="30" y2="200"/>
+        <line x1="370" y1="200" x2="390" y2="200"/>
+      </g>
+    </svg>
+    <div class="coil-core">
+      <div class="num">0.18–25</div>
+      <div class="lbl">mm độ dày</div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">Thép cán nguội <b>SPCC / SPCC-SD</b></div>
+    <div class="ticker-item">Thép cán nóng <b>SS400 / Q235B</b></div>
+    <div class="ticker-item">Tôn lạnh <b>AZ50 – AZ150</b></div>
+    <div class="ticker-item">Cắt tấm theo quy cách <b>±0.5mm</b></div>
+    <div class="ticker-item">Đối tác <b>Tôn Tân Phước Khanh</b></div>
+    <div class="ticker-item">Thép cán nguội <b>SPCC / SPCC-SD</b></div>
+    <div class="ticker-item">Thép cán nóng <b>SS400 / Q235B</b></div>
+    <div class="ticker-item">Tôn lạnh <b>AZ50 – AZ150</b></div>
+    <div class="ticker-item">Cắt tấm theo quy cách <b>±0.5mm</b></div>
+    <div class="ticker-item">Đối tác <b>Tôn Tân Phước Khanh</b></div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="sec-head">
+    <h2>Ba dòng sản phẩm<br><em>Chủ lực</em></h2>
+    <p class="sec-note">Nguồn hàng ổn định từ các nhà máy lớn trong nước, đầy đủ chứng chỉ xuất xưởng (CO/CQ) theo từng lô hàng.</p>
+  </div>
+  <div class="prod-grid">
+    <article class="prod">
+      <div class="prod-tag">CRC — Cold Rolled</div>
+      <h3>Thép cán nguội</h3>
+      <p>Bề mặt mịn, dung sai độ dày thấp, phù hợp gia công dập, chấn, sản xuất thiết bị gia dụng, tủ điện, chi tiết cơ khí chính xác.</p>
+      <div class="prod-spec">
+        <div><b>0.18 – 3.0</b>Độ dày (mm)</div>
+        <div><b>SPCC, SPCC-SD</b>Mác thép</div>
+      </div>
+    </article>
+    <article class="prod">
+      <div class="prod-tag">HRC — Hot Rolled</div>
+      <h3>Thép cán nóng</h3>
+      <p>Chịu lực tốt, giá thành cạnh tranh — lựa chọn tiêu chuẩn cho kết cấu nhà xưởng, bồn bể, đóng tàu và cơ khí chế tạo.</p>
+      <div class="prod-spec">
+        <div><b>1.5 – 25</b>Độ dày (mm)</div>
+        <div><b>SS400, Q235B</b>Mác thép</div>
+      </div>
+    </article>
+    <article class="prod">
+      <div class="prod-tag">GL — Galvalume</div>
+      <h3>Tôn lạnh</h3>
+      <p>Lớp mạ hợp kim nhôm kẽm chống ăn mòn vượt trội, dùng cho mái lợp, vách ngăn nhà xưởng và dân dụng. Hợp tác cùng Tôn Tân Phước Khanh.</p>
+      <div class="prod-spec">
+        <div><b>AZ50 – AZ150</b>Lớp mạ</div>
+        <div><b>0.25 – 0.5</b>Độ dày (mm)</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="partner" id="partner">
+  <div class="partner-inner">
+    <div>
+      <div class="hero-eyebrow display" style="color:#a5d9b8">Đối tác chiến lược</div>
+      <h3>Tôn Tân Phước Khanh</h3>
+      <p>Hợp tác trực tiếp với nhà máy Tôn Tân Phước Khanh giúp KLC Steel chủ động nguồn tôn lạnh chất lượng cao, giá gốc nhà máy và tiến độ giao hàng ổn định.</p>
+    </div>
+    <a class="btn btn-ghost" href="#contact">Tìm hiểu thêm</a>
+  </div>
+</div>
+
+<section id="stats">
+  <div class="sec-head">
+    <h2>Năng lực <em>Cung ứng</em></h2>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">10<span>+</span></div><div class="l">Năm kinh nghiệm</div></div>
+    <div class="stat"><div class="n">5.000<span>T</span></div><div class="l">Tồn kho thường xuyên</div></div>
+    <div class="stat"><div class="n">300<span>+</span></div><div class="l">Khách hàng doanh nghiệp</div></div>
+    <div class="stat"><div class="n">24<span>h</span></div><div class="l">Báo giá &amp; xác nhận đơn</div></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-inner">
+    <div>
+      <div class="logo" style="margin-bottom:18px">
+        <div class="logo-mark">KLC</div>
+        <div class="logo-name">KLC <span>Steel</span></div>
+      </div>
+      <p>Chuyên cung cấp thép cán nguội, thép cán nóng, tôn lạnh cho công nghiệp và xây dựng.</p>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <a href="tel:0900000000">Hotline: 0900 000 000</a>
+      <a href="mailto:sales@klcsteel.vn">sales@klcsteel.vn</a>
+      <p>KCN ..., TP. Hồ Chí Minh</p>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="#products">Thép cán nguội</a>
+      <a href="#products">Thép cán nóng</a>
+      <a href="#products">Tôn lạnh</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 KLC Steel. Concept 1 — Industrial Dark.</div>
+</footer>
+
+</body>
+</html>

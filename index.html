@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Chọn mẫu thiết kế website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f7f5;
+    --ink:#1a2620;
+    --gray:#5c6b63;
+    --green:#0e7a3c;
+    --silver:#dde3e0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+  header{text-align:center;padding:70px 24px 40px}
+  .logo{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:22px;margin-bottom:24px}
+  .logo-mark{width:44px;height:44px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .logo span{color:var(--green)}
+  h1{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
+  header p{margin-top:12px;color:var(--gray);max-width:560px;margin-left:auto;margin-right:auto}
+
+  main{flex:1;max-width:1180px;margin:0 auto;padding:20px 24px 80px;width:100%}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+  .concept{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--silver);border-radius:16px;overflow:hidden;transition:.22s}
+  .concept:hover{transform:translateY(-4px);box-shadow:0 22px 48px -24px rgba(26,38,32,.3);border-color:var(--green)}
+  .thumb{height:190px;position:relative;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;letter-spacing:-.01em}
+  .t1{background:#14171a;color:#e5eaef}
+  .t1 b{color:#23a04f}
+  .t2{background:#fff;color:#1a2620;border-bottom:1px solid var(--silver)}
+  .t2 b{color:#0e7a3c}
+  .t3{background:#eef1ee;background-image:linear-gradient(#d3dbd3 1px,transparent 1px),linear-gradient(90deg,#d3dbd3 1px,transparent 1px);background-size:26px 26px;color:#20302a}
+  .t3 b{color:#137a3f}
+  .t4{background:radial-gradient(400px 260px at 70% 0%,#10502f,#07281a);color:#f2f5f4}
+  .t4 b{background:linear-gradient(100deg,#2fd47f,#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .body{padding:22px 26px 26px}
+  .num{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+  .body h2{font-size:19px;font-weight:700;margin:8px 0 8px}
+  .body p{font-size:13.5px;color:var(--gray)}
+  .body .go{display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:var(--green)}
+
+  footer{text-align:center;padding:26px;font-size:12.5px;color:var(--gray);border-top:1px solid var(--silver)}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><div class="logo-mark">KLC</div>KLC<span>Steel</span></div>
+  <h1>Chọn mẫu thiết kế website</h1>
+  <p>4 hướng thiết kế cho website KLC Steel. Bấm vào từng mẫu để xem bản demo hoàn chỉnh, xem tốt nhất trên máy tính.</p>
+</header>
+
+<main>
+  <div class="grid">
+    <a class="concept" href="/concept-1/">
+      <div class="thumb t1">THÉP CÁN <b>&nbsp;CHUẨN</b></div>
+      <div class="body">
+        <div class="num">Mẫu 01</div>
+        <h2>Industrial Dark — Công nghiệp mạnh mẽ</h2>
+        <p>Nền tối màu gang thép, chữ tiêu đề cực lớn, vòng cuộn thép chuyển động. Ấn tượng thị giác mạnh, đậm chất nhà máy.</p>
+        <span class="go">Xem mẫu 01 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-2/">
+      <div class="thumb t2">Đúng quy cách, <b>&nbsp;đúng tiến độ</b></div>
+      <div class="body">
+        <div class="num">Mẫu 02</div>
+        <h2>Corporate Light — Doanh nghiệp chuyên nghiệp</h2>
+        <p>Giao diện sáng, sạch, form báo giá nhanh ngay đầu trang và bảng quy cách chi tiết. Thiên về chuyển đổi đơn hàng B2B.</p>
+        <span class="go">Xem mẫu 02 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-3/">
+      <div class="thumb t3">BẢN VẼ <b>&nbsp;KLC-2026</b></div>
+      <div class="body">
+        <div class="num">Mẫu 03</div>
+        <h2>Technical Blueprint — Bản vẽ kỹ thuật</h2>
+        <p>Phong cách bản vẽ CAD: lưới tọa độ, sơ đồ mặt cắt tôn lạnh có chú thích, bảng spec sheet. Khác biệt, hợp khách kỹ thuật.</p>
+        <span class="go">Xem mẫu 03 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-4/">
+      <div class="thumb t4">Nền thép <b>&nbsp;vững</b></div>
+      <div class="body">
+        <div class="num">Mẫu 04</div>
+        <h2>Modern Green — Hiện đại ánh kim</h2>
+        <p>Gradient xanh đậm, chữ ánh kim bạc theo tinh thần logo, card kính mờ. Hình ảnh trẻ trung, hiện đại, thiên về marketing.</p>
+        <span class="go">Xem mẫu 04 →</span>
+      </div>
+    </a>
+  </div>
+</main>
+
+<footer>© 2026 KLC Steel — Bản demo thiết kế, nội dung và số liệu chỉ mang tính minh hoạ.</footer>
+
+</body>
+</html>
