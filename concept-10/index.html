@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 10: Corporate Light 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f9f8;
+    --white:#ffffff;
+    --ink:#1a2620;
+    --gray:#5c6b63;
+    --silver:#dde3e0;
+    --green:#0e7a3c;
+    --green-soft:#e7f3ec;
+    --green-dark:#0a5c2d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;line-height:1.65}
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  .topbar{background:var(--ink);color:#c7d2cb;font-size:12.5px;padding:8px 48px;display:flex;justify-content:space-between}
+  .topbar b{color:#7fd9a3}
+
+  nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--silver);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:-.01em}
+  .logo-mark{width:42px;height:42px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .logo span{color:var(--green)}
+  nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  nav a{text-decoration:none;color:var(--gray);font-size:14.5px;font-weight:500;transition:color .2s}
+  nav a:hover{color:var(--green)}
+  .nav-cta{background:var(--green);color:#fff!important;padding:11px 24px;border-radius:8px;font-weight:600}
+  .nav-cta:hover{background:var(--green-dark)}
+
+  .hero{max-width:1320px;margin:0 auto;padding:64px 48px 40px}
+  .badge{display:inline-block;background:var(--green-soft);color:var(--green);font-size:13px;font-weight:600;padding:7px 16px;border-radius:99px;margin-bottom:20px}
+  h1{font-size:clamp(34px,4.2vw,54px);font-weight:800;letter-spacing:-.025em;line-height:1.12;max-width:940px}
+  h1 em{font-style:normal;color:var(--green)}
+  .hero-lede{margin-top:18px;font-size:17px;color:var(--gray);max-width:620px}
+
+  .build{max-width:1320px;margin:0 auto;padding:24px 48px 80px;display:grid;grid-template-columns:1.32fr .68fr;gap:28px;align-items:start}
+
+  /* 3D STAGE */
+  .stage{position:relative;background:var(--white);border:1px solid var(--silver);border-radius:16px;overflow:hidden;aspect-ratio:16/11;min-height:430px;box-shadow:0 30px 70px -46px rgba(26,38,32,.4)}
+  .stage canvas{display:block;width:100%;height:100%;touch-action:none}
+  .label-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .label{position:absolute;left:0;top:0;background:rgba(255,255,255,.93);border:1px solid var(--silver);border-radius:9px;padding:5px 11px;white-space:nowrap;box-shadow:0 8px 22px -14px rgba(26,38,32,.5);transition:opacity .25s}
+  .label b{font-family:'IBM Plex Mono';font-size:13.5px;font-weight:500;color:var(--ink);display:block;line-height:1.3}
+  .label i{font-style:normal;font-size:10px;color:var(--gray);letter-spacing:.09em;text-transform:uppercase}
+
+  .views{position:absolute;top:14px;left:14px;display:flex;gap:6px;z-index:4;flex-wrap:wrap}
+  .views button{background:var(--white);border:1px solid var(--silver);border-radius:8px;color:var(--gray);font-size:12.5px;font-weight:600;padding:8px 13px;cursor:pointer;transition:.18s}
+  .views button:hover{border-color:var(--green);color:var(--green)}
+  .views button[aria-current="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .stage-tools{position:absolute;top:14px;right:14px;display:flex;gap:6px;z-index:4}
+  .stage-tools button{background:var(--white);border:1px solid var(--silver);border-radius:8px;color:var(--gray);font-size:12.5px;font-weight:600;padding:8px 13px;cursor:pointer}
+  .stage-tools button:hover{border-color:var(--green);color:var(--green)}
+  .stage-hint{position:absolute;bottom:12px;right:16px;font-size:11.5px;color:#9aa8a0;z-index:3;pointer-events:none}
+  .stage-code{position:absolute;bottom:12px;left:16px;font-family:'IBM Plex Mono';font-size:12px;background:var(--ink);color:#fff;padding:5px 11px;border-radius:7px;z-index:3}
+
+  .stage-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:40px;background:var(--white)}
+  .stage-fallback.on{display:flex}
+  .stage-fallback strong{font-size:19px;font-weight:800}
+  .stage-fallback p{font-size:13.5px;color:var(--gray);max-width:400px}
+
+  /* CONFIG CARD */
+  .quote-card{background:var(--white);border:1px solid var(--silver);border-radius:16px;box-shadow:0 24px 60px -30px rgba(26,38,32,.25);position:sticky;top:96px}
+  .quote-head{padding:24px 26px 18px;border-bottom:1px solid var(--silver)}
+  .quote-head h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .quote-head p{font-size:13px;color:var(--gray);margin-top:4px}
+  .quote-body{padding:22px 26px}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:12.5px;font-weight:600;color:var(--gray);margin-bottom:6px}
+  .field select,.field input{width:100%;border:1.5px solid var(--silver);border-radius:8px;padding:11px 13px;font-size:14px;color:var(--ink);background:var(--bg);font-family:'Be Vietnam Pro',sans-serif}
+  .field input{font-family:'IBM Plex Mono',monospace}
+  .field select:focus,.field input:focus{outline:none;border-color:var(--green)}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .readout{border-top:1px solid var(--silver);margin-top:6px;padding-top:16px}
+  .readout div{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;font-size:13.5px}
+  .readout span{color:var(--gray)}
+  .readout b{font-family:'IBM Plex Mono';font-weight:500;font-size:15px}
+  .readout .total b{color:var(--green);font-size:19px;font-weight:600}
+  .btn{display:inline-block;padding:14px 28px;border-radius:9px;font-weight:600;font-size:15px;text-decoration:none;transition:.2s;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif}
+  .btn-solid{background:var(--green);color:#fff;width:100%;margin-top:14px}
+  .btn-solid:hover{background:var(--green-dark)}
+  .btn-line{border:1.5px solid var(--silver);color:var(--ink);background:var(--white)}
+  .btn-line:hover{border-color:var(--green);color:var(--green)}
+  .quote-note{font-size:12px;color:var(--gray);text-align:center;margin-top:11px}
+  .submitted{margin-top:12px;background:var(--green-soft);border-radius:9px;padding:12px 14px;font-size:12.5px;color:var(--green-dark);display:none}
+  .submitted.on{display:block}
+  .submitted code{font-family:'IBM Plex Mono';font-size:12px;display:block;margin-top:4px;color:var(--ink)}
+  .disclosure{border-top:1px solid var(--silver);padding:14px 26px 18px;font-size:11.5px;color:var(--gray);line-height:1.6}
+
+  section{max-width:1320px;margin:0 auto;padding:86px 48px}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+  h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+  .sec-sub{margin-top:14px;color:var(--gray);max-width:600px}
+
+  .cards{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:var(--white);border:1px solid var(--silver);border-radius:14px;padding:26px;transition:.25s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 44px -24px rgba(26,38,32,.28);border-color:#bcd9c8}
+  .card .code{font-family:'IBM Plex Mono';font-size:12px;color:var(--green);letter-spacing:.06em}
+  .card h3{font-size:20px;font-weight:700;margin-top:8px}
+  .card p{font-size:14px;color:var(--gray);margin-top:10px;flex:1}
+  .spec-table{margin-top:16px;border-top:1px solid var(--silver);font-size:13px}
+  .spec-table div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--silver)}
+  .spec-table span{color:var(--gray)}
+  .spec-table b{font-family:'IBM Plex Mono';font-weight:500}
+  .card button{margin-top:16px;background:none;border:none;color:var(--green);font-weight:600;font-size:14px;text-align:left;cursor:pointer;padding:0;font-family:'Be Vietnam Pro',sans-serif}
+  .card button:hover{text-decoration:underline}
+
+  .why{background:var(--white);border-top:1px solid var(--silver);border-bottom:1px solid var(--silver)}
+  .why-grid{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:34px}
+  .why-item .ic{width:46px;height:46px;border-radius:10px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;margin-bottom:16px}
+  .why-item h4{font-size:16.5px;font-weight:700;margin-bottom:8px}
+  .why-item p{font-size:13.5px;color:var(--gray)}
+
+  .partner-box{background:linear-gradient(120deg,var(--green) 0%,var(--green-dark) 100%);border-radius:18px;padding:54px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;color:#fff}
+  .partner-box h3{font-size:clamp(22px,2.8vw,30px);font-weight:800;letter-spacing:-.01em}
+  .partner-box p{margin-top:12px;color:#d3ecdd;max-width:560px;font-size:15px}
+  .partner-box .btn{background:#fff;color:var(--green);width:auto}
+
+  footer{background:var(--ink);color:#aebbb3;padding:58px 48px 34px}
+  .foot{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px}
+  footer h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:16px}
+  footer a,footer p{color:#aebbb3;font-size:14px;text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:#7fd9a3}
+  .copyright{max-width:1320px;margin:42px auto 0;border-top:1px solid #2c3a32;padding-top:22px;font-size:12.5px;color:#6d7a72}
+
+  @media(max-width:1080px){
+    /* minmax(0,...) and min-width:0 stop the canvas's intrinsic pixel size from pinning the
+       grid track open, which is what makes a 3D page scroll sideways on a phone. */
+    .build{grid-template-columns:minmax(0,1fr);padding-bottom:56px}
+    .quote-card{position:static}
+    .stage{aspect-ratio:4/3;min-height:270px;min-width:0}
+    .stage-hint{display:none}
+    .stage-tools{top:auto;bottom:14px}
+    .cards{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr 1fr}
+    .foot{grid-template-columns:1fr 1fr}
+    nav{padding:0 22px}
+    nav ul{display:none}
+    .topbar{display:none}
+    section,.hero,.build{padding-left:22px;padding-right:22px}
+    footer{padding-left:22px;padding-right:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>Hotline: <b>0900 000 000</b> · sales@klcsteel.vn</div>
+  <div>Giá thép cập nhật ngày <b>17/07/2026</b></div>
+</div>
+
+<nav>
+  <div class="logo"><div class="logo-mark">KLC</div>KLC<span>Steel</span></div>
+  <ul>
+    <li><a href="#configurator">Cấu hình tấm</a></li>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#why">Vì sao chọn KLC</a></li>
+    <li><a href="#quote" class="nav-cta">Nhận báo giá</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="configurator">
+  <div class="badge">✓ CO/CQ đầy đủ theo từng lô hàng</div>
+  <h1>Chọn quy cách, xem đúng bó thép bạn sẽ nhận — <em>rồi mới báo giá</em></h1>
+  <p class="hero-lede">Điền quy cách vào phiếu bên phải: mô hình 3D dựng lại đúng khổ, đúng chiều dài và đúng số tấm, còn khối lượng được tính trực tiếp từ hình học. Không phải hình minh hoạ.</p>
+</div>
+
+<div class="build">
+  <div class="stage" id="stage">
+    <div class="views" id="views" role="group" aria-label="Góc nhìn"></div>
+    <div class="stage-tools">
+      <button type="button" id="spin" aria-pressed="true">Dừng xoay</button>
+      <button type="button" id="reset">Góc mặc định</button>
+    </div>
+    <canvas id="world" role="img" aria-label="Mô hình 3D một bó tôn tấm đã cắt đặt trên bàn xoay trưng bày, có nhãn kích thước khổ rộng, chiều dài và chiều cao bó"></canvas>
+    <div class="stage-code mono" id="stage-code">CRC · SPCC</div>
+    <div class="stage-hint">Kéo để quay · cuộn chuột để phóng</div>
+    <div class="stage-fallback" id="fallback">
+      <strong>Không bật được WebGL</strong>
+      <p>Trình duyệt hiện tại không dựng được mô hình 3D. Phiếu cấu hình bên cạnh vẫn tính đúng khối lượng và chiều cao bó theo quy cách bạn chọn.</p>
+    </div>
+  </div>
+
+  <form class="quote-card" id="quote" autocomplete="off">
+    <div class="quote-head">
+      <h3>Phiếu quy cách &amp; báo giá</h3>
+      <p>Đổi bất kỳ ô nào, mô hình và khối lượng cập nhật ngay.</p>
+    </div>
+    <div class="quote-body">
+      <div class="field">
+        <label for="product">Loại sản phẩm</label>
+        <select id="product"></select>
+      </div>
+      <div class="pair">
+        <div class="field">
+          <label for="gauge">Độ dày (mm)</label>
+          <select id="gauge"></select>
+        </div>
+        <div class="field">
+          <label for="width">Khổ rộng (mm)</label>
+          <select id="width"></select>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="field">
+          <label for="length">Chiều dài tấm (mm)</label>
+          <input type="number" id="length" min="500" max="6000" step="50" value="2500">
+        </div>
+        <div class="field">
+          <label for="sheets">Số tấm</label>
+          <input type="number" id="sheets" min="1" max="400" step="1" value="40">
+        </div>
+      </div>
+      <div class="readout">
+        <div><span>Khối lượng 1 tấm</span><b id="out-sheet">—</b></div>
+        <div><span>Chiều cao bó</span><b id="out-height">—</b></div>
+        <div class="total"><span>Tổng khối lượng</span><b id="out-total">—</b></div>
+      </div>
+      <button type="submit" class="btn btn-solid">Gửi yêu cầu báo giá</button>
+      <div class="quote-note">Hoặc gọi trực tiếp: 0900 000 000 (Zalo)</div>
+      <div class="submitted" id="submitted"></div>
+    </div>
+    <p class="disclosure">Khối lượng lý thuyết theo khối lượng riêng 7.850 kg/m³, chưa gồm dung sai cán và dung sai cắt. Mô hình dựng ở tỷ lệ thật — độ dày không phóng đại, nên hãy dùng góc nhìn “Cạnh bó” để thấy lớp tấm.</p>
+  </form>
+</div>
+
+<section id="products">
+  <div class="eyebrow">Danh mục sản phẩm</div>
+  <h2>Ba dòng thép chủ lực</h2>
+  <p class="sec-sub">Bấm vào một dòng để nạp quy cách phổ thông của dòng đó vào phiếu cấu hình phía trên.</p>
+  <div class="cards">
+    <article class="card">
+      <div class="code">CRC · SPCC</div>
+      <h3>Thép cán nguội</h3>
+      <p>Bề mặt mịn, dung sai thấp — cho gia công dập, chấn, thiết bị gia dụng, tủ điện và chi tiết cơ khí chính xác.</p>
+      <div class="spec-table">
+        <div><span>Độ dày</span><b>0.18 – 3.0 mm</b></div>
+        <div><span>Khổ rộng</span><b>1000 / 1250 mm</b></div>
+        <div><span>Mác thép</span><b>SPCC, SPCC-SD</b></div>
+      </div>
+      <button type="button" data-load="crc">Nạp quy cách CRC vào phiếu →</button>
+    </article>
+    <article class="card">
+      <div class="code">HRC · SS400</div>
+      <h3>Thép cán nóng</h3>
+      <p>Chịu lực tốt, giá cạnh tranh — tiêu chuẩn cho kết cấu nhà xưởng, bồn bể, cơ khí chế tạo và đóng tàu.</p>
+      <div class="spec-table">
+        <div><span>Độ dày</span><b>1.5 – 25 mm</b></div>
+        <div><span>Khổ rộng</span><b>1250 / 1500 mm</b></div>
+        <div><span>Mác thép</span><b>SS400, Q235B</b></div>
+      </div>
+      <button type="button" data-load="hrc">Nạp quy cách HRC vào phiếu →</button>
+    </article>
+    <article class="card">
+      <div class="code">GL · AZ100</div>
+      <h3>Tôn lạnh</h3>
+      <p>Mạ hợp kim nhôm kẽm chống ăn mòn vượt trội — mái lợp, vách ngăn nhà xưởng. Hợp tác cùng Tôn Tân Phước Khanh.</p>
+      <div class="spec-table">
+        <div><span>Độ dày</span><b>0.25 – 0.5 mm</b></div>
+        <div><span>Lớp mạ</span><b>AZ50 – AZ150</b></div>
+        <div><span>Dạng hàng</span><b>Cuộn / tấm cắt</b></div>
+      </div>
+      <button type="button" data-load="gl">Nạp quy cách tôn lạnh vào phiếu →</button>
+    </article>
+  </div>
+</section>
+
+<div class="why" id="why">
+  <section style="padding-top:78px;padding-bottom:78px">
+    <div class="eyebrow">Vì sao chọn KLC Steel</div>
+    <h2>Mua thép không chỉ là mua giá</h2>
+    <div class="why-grid">
+      <div class="why-item"><div class="ic">01</div><h4>Hàng sẵn kho</h4><p>Quy cách phổ thông luôn sẵn 5.000+ tấn, không phải chờ nhà máy cán.</p></div>
+      <div class="why-item"><div class="ic">02</div><h4>Cắt theo yêu cầu</h4><p>Cắt tấm, xả băng theo quy cách riêng với dung sai ±0.5 mm.</p></div>
+      <div class="why-item"><div class="ic">03</div><h4>Chứng từ đầy đủ</h4><p>CO/CQ, biên bản giao nhận, hoá đơn VAT theo từng lô hàng.</p></div>
+      <div class="why-item"><div class="ic">04</div><h4>Giao đúng tiến độ</h4><p>Đội xe liên kết giao hàng toàn quốc, khu vực HCM trong 48 giờ.</p></div>
+    </div>
+  </section>
+</div>
+
+<section id="partner">
+  <div class="partner-box">
+    <div>
+      <div class="eyebrow" style="color:#a9e3c0">Đối tác chiến lược</div>
+      <h3>Hợp tác cùng Tôn Tân Phước Khanh</h3>
+      <p>Nguồn tôn lạnh trực tiếp từ nhà máy — giá gốc, chất lượng ổn định, chủ động tiến độ cho các đơn hàng khối lượng lớn.</p>
+    </div>
+    <a class="btn btn-line" href="#quote">Liên hệ hợp tác</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>KLC Steel</h4>
+      <p>Chuyên cung cấp thép cán nguội, thép cán nóng, tôn lạnh cho công nghiệp và xây dựng.</p>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="#products">Thép cán nguội</a>
+      <a href="#products">Thép cán nóng</a>
+      <a href="#products">Tôn lạnh</a>
+    </div>
+    <div>
+      <h4>Công ty</h4>
+      <a href="#why">Về KLC Steel</a>
+      <a href="#partner">Đối tác</a>
+      <a href="#quote">Báo giá</a>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <p>Hotline: 0900 000 000</p>
+      <p>sales@klcsteel.vn</p>
+      <p>KCN ..., TP. Hồ Chí Minh</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 KLC Steel. Concept 10 — Corporate Light 3D.</div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start } from '../assets/klc3d/runtime.js';
+import { createScene, PRODUCTS, quoteFor, STACK_BASE_Y } from './scene.js';
+
+// Bright product studio: soft key from the left, cool fill, one narrow rim for the cut edges.
+const LOOK = {
+  toneMapping: 'ACESFilmicToneMapping',
+  exposure: 1.0,
+  sky: { zenith: '#ffffff', horizon: '#dbe4df' },
+  palette: { floor: '#eef2f0', table: '#cfd8d3', timber: '#9c7d55' },
+  light: {
+    subject: [0, 0.3, 0], environmentIntensity: 0.95, distance: 3.6,
+    key: { color: '#ffffff', intensity: 15, width: 2.6, height: 3.2, elevationDeg: 42, azimuthDeg: 310 },
+    fill: { color: '#eef4ff', intensity: 4, width: 3.4, height: 2.0, elevationDeg: 16, azimuthDeg: 80 },
+    rim: { color: '#ffffff', intensity: 9, width: 0.5, height: 2.6, elevationDeg: 22, azimuthDeg: 175 },
+    contact: { color: '#ffffff', intensity: 0.5, mapSize: 2048, bias: -0.0001, normalBias: 0.02, extent: 4 }
+  },
+  camera: { fovDeg: 36, limits: { minDist: 0.12, maxDist: 9, minPolarDeg: 8, maxPolarDeg: 89 } }
+};
+
+const VIEWS = {
+  'Tổng thể': { position: [2.6, 1.9, 3.4], target: [0, 0.3, 0] },
+  'Mặt trên': { position: [0.35, 3.4, 0.55], target: [0, 0.2, 0] },
+  // Level with the cut edge and close in: this is where a 1.2 mm sheet becomes visible at true
+  // scale, and where the lamination shows the ordered sheet count. aimAtEdge() keeps it aimed as
+  // the ordered bundle changes height and width.
+  'Cạnh bó': { position: [0.85, 0.19, 0.13], target: [0.625, 0.184, 0] }
+};
+
+/** Re-aims the close-up at the cut edge of whatever bundle the form currently describes. */
+function aimAtEdge(quote, widthMm) {
+  const edgeX = widthMm / 2000;
+  const midEdgeY = STACK_BASE_Y + quote.bundleHeightMm / 2000;
+  VIEWS['Cạnh bó'].position = [edgeX + 0.3, midEdgeY + 0.055, 0.22];
+  VIEWS['Cạnh bó'].target = [edgeX, midEdgeY, 0];
+}
+
+const kg = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 1 });
+const mm = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 1 });
+
+const canvas = document.querySelector('#world');
+const stage = document.querySelector('#stage');
+
+const scene = start({
+  canvas, viewport: stage, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    document.querySelector('#fallback').classList.add('on');
+    document.querySelector('#views').hidden = true;
+    document.querySelector('.stage-tools').hidden = true;
+  }
+});
+
+// The form owns the spec. When there is no WebGL it still computes every number, so the quote
+// path keeps working; only the picture is missing.
+const fields = {
+  product: document.querySelector('#product'),
+  gauge: document.querySelector('#gauge'),
+  width: document.querySelector('#width'),
+  length: document.querySelector('#length'),
+  sheets: document.querySelector('#sheets')
+};
+const DEFAULTS = { crc: { gauge: 1.2, width: 1250, length: 2500, sheets: 40 },
+  hrc: { gauge: 3.0, width: 1500, length: 6000, sheets: 25 },
+  gl: { gauge: 0.4, width: 1200, length: 3000, sheets: 60 } };
+
+for (const [key, product] of Object.entries(PRODUCTS)) {
+  fields.product.append(new Option(product.label, key));
+}
+
+function fillOptions(select, values, chosen, format) {
+  select.textContent = '';
+  for (const value of values) select.append(new Option(format(value), String(value)));
+  select.value = String(values.includes(chosen) ? chosen : values[Math.floor(values.length / 2)]);
+}
+
+function readSpec() {
+  return {
+    product: fields.product.value,
+    gaugeMm: Number(fields.gauge.value),
+    widthMm: Number(fields.width.value),
+    lengthMm: Math.min(6000, Math.max(500, Number(fields.length.value) || 2500)),
+    sheets: Math.min(400, Math.max(1, Math.round(Number(fields.sheets.value) || 1)))
+  };
+}
+
+function apply() {
+  const spec = readSpec();
+  const quote = quoteFor(spec);
+  document.querySelector('#out-sheet').textContent = `${kg.format(quote.sheetMassKg)} kg`;
+  document.querySelector('#out-height').textContent = `${mm.format(quote.bundleHeightMm)} mm`;
+  document.querySelector('#out-total').textContent = `${kg.format(quote.totalMassKg)} kg`;
+  document.querySelector('#stage-code').textContent = PRODUCTS[spec.product].code;
+  aimAtEdge(quote, spec.widthMm);
+  scene?.world.apply(spec);
+}
+
+function selectProduct(key, { withDefaults = true } = {}) {
+  const product = PRODUCTS[key];
+  const preset = DEFAULTS[key];
+  fields.product.value = key;
+  fillOptions(fields.gauge, product.gauges, withDefaults ? preset.gauge : Number(fields.gauge.value), (v) => mm.format(v));
+  fillOptions(fields.width, product.widths, withDefaults ? preset.width : Number(fields.width.value), (v) => String(v));
+  if (withDefaults) {
+    fields.length.value = String(preset.length);
+    fields.sheets.value = String(preset.sheets);
+  }
+  apply();
+}
+
+fields.product.addEventListener('change', () => selectProduct(fields.product.value));
+for (const field of [fields.gauge, fields.width, fields.length, fields.sheets]) {
+  field.addEventListener('input', apply);
+  field.addEventListener('change', apply);
+}
+for (const button of document.querySelectorAll('[data-load]')) {
+  button.addEventListener('click', () => {
+    selectProduct(button.dataset.load);
+    document.querySelector('#configurator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+document.querySelector('#quote').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const spec = readSpec();
+  const box = document.querySelector('#submitted');
+  box.classList.add('on');
+  box.innerHTML = 'Đã ghi nhận quy cách. Đây là bản demo nên phiếu chưa được gửi đi.'
+    + `<code>${PRODUCTS[spec.product].code} · ${mm.format(spec.gaugeMm)} × ${spec.widthMm} × ${spec.lengthMm} mm · ${spec.sheets} tấm</code>`;
+});
+
+selectProduct('crc');
+
+if (scene) {
+  const spin = document.querySelector('#spin');
+  function paintSpin() {
+    const spinning = !scene.isPaused();
+    spin.textContent = spinning ? 'Dừng xoay' : 'Xoay bàn';
+    spin.setAttribute('aria-pressed', String(spinning));
+  }
+  spin.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintSpin(); });
+  paintSpin();
+
+  // A named view frames a specific face of the bundle, so taking one stops the turntable and
+  // squares it back to 0°; otherwise the framing is only right for the instant it was taken.
+  // Wrapping the published contract means a capture script gets exactly what a visitor gets.
+  const moveTo = window.__viewer.setView;
+  window.__viewer.setView = (name) => {
+    scene.setPaused(true);
+    scene.world.squareUp();
+    paintSpin();
+    return moveTo(name);
+  };
+
+  const viewButtons = document.querySelector('#views');
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => {
+      window.__viewer.setView(name);
+      for (const other of viewButtons.children) other.setAttribute('aria-current', String(other === button));
+    });
+    viewButtons.append(button);
+  }
+  viewButtons.firstElementChild.setAttribute('aria-current', 'true');
+
+  document.querySelector('#reset').addEventListener('click', () => {
+    scene.reset();
+    for (const other of viewButtons.children) {
+      other.setAttribute('aria-current', String(other === viewButtons.firstElementChild));
+    }
+  });
+}
+</script>
+
+</body>
+</html>

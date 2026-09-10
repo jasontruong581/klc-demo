@@ -1,0 +1,81 @@
+# KLC Steel — website design concepts
+
+A static demo site that presents several complete website design directions for **KLC Steel**, a
+Vietnamese supplier of cold-rolled steel (CRC), hot-rolled steel (HRC) and galvalume sheet
+(tôn lạnh). The root page is a picker; each concept is a full, self-contained landing page the
+client can click through and compare.
+
+All content is in Vietnamese. Company figures, contact details and prices are **placeholder demo
+data**, not KLC's real numbers.
+
+## Concepts
+
+| # | Concept | Direction |
+| --- | --- | --- |
+| 01 | [Industrial Dark](concept-1/) | Dark foundry palette, oversized display type, high visual impact |
+| 02 | [Corporate Light](concept-2/) | Bright and clean, quote form above the fold, B2B conversion focus |
+| 03 | [Technical Blueprint](concept-3/) | CAD drawing language: coordinate grid, annotated section, spec sheet |
+| 04 | [Modern Green](concept-4/) | Deep green gradient, metallic type, frosted-glass cards, marketing-led |
+| 09 | [Industrial Dark 3D](concept-9/) | 01 with a live WebGL decoiler line |
+| 10 | [Corporate Light 3D](concept-10/) | 02 with the quote form driving a true-scale bundle |
+| 11 | [Technical Blueprint 3D](concept-11/) | 03 with an explodable orthographic section |
+| 12 | [Modern Green 3D](concept-12/) | 04 with a full-bleed WebGL hero |
+
+Concepts 09–12 are the 3D counterparts of 01–04 in the same order. See
+[docs/concepts.md](docs/concepts.md) for what each one is trying to prove, and
+[docs/3d-architecture.md](docs/3d-architecture.md) for how the 3D pages are built.
+
+**Numbers 05–08 are reserved** for a separate workstream; leave that range free when adding
+concepts.
+
+## Layout
+
+```text
+index.html            the picker page: every concept as a card
+concept-<n>/          one concept per folder
+  index.html            the whole page — markup, CSS and page script inline
+  scene.js              3D concepts only: the subject, its state and its behaviour
+assets/klc3d/         shared 3D modules (concepts 09+ only)
+  runtime.js            renderer, render loop, orbit rig, named-view contract, lifecycle
+  scene-kit.js          lighting rigs, material cache, steel surfaces, labels, coil geometry
+docs/                 concept catalogue and 3D architecture notes
+```
+
+Links between pages are absolute (`/concept-1/`), so the site must be served from a domain root,
+not from a subdirectory.
+
+## Running it locally
+
+The flat concepts (01–04) open straight from disk. The 3D concepts use ES modules and an import
+map, which browsers refuse over `file://`, so serve the folder over HTTP:
+
+```sh
+python -m http.server 4181 --bind 127.0.0.1
+# then open http://127.0.0.1:4181/
+```
+
+There is no build step, no package manifest and no dependency install. Three.js is loaded from a
+CDN at runtime through the import map in each 3D page, pinned to an exact version.
+
+## Conventions
+
+- **One folder per concept, one page per folder.** A flat concept is a single HTML file with its
+  CSS and content inline. Keep it that way: each concept has to be readable and movable on its own.
+- **Each concept owns its own visual system.** Fonts, palette and component styles are declared in
+  that page's `<style>` block and are deliberately not shared between concepts — a concept is a
+  proposal, not a component library.
+- **Vietnamese copy, `lang="vi"`,** and Vietnamese number formatting (`.` thousands separator,
+  `,` decimal separator) in body text and in any figure rendered by script.
+- **Demo data stays obviously demo.** `0900 000 000`, `sales@klcsteel.vn`, `KCN ...`.
+- **Only the 3D pages share code**, and only through `assets/klc3d/`. See the architecture notes
+  for the boundary between the shared runtime and a concept's own `scene.js`.
+
+## Adding a concept
+
+1. Pick the next free number, avoiding the reserved 05–08 range.
+2. Create `concept-<n>/index.html`. For a flat concept, copy the nearest existing one and replace
+   the palette, type and layout. For a 3D concept, follow
+   [docs/3d-architecture.md](docs/3d-architecture.md).
+3. Add a card to `index.html`: a thumbnail class (`.t<n>`) in the stylesheet plus an entry in the
+   matching group grid.
+4. Add a row to the table above and an entry in [docs/concepts.md](docs/concepts.md).

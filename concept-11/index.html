@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 11: Technical Blueprint 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Be+Vietnam+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1ee;
+    --paper-2:#e4e9e4;
+    --grid:#d3dbd3;
+    --ink:#20302a;
+    --gray:#5e6f66;
+    --green:#137a3f;
+    --green-ink:#0c5a2d;
+    --white:#fbfcfb;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:32px 32px;
+    color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;line-height:1.65;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:66px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Archivo';font-weight:800;font-size:19px}
+  .logo-mark{width:38px;height:38px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;border:2px solid var(--ink)}
+  .logo span{color:var(--green)}
+  nav ul{display:flex;list-style:none;height:100%}
+  nav li{height:100%}
+  nav a{display:flex;align-items:center;height:100%;padding:0 20px;text-decoration:none;color:var(--ink);font-family:'IBM Plex Mono';font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;border-left:1px solid var(--grid);transition:.15s}
+  nav a:hover{background:var(--paper-2)}
+  .nav-cta{background:var(--green);color:#fff!important}
+  .nav-cta:hover{background:var(--green-ink)!important}
+
+  .frame{max-width:1260px;margin:0 auto;padding:0 40px}
+
+  .hero{padding:64px 0 56px;border-bottom:2px solid var(--ink)}
+  .hero-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:44px;align-items:start}
+  .drw-no{font-family:'IBM Plex Mono';font-size:12px;color:var(--gray);letter-spacing:.06em;margin-bottom:16px}
+  .drw-no b{color:var(--green);font-weight:600}
+  h1{font-family:'Archivo';font-weight:800;font-size:clamp(34px,4.2vw,52px);line-height:1.06;letter-spacing:-.02em;text-transform:uppercase}
+  h1 em{font-style:normal;color:var(--green)}
+  .hero p{margin-top:20px;color:var(--gray);font-size:15.5px;max-width:460px}
+  .hero-actions{margin-top:28px;display:flex;gap:0}
+  .btn{display:inline-block;padding:14px 26px;font-family:'IBM Plex Mono';font-size:13px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;border:2px solid var(--ink);transition:.15s;font-weight:600;cursor:pointer;background:var(--white);color:var(--ink)}
+  .btn-solid{background:var(--green);border-color:var(--green);color:#fff}
+  .btn-solid:hover{background:var(--green-ink);border-color:var(--green-ink)}
+  .btn-line{border-left:none}
+  .btn-line:hover{background:var(--paper-2)}
+
+  /* 3D DRAWING SHEET */
+  .sheet3d{border:2px solid var(--ink);background:var(--white)}
+  .sheet3d-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid var(--ink);padding:10px 16px;font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);flex-wrap:wrap}
+  .sheet3d-head b{color:var(--green)}
+  .stage{position:relative;overflow:hidden;aspect-ratio:16/11;min-height:400px;background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+  .stage canvas{display:block;width:100%;height:100%;touch-action:none}
+  .label-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .label{position:absolute;left:0;top:0;background:var(--white);border:1.5px solid var(--ink);padding:4px 9px;white-space:nowrap;transition:opacity .25s}
+  .label.green{border-color:var(--green)}
+  .label b{font-family:'IBM Plex Mono';font-size:13px;font-weight:600;display:block;line-height:1.25}
+  .label.green b{color:var(--green)}
+  .label i{font-style:normal;font-size:10px;color:var(--gray);letter-spacing:.06em;text-transform:uppercase}
+  .views{position:absolute;top:10px;left:10px;display:flex;gap:1px;z-index:4;background:var(--ink)}
+  .views button{background:var(--white);border:none;color:var(--ink);font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;cursor:pointer}
+  .views button:hover{background:var(--paper-2)}
+  .views button[aria-current="true"]{background:var(--green);color:#fff}
+  .stage-tools{position:absolute;top:10px;right:10px;display:flex;gap:1px;z-index:4;background:var(--ink)}
+  .stage-tools button{background:var(--white);border:none;color:var(--ink);font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;cursor:pointer}
+  .stage-tools button:hover{background:var(--paper-2)}
+  .stage-hint{position:absolute;bottom:10px;right:14px;font-family:'IBM Plex Mono';font-size:11px;color:var(--gray);z-index:3;pointer-events:none}
+  .scale-stamp{position:absolute;bottom:10px;left:14px;font-family:'IBM Plex Mono';font-size:11px;color:var(--green);background:var(--white);border:1.5px solid var(--green);padding:3px 9px;z-index:3}
+  .stage-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:36px;background:var(--white)}
+  .stage-fallback.on{display:flex}
+  .stage-fallback strong{font-family:'Archivo';font-size:19px;text-transform:uppercase}
+  .stage-fallback p{font-size:13.5px;color:var(--gray);max-width:400px}
+
+  .sheet3d-controls{border-top:2px solid var(--ink);display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--grid)}
+  .ctl{background:var(--white);padding:14px 16px}
+  .ctl label,.ctl .lbl{display:block;font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:8px}
+  .ctl .lbl b{color:var(--green);font-weight:600}
+  .seg{display:flex;gap:1px;background:var(--ink)}
+  .seg button{flex:1;background:var(--white);border:none;font-family:'IBM Plex Mono';font-size:12px;padding:9px 4px;cursor:pointer;color:var(--ink)}
+  .seg button:hover{background:var(--paper-2)}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff}
+  select{width:100%;border:1.5px solid var(--ink);background:var(--white);padding:9px 10px;font-family:'IBM Plex Mono';font-size:12.5px;color:var(--ink)}
+  input[type=range]{width:100%;accent-color:var(--green);height:20px}
+
+  .legend{border-top:2px solid var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));background:var(--grid);gap:1px}
+  .legend div{background:var(--white);padding:12px 16px}
+  .legend dt{font-family:'IBM Plex Mono';font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--gray)}
+  .legend dd{font-family:'IBM Plex Mono';font-size:16px;font-weight:600;margin-top:3px}
+  .disclosure{border-top:1px solid var(--grid);background:var(--white);padding:13px 16px;font-size:11.5px;color:var(--gray);line-height:1.6}
+
+  section{padding:76px 0}
+  .sec-label{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .sec-label .no{font-family:'IBM Plex Mono';font-size:13px;font-weight:600;background:var(--ink);color:var(--white);padding:5px 12px}
+  h2{font-family:'Archivo';font-weight:800;font-size:clamp(26px,3.2vw,38px);text-transform:uppercase;letter-spacing:-.01em}
+  h2 em{font-style:normal;color:var(--green)}
+
+  .sheet{border:2px solid var(--ink);background:var(--white)}
+  .sheet-row{display:grid;grid-template-columns:200px 1fr 1fr 1fr 150px;border-bottom:1px solid var(--grid)}
+  .sheet-row:last-child{border-bottom:none}
+  .sheet-row.head{background:var(--ink);color:var(--white);font-family:'IBM Plex Mono';font-size:11.5px;text-transform:uppercase;letter-spacing:.08em}
+  .sheet-row > div{padding:18px 20px;border-right:1px solid var(--grid);display:flex;flex-direction:column;justify-content:center}
+  .sheet-row.head > div{border-right-color:#3a4a42;padding:12px 20px}
+  .sheet-row > div:last-child{border-right:none}
+  .p-name{font-family:'Archivo';font-weight:700;font-size:17px;text-transform:uppercase}
+  .p-name small{display:block;font-family:'IBM Plex Mono';font-weight:400;font-size:11px;color:var(--green);text-transform:none;margin-top:3px}
+  .p-val{font-family:'IBM Plex Mono';font-size:14px;font-weight:500}
+  .p-val small{display:block;font-size:11px;color:var(--gray);font-family:'Be Vietnam Pro'}
+  .sheet-row .cta-cell a{font-family:'IBM Plex Mono';font-size:12px;color:var(--green);text-decoration:none;font-weight:600;text-transform:uppercase}
+  .sheet-row .cta-cell a:hover{text-decoration:underline}
+  .sheet-row:not(.head):hover{background:#f4f8f5}
+
+  .process{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--ink);background:var(--white)}
+  .step{padding:28px 24px;border-right:1px solid var(--grid)}
+  .step:last-child{border-right:none}
+  .step .no{font-family:'IBM Plex Mono';font-size:12px;color:var(--green);font-weight:600;letter-spacing:.1em}
+  .step h4{font-family:'Archivo';font-weight:700;font-size:16px;margin:12px 0 8px;text-transform:uppercase}
+  .step p{font-size:13.5px;color:var(--gray)}
+
+  .partner{border:2px solid var(--ink);background:var(--green);color:#fff;display:grid;grid-template-columns:1fr auto;align-items:center}
+  .partner .txt{padding:42px}
+  .partner h3{font-family:'Archivo';font-weight:800;font-size:clamp(22px,2.6vw,30px);text-transform:uppercase}
+  .partner p{margin-top:10px;color:#cfe9da;max-width:560px;font-size:15px}
+  .partner .stamp{padding:42px;border-left:2px dashed rgba(255,255,255,.4);font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.1em;text-align:center}
+  .partner .stamp b{display:block;font-size:15px;margin-top:6px}
+
+  footer{border-top:2px solid var(--ink);background:var(--white);padding:48px 0 28px}
+  .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px}
+  footer h4{font-family:'IBM Plex Mono';font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:14px;font-weight:600}
+  footer p,footer a{font-size:14px;color:var(--gray);text-decoration:none;display:block;margin-bottom:7px}
+  footer a:hover{color:var(--green)}
+  .title-block{margin-top:40px;border:2px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr);font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;color:var(--gray)}
+  .title-block div{padding:10px 14px;border-right:1px solid var(--grid)}
+  .title-block div:last-child{border-right:none}
+  .title-block b{display:block;font-size:12.5px;color:var(--ink);margin-top:2px}
+
+  @media(max-width:1060px){
+    nav ul{display:none}
+    /* minmax(0,...) and min-width:0 stop the canvas's intrinsic pixel size from pinning the
+       grid track open, which is what makes a 3D page scroll sideways on a phone. */
+    .hero-grid{grid-template-columns:minmax(0,1fr)}
+    .sheet3d{min-width:0}
+    .stage{aspect-ratio:4/3;min-height:250px;min-width:0}
+    .stage-hint{display:none}
+    .stage-tools{top:auto;bottom:10px}
+    .sheet3d-controls{grid-template-columns:minmax(0,1fr)}
+    select{min-width:0}
+    .legend{grid-template-columns:minmax(0,1fr)}
+    .sheet-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .process{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .partner{grid-template-columns:1fr}
+    .partner .stamp{border-left:none;border-top:2px dashed rgba(255,255,255,.4)}
+    .foot{grid-template-columns:1fr}
+    .title-block{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+    .frame{padding:0 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><div class="logo-mark">KLC</div>KLC<span>STEEL</span></div>
+  <ul>
+    <li><a href="#section">Mặt cắt 3D</a></li>
+    <li><a href="#spec">Quy cách</a></li>
+    <li><a href="#process">Quy trình</a></li>
+    <li><a href="#contact" class="nav-cta">Báo giá</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="section">
+  <div class="frame hero-grid">
+    <div>
+      <div class="drw-no mono">BẢN VẼ SỐ <b>KLC-2026-11</b> · HÌNH CHIẾU TRỰC GIAO · ĐƠN VỊ: MM</div>
+      <h1>Mặt cắt <em>Tôn lạnh</em> dựng đúng <em>Thông số</em></h1>
+      <p>Chọn độ dày toàn phần và lớp mạ như khi đặt hàng. Mô hình tách lớp bên cạnh tính lại chiều dày từng lớp và khối lượng theo đúng công thức của bảng dữ liệu nhà máy.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="#contact">Gửi quy cách → nhận giá</a>
+        <a class="btn btn-line" href="#spec">Bảng thông số</a>
+      </div>
+      <dl class="legend" style="margin-top:32px;border:2px solid var(--ink)">
+        <div><dt>Dày toàn phần (TCT)</dt><dd id="out-tct">—</dd></div>
+        <div><dt>Lớp mạ / mặt</dt><dd id="out-coat">—</dd></div>
+        <div><dt>Thép nền</dt><dd id="out-base">—</dd></div>
+        <div><dt>Khối lượng tấm</dt><dd id="out-mass">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="sheet3d">
+      <div class="sheet3d-head">
+        <span>Hình 01 — Mặt cắt tách lớp tôn lạnh</span>
+        <b id="head-class">GL / AZ100</b>
+      </div>
+      <div class="stage" id="stage">
+        <div class="views" id="views" role="group" aria-label="Hình chiếu"></div>
+        <div class="stage-tools">
+          <button type="button" id="spin" aria-pressed="true">Dừng quay</button>
+          <button type="button" id="reset">Về hình chiếu gốc</button>
+        </div>
+        <canvas id="world" role="img" aria-label="Mô hình 3D mặt cắt tôn lạnh tách thành ba lớp: lớp mạ nhôm kẽm mặt trên, thép nền cán nguội và lớp mạ mặt dưới, kèm nhãn chiều dày từng lớp"></canvas>
+        <div class="scale-stamp mono" id="scale-stamp">TL trục dày ×160</div>
+        <div class="stage-hint">Kéo để quay · cuộn chuột để phóng</div>
+        <div class="stage-fallback" id="fallback">
+          <strong>Không bật được WebGL</strong>
+          <p>Trình duyệt hiện tại không dựng được mô hình 3D. Bảng chiều dày từng lớp bên cạnh vẫn được tính đầy đủ theo quy cách bạn chọn.</p>
+        </div>
+      </div>
+      <div class="sheet3d-controls">
+        <div class="ctl">
+          <label for="tct">Dày toàn phần — TCT (mm)</label>
+          <select id="tct"></select>
+        </div>
+        <div class="ctl">
+          <span class="lbl" id="class-label">Lớp mạ nhôm-kẽm (g/m², hai mặt)</span>
+          <div class="seg" id="coating" role="group" aria-labelledby="class-label"></div>
+        </div>
+        <div class="ctl">
+          <label for="explode">Tách lớp — <b id="explode-value">55%</b></label>
+          <input type="range" id="explode" min="0" max="100" step="1" value="55">
+        </div>
+        <div class="ctl">
+          <label for="scale">Phóng đại trục độ dày</label>
+          <select id="scale">
+            <option value="1">×1 — tỷ lệ thật</option>
+            <option value="40">×40</option>
+            <option value="160" selected>×160</option>
+            <option value="400">×400</option>
+          </select>
+        </div>
+      </div>
+      <p class="disclosure">Chiều dày lớp mạ suy ra từ ký hiệu AZ (khối lượng mạ hai mặt, g/m²) chia đôi rồi chia cho khối lượng riêng hợp kim nhôm-kẽm 3.750 kg/m³; thép nền bằng TCT trừ hai lớp mạ. Kích thước mặt bằng của mẫu là 240 × 160 mm ở tỷ lệ thật; chỉ trục độ dày được phóng đại theo hệ số ghi trên bản vẽ.</p>
+    </div>
+  </div>
+</div>
+
+<section id="spec">
+  <div class="frame">
+    <div class="sec-label"><span class="no">MỤC 01</span><h2>Bảng quy cách <em>Sản phẩm</em></h2></div>
+    <div class="sheet">
+      <div class="sheet-row head">
+        <div>Sản phẩm</div><div>Độ dày</div><div>Khổ rộng</div><div>Mác / lớp mạ</div><div>—</div>
+      </div>
+      <div class="sheet-row">
+        <div class="p-name">Thép cán nguội<small>CRC — Cold Rolled Coil</small></div>
+        <div class="p-val">0.18 – 3.0<small>mm</small></div>
+        <div class="p-val">1000 / 1250<small>mm</small></div>
+        <div class="p-val">SPCC, SPCC-SD<small>JIS G3141</small></div>
+        <div class="cta-cell"><a href="#contact">Báo giá →</a></div>
+      </div>
+      <div class="sheet-row">
+        <div class="p-name">Thép cán nóng<small>HRC — Hot Rolled Coil</small></div>
+        <div class="p-val">1.5 – 25<small>mm</small></div>
+        <div class="p-val">1250 / 1500<small>mm</small></div>
+        <div class="p-val">SS400, Q235B<small>JIS G3101</small></div>
+        <div class="cta-cell"><a href="#contact">Báo giá →</a></div>
+      </div>
+      <div class="sheet-row">
+        <div class="p-name">Tôn lạnh<small>GL — Galvalume</small></div>
+        <div class="p-val">0.25 – 0.5<small>mm</small></div>
+        <div class="p-val">1200<small>mm</small></div>
+        <div class="p-val">AZ50 – AZ150<small>Hợp tác Tôn Tân Phước Khanh</small></div>
+        <div class="cta-cell"><a href="#section">Xem mặt cắt →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="frame">
+    <div class="sec-label"><span class="no">MỤC 02</span><h2>Quy trình <em>Đặt hàng</em></h2></div>
+    <div class="process">
+      <div class="step"><div class="no">BƯỚC 01</div><h4>Gửi quy cách</h4><p>Khách gửi bản vẽ hoặc quy cách: dày × rộng × dài, mác thép, số lượng.</p></div>
+      <div class="step"><div class="no">BƯỚC 02</div><h4>Báo giá 24h</h4><p>KLC kiểm tra tồn kho và báo giá kèm tiến độ giao trong 24 giờ.</p></div>
+      <div class="step"><div class="no">BƯỚC 03</div><h4>Cắt xả gia công</h4><p>Cắt tấm, xả băng theo quy cách với dung sai ±0.5 mm.</p></div>
+      <div class="step"><div class="no">BƯỚC 04</div><h4>Giao &amp; nghiệm thu</h4><p>Giao hàng kèm CO/CQ, cân đối chiếu khối lượng tại kho khách.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="partner" style="padding-top:0">
+  <div class="frame">
+    <div class="partner">
+      <div class="txt">
+        <h3>Đối tác nhà máy: Tôn Tân Phước Khanh</h3>
+        <p>Nguồn tôn lạnh trực tiếp từ dây chuyền nhà máy — chất lượng lớp mạ ổn định, giá gốc và chủ động sản lượng cho đơn hàng dự án.</p>
+      </div>
+      <div class="stamp">Chứng nhận hợp tác<b>TPK × KLC</b></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="frame">
+    <div class="foot">
+      <div>
+        <div class="logo" style="margin-bottom:14px"><div class="logo-mark">KLC</div>KLC<span style="color:var(--green)">STEEL</span></div>
+        <p>Chuyên cung cấp thép cán nguội, thép cán nóng, tôn lạnh cho công nghiệp và xây dựng.</p>
+      </div>
+      <div>
+        <h4>Liên hệ kỹ thuật</h4>
+        <a href="tel:0900000000">Hotline: 0900 000 000</a>
+        <a href="mailto:sales@klcsteel.vn">sales@klcsteel.vn</a>
+      </div>
+      <div>
+        <h4>Sản phẩm</h4>
+        <a href="#spec">Thép cán nguội</a>
+        <a href="#spec">Thép cán nóng</a>
+        <a href="#spec">Tôn lạnh</a>
+      </div>
+    </div>
+    <div class="title-block">
+      <div>Công ty<b>KLC STEEL</b></div>
+      <div>Bản vẽ<b>WEB-CONCEPT-11</b></div>
+      <div>Phiên bản<b>REV. A — 2026</b></div>
+      <div>Duyệt<b>PHÒNG KINH DOANH</b></div>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start } from '../assets/klc3d/runtime.js';
+import { createScene, sectionFor, COATING_CLASSES, TCT_OPTIONS } from './scene.js';
+
+// A drawing, not a photograph: flat even light, no shadows, orthographic projection.
+const LOOK = {
+  toneMapping: 'NoToneMapping',
+  exposure: 1,
+  shadows: false,
+  palette: {
+    paper: '#eef1ee', grid: '#d7ded7', gridStrong: '#b9c5bc',
+    coating: '#d3ddd6', ink: '#20302a'
+  },
+  light: {
+    castShadow: false,
+    color: '#ffffff', intensity: 1.5, elevationDeg: 58, azimuthDeg: 230,
+    rimColor: '#ffffff', rimIntensity: 0.8, rimElevationDeg: 20, rimAzimuthDeg: 40,
+    skyColor: '#f2f6f3', groundColor: '#b3bfb6', fillIntensity: 1.7
+  },
+  camera: {
+    kind: 'orthographic', frustumHeight: 0.34, near: 0.01, far: 6,
+    limits: { minZoom: 0.4, maxZoom: 6 }
+  }
+};
+
+const VIEWS = {
+  'Phối cảnh': { position: [0.42, 0.3, 0.5], target: [0, 0, 0] },
+  'Mặt cắt': { position: [0, 0.02, 0.7], target: [0, 0.02, 0] },
+  'Mặt trên': { position: [0.02, 0.7, 0.05], target: [0, 0, 0] }
+};
+
+const micron = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 1 });
+const twoDecimals = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const canvas = document.querySelector('#world');
+const stage = document.querySelector('#stage');
+
+const scene = start({
+  canvas, viewport: stage, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    document.querySelector('#fallback').classList.add('on');
+    document.querySelector('#views').hidden = true;
+    document.querySelector('.stage-tools').hidden = true;
+    document.querySelector('#scale-stamp').hidden = true;
+  }
+});
+
+const spec = { tctMm: 0.4, coatingClass: 'AZ100', explode: 0.55, thicknessScale: 160 };
+
+const tctSelect = document.querySelector('#tct');
+for (const value of TCT_OPTIONS) tctSelect.append(new Option(twoDecimals.format(value), String(value)));
+tctSelect.value = String(spec.tctMm);
+
+const coatingGroup = document.querySelector('#coating');
+for (const name of Object.keys(COATING_CLASSES)) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = name;
+  button.dataset.coating = name;
+  button.setAttribute('aria-pressed', String(name === spec.coatingClass));
+  coatingGroup.append(button);
+}
+
+function apply(next = {}) {
+  Object.assign(spec, next);
+  const section = sectionFor(spec);
+  document.querySelector('#out-tct').textContent = `${twoDecimals.format(section.tctMm)} mm`;
+  document.querySelector('#out-coat').textContent = `${micron.format(section.coatingMm * 1000)} µm`;
+  document.querySelector('#out-base').textContent = `${micron.format(section.baseMm * 1000)} µm`;
+  document.querySelector('#out-mass').textContent = `${twoDecimals.format(section.sheetMassKgM2)} kg/m²`;
+  document.querySelector('#head-class').textContent = `GL / ${spec.coatingClass}`;
+  const stamp = document.querySelector('#scale-stamp');
+  stamp.textContent = spec.thicknessScale === 1 ? 'TL trục dày ×1 — tỷ lệ thật' : `TL trục dày ×${spec.thicknessScale}`;
+  scene?.world.apply(spec);
+}
+
+tctSelect.addEventListener('change', () => apply({ tctMm: Number(tctSelect.value) }));
+coatingGroup.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-coating]');
+  if (!button) return;
+  for (const other of coatingGroup.children) other.setAttribute('aria-pressed', String(other === button));
+  apply({ coatingClass: button.dataset.coating });
+});
+
+const explode = document.querySelector('#explode');
+explode.addEventListener('input', () => {
+  document.querySelector('#explode-value').textContent = `${explode.value}%`;
+  apply({ explode: Number(explode.value) / 100 });
+});
+
+const scaleSelect = document.querySelector('#scale');
+scaleSelect.addEventListener('change', () => apply({ thicknessScale: Number(scaleSelect.value) }));
+
+apply();
+
+if (scene) {
+  const viewButtons = document.querySelector('#views');
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => {
+      scene.setView(name);
+      for (const other of viewButtons.children) other.setAttribute('aria-current', String(other === button));
+    });
+    viewButtons.append(button);
+  }
+  viewButtons.firstElementChild.setAttribute('aria-current', 'true');
+
+  const spin = document.querySelector('#spin');
+  function paintSpin() {
+    const spinning = !scene.isPaused();
+    spin.textContent = spinning ? 'Dừng quay' : 'Quay bản vẽ';
+    spin.setAttribute('aria-pressed', String(spinning));
+  }
+  spin.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintSpin(); });
+  paintSpin();
+
+  document.querySelector('#reset').addEventListener('click', () => {
+    scene.reset();
+    for (const other of viewButtons.children) {
+      other.setAttribute('aria-current', String(other === viewButtons.firstElementChild));
+    }
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 9: Industrial Dark 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14171a;
+    --ink-2:#1c2126;
+    --ink-3:#262c33;
+    --steel:#b9c2cb;
+    --steel-bright:#e5eaef;
+    --green:#23a04f;
+    --green-deep:#157238;
+    --line:#333a42;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--steel);font-family:'Be Vietnam Pro',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden}
+  .display{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(20,23,26,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo-mark{width:40px;height:40px;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Oswald';font-weight:700;color:#fff;font-size:15px;clip-path:polygon(0 0,100% 0,100% 78%,78% 100%,0 100%)}
+  .logo-name{font-family:'Oswald';font-weight:600;font-size:19px;color:var(--steel-bright);text-transform:uppercase;letter-spacing:.06em}
+  .logo-name span{color:var(--green)}
+  nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  nav a{color:var(--steel);text-decoration:none;font-size:13px;text-transform:uppercase;letter-spacing:.12em;transition:color .2s}
+  nav a:hover,nav a:focus-visible{color:var(--green)}
+  .nav-cta{background:var(--green);color:#fff!important;padding:10px 22px;font-weight:500}
+  .nav-cta:hover{background:var(--green-deep);color:#fff!important}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:minmax(340px,1fr) 1.25fr;align-items:center;padding:110px 40px 50px;gap:48px;max-width:1560px;margin:0 auto}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:22px}
+  .hero-eyebrow::before{content:'';width:34px;height:2px;background:var(--green)}
+  h1{font-family:'Oswald';font-weight:700;font-size:clamp(46px,6vw,92px);line-height:.98;text-transform:uppercase;color:var(--steel-bright)}
+  h1 .hollow{color:transparent;-webkit-text-stroke:2px var(--steel);display:block}
+  h1 .accent{color:var(--green)}
+  .hero-sub{max-width:480px;margin-top:24px;font-size:15.5px;color:#8d979f}
+  .hero-actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 32px;font-family:'Oswald';font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:14px;text-decoration:none;transition:.2s;border:none;cursor:pointer}
+  .btn-solid{background:var(--green);color:#fff;clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,0 100%)}
+  .btn-solid:hover{background:var(--green-deep)}
+  .btn-ghost{border:1px solid var(--line);color:var(--steel-bright);background:transparent}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+
+  /* 3D STAGE */
+  .stage{position:relative;border:1px solid var(--line);background:#0f1215;aspect-ratio:16/11;min-height:420px;overflow:hidden}
+  .stage canvas{display:block;width:100%;height:100%;touch-action:none}
+  .stage-tag{position:absolute;top:0;left:0;background:var(--ink);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:9px 16px;font-family:'Oswald';font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);z-index:3}
+  .stage-hint{position:absolute;bottom:82px;right:16px;font-size:11.5px;letter-spacing:.06em;color:#7f8992;z-index:3;text-align:right;pointer-events:none;background:rgba(20,23,26,.7);padding:4px 9px}
+
+  .views{position:absolute;top:12px;right:12px;display:flex;gap:1px;z-index:4;background:var(--line)}
+  .views button{background:rgba(20,23,26,.9);border:none;color:var(--steel);font-family:'Oswald';font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:.18s}
+  .views button:hover{color:var(--green)}
+  .views button[aria-current="true"]{background:var(--green);color:#fff}
+
+  .hud{position:absolute;left:0;bottom:0;right:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));background:var(--line);gap:1px;border-top:1px solid var(--line);z-index:3}
+  .hud div{background:rgba(20,23,26,.94);padding:11px 14px}
+  .hud dt{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#6c757d}
+  .hud dd{font-family:'Oswald';font-weight:500;font-size:19px;color:var(--steel-bright);margin-top:2px}
+  .hud dd span{font-size:12px;color:var(--green);font-family:'Be Vietnam Pro';font-weight:400;margin-left:3px}
+
+  .stage-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:40px;background:radial-gradient(600px 400px at 50% 30%,#20262c,#0f1215)}
+  .stage-fallback.on{display:flex}
+  .stage-fallback strong{font-family:'Oswald';font-size:22px;color:var(--steel-bright);text-transform:uppercase;letter-spacing:.04em}
+  .stage-fallback p{font-size:13.5px;color:#8d979f;max-width:380px}
+
+  /* CONTROLS */
+  .controls{margin-top:22px;border:1px solid var(--line);background:var(--ink-2)}
+  .controls-head{padding:14px 20px;border-bottom:1px solid var(--line);font-family:'Oswald';font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel-bright)}
+  .controls-body{padding:20px;display:grid;gap:18px}
+  .ctl label,.ctl .ctl-label{display:block;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#8d979f;margin-bottom:9px}
+  .ctl-value{font-family:'Oswald';color:var(--green);font-size:14px}
+  .seg{display:flex;gap:1px;background:var(--line)}
+  .seg button{flex:1;background:var(--ink-3);border:none;color:var(--steel);font-family:'Oswald';font-size:13px;letter-spacing:.06em;padding:11px 8px;cursor:pointer;transition:.18s}
+  .seg button:hover{color:var(--green)}
+  .seg button[aria-pressed="true"]{background:var(--green);color:#fff}
+  input[type=range]{width:100%;accent-color:var(--green);height:22px}
+  .ctl-row{display:flex;gap:12px;flex-wrap:wrap}
+  .ctl-row .btn{flex:1;text-align:center;padding:12px 18px}
+  .disclosure{font-size:12px;color:#6c757d;border-top:1px solid var(--line);padding:14px 20px;line-height:1.55}
+
+  /* Ticker */
+  .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--ink-2)}
+  .ticker-track{display:flex;width:max-content;animation:scroll 30s linear infinite}
+  @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .ticker-item{padding:16px 36px;font-family:'Oswald';font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:#7d8790;border-right:1px solid var(--line);white-space:nowrap}
+  .ticker-item b{color:var(--green);font-weight:600}
+
+  /* Sections */
+  section{padding:100px 40px;max-width:1400px;margin:0 auto}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;gap:30px;flex-wrap:wrap}
+  h2{font-family:'Oswald';font-weight:600;font-size:clamp(32px,4.2vw,52px);text-transform:uppercase;color:var(--steel-bright);line-height:1.05}
+  h2 em{font-style:normal;color:var(--green)}
+  .sec-note{max-width:380px;font-size:14px;color:#8d979f}
+
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
+  .prod{background:var(--ink-2);padding:40px 34px;position:relative;transition:background .25s;min-height:360px;display:flex;flex-direction:column}
+  .prod:hover{background:var(--ink-3)}
+  .prod-tag{font-size:11px;letter-spacing:.2em;color:var(--green);text-transform:uppercase}
+  .prod h3{font-family:'Oswald';font-weight:600;font-size:27px;text-transform:uppercase;color:var(--steel-bright);margin:14px 0 16px}
+  .prod p{font-size:14px;color:#8d979f;flex:1}
+  .prod-spec{margin-top:24px;border-top:1px solid var(--line);padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .prod-spec div{font-size:12px;color:#78828b}
+  .prod-spec b{display:block;font-family:'Oswald';font-size:17px;color:var(--steel-bright);font-weight:500}
+
+  .partner{background:var(--green-deep)}
+  .partner-inner{max-width:1400px;margin:0 auto;padding:66px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .partner h3{font-family:'Oswald';font-size:clamp(24px,3vw,36px);text-transform:uppercase;color:#fff;font-weight:600}
+  .partner p{color:#c8ead4;max-width:520px;margin-top:10px;font-size:15px}
+  .partner .btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+  .partner .btn-ghost:hover{border-color:#fff;color:#fff}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line)}
+  .stat{background:var(--ink);padding:38px 28px}
+  .stat .n{font-family:'Oswald';font-weight:700;font-size:50px;color:var(--steel-bright)}
+  .stat .n span{color:var(--green)}
+  .stat .l{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#78828b;margin-top:6px}
+
+  footer{border-top:1px solid var(--line);padding:56px 40px 38px;background:var(--ink-2)}
+  .foot-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px}
+  footer h4{font-family:'Oswald';text-transform:uppercase;font-size:14px;letter-spacing:.15em;color:var(--steel-bright);margin-bottom:18px}
+  footer p,footer a{font-size:14px;color:#8d979f;text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:var(--green)}
+  .copyright{max-width:1400px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:#5c656d}
+
+  @media(max-width:1100px){
+    /* minmax(0,...) and min-width:0 stop the canvas's intrinsic pixel size from pinning the
+       grid track open, which is what makes a 3D page scroll sideways on a phone. */
+    .hero{grid-template-columns:minmax(0,1fr);padding-top:96px}
+    .stage{aspect-ratio:4/3;min-width:0;min-height:280px}
+    .stage-hint{display:none}
+    .views{top:auto;bottom:88px;right:12px}
+    .hud{grid-template-columns:repeat(auto-fit,minmax(102px,1fr))}
+    .stats{grid-template-columns:1fr}
+    .stat .n{font-size:42px}
+    .prod-grid{grid-template-columns:1fr}
+    .foot-inner{grid-template-columns:1fr}
+    nav ul{display:none}
+    section{padding:70px 22px}
+    .hero{padding-left:22px;padding-right:22px}
+    footer,.partner-inner{padding-left:22px;padding-right:22px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark">KLC</div>
+    <div class="logo-name">KLC <span>Steel</span></div>
+  </div>
+  <ul>
+    <li><a href="#line">Dây xả cuộn</a></li>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#partner">Đối tác</a></li>
+    <li><a href="#contact" class="nav-cta">Báo giá</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="line">
+  <div>
+    <div class="hero-eyebrow display">Nhà cung cấp thép công nghiệp</div>
+    <h1>
+      Thép cán<br>
+      <span class="hollow">Chuẩn từng</span>
+      <span class="accent">Milimét</span>
+    </h1>
+    <p class="hero-sub">KLC Steel cung cấp thép cán nguội, thép cán nóng và tôn lạnh cho nhà máy, công trình và xưởng gia công trên toàn quốc. Hàng sẵn kho — cắt theo quy cách — giao đúng tiến độ.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#contact">Yêu cầu báo giá</a>
+      <a class="btn btn-ghost" href="#products">Xem quy cách</a>
+    </div>
+
+    <div class="controls">
+      <div class="controls-head">Điều khiển dây xả cuộn</div>
+      <div class="controls-body">
+        <div class="ctl">
+          <span class="ctl-label" id="gauge-label">Độ dày dải thép</span>
+          <div class="seg" id="gauge" role="group" aria-labelledby="gauge-label">
+            <button type="button" data-gauge="0.5" aria-pressed="false">0,5 mm</button>
+            <button type="button" data-gauge="1.2" aria-pressed="true">1,2 mm</button>
+            <button type="button" data-gauge="2" aria-pressed="false">2,0 mm</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <label for="speed">Tốc độ dây — <span class="ctl-value" id="speed-value">45 m/phút</span></label>
+          <input type="range" id="speed" min="10" max="90" step="5" value="45">
+        </div>
+        <div class="ctl-row">
+          <button type="button" class="btn btn-solid" id="run" aria-pressed="true">Dừng dây</button>
+          <button type="button" class="btn btn-ghost" id="reset">Về góc mặc định</button>
+        </div>
+      </div>
+      <p class="disclosure">Mô hình 3D dựng theo cuộn thép tiêu chuẩn: đường kính ngoài 1.500 mm, lỗ 508 mm, khổ 1.250 mm. Khối lượng và chiều dài dải được tính trực tiếp từ hình học với khối lượng riêng 7.850 kg/m³. Để dễ quan sát, độ dày dải được vẽ phóng đại 6 lần và mặt cuộn chỉ vẽ 46 vòng tượng trưng.</p>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="stage-tag">Mô hình dây xả cuộn — tương tác</div>
+    <div class="views" id="views" role="group" aria-label="Góc nhìn"></div>
+    <canvas id="world" role="img" aria-label="Mô hình 3D một cuộn thép đặt trên trục xả, dải thép được nhả qua cặp con lăn ép ra bàn con lăn trong xưởng tối"></canvas>
+    <dl class="hud" aria-live="off">
+      <div><dt>Đường kính</dt><dd id="hud-od">—</dd></div>
+      <div><dt>Khổ rộng</dt><dd id="hud-width">—</dd></div>
+      <div><dt>Khối lượng</dt><dd id="hud-mass">—</dd></div>
+      <div><dt>Dài trong cuộn</dt><dd id="hud-length">—</dd></div>
+      <div><dt>Đã nhả</dt><dd id="hud-paid">—</dd></div>
+    </dl>
+    <div class="stage-hint">Kéo để quay · cuộn chuột để phóng</div>
+    <div class="stage-fallback" id="fallback">
+      <strong>Không bật được WebGL</strong>
+      <p>Trình duyệt hiện tại không dựng được mô hình 3D. Mọi thông số kỹ thuật của cuộn thép vẫn nằm đầy đủ trong phần bên cạnh và bảng quy cách phía dưới.</p>
+    </div>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">Thép cán nguội <b>SPCC / SPCC-SD</b></div>
+    <div class="ticker-item">Thép cán nóng <b>SS400 / Q235B</b></div>
+    <div class="ticker-item">Tôn lạnh <b>AZ50 – AZ150</b></div>
+    <div class="ticker-item">Cắt tấm theo quy cách <b>±0.5mm</b></div>
+    <div class="ticker-item">Đối tác <b>Tôn Tân Phước Khanh</b></div>
+    <div class="ticker-item">Thép cán nguội <b>SPCC / SPCC-SD</b></div>
+    <div class="ticker-item">Thép cán nóng <b>SS400 / Q235B</b></div>
+    <div class="ticker-item">Tôn lạnh <b>AZ50 – AZ150</b></div>
+    <div class="ticker-item">Cắt tấm theo quy cách <b>±0.5mm</b></div>
+    <div class="ticker-item">Đối tác <b>Tôn Tân Phước Khanh</b></div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="sec-head">
+    <h2>Ba dòng sản phẩm<br><em>Chủ lực</em></h2>
+    <p class="sec-note">Nguồn hàng ổn định từ các nhà máy lớn trong nước, đầy đủ chứng chỉ xuất xưởng (CO/CQ) theo từng lô hàng.</p>
+  </div>
+  <div class="prod-grid">
+    <article class="prod">
+      <div class="prod-tag">CRC — Cold Rolled</div>
+      <h3>Thép cán nguội</h3>
+      <p>Bề mặt mịn, dung sai độ dày thấp, phù hợp gia công dập, chấn, sản xuất thiết bị gia dụng, tủ điện, chi tiết cơ khí chính xác.</p>
+      <div class="prod-spec">
+        <div><b>0.18 – 3.0</b>Độ dày (mm)</div>
+        <div><b>SPCC, SPCC-SD</b>Mác thép</div>
+      </div>
+    </article>
+    <article class="prod">
+      <div class="prod-tag">HRC — Hot Rolled</div>
+      <h3>Thép cán nóng</h3>
+      <p>Chịu lực tốt, giá thành cạnh tranh — lựa chọn tiêu chuẩn cho kết cấu nhà xưởng, bồn bể, đóng tàu và cơ khí chế tạo.</p>
+      <div class="prod-spec">
+        <div><b>1.5 – 25</b>Độ dày (mm)</div>
+        <div><b>SS400, Q235B</b>Mác thép</div>
+      </div>
+    </article>
+    <article class="prod">
+      <div class="prod-tag">GL — Galvalume</div>
+      <h3>Tôn lạnh</h3>
+      <p>Lớp mạ hợp kim nhôm kẽm chống ăn mòn vượt trội, dùng cho mái lợp, vách ngăn nhà xưởng và dân dụng. Hợp tác cùng Tôn Tân Phước Khanh.</p>
+      <div class="prod-spec">
+        <div><b>AZ50 – AZ150</b>Lớp mạ</div>
+        <div><b>0.25 – 0.5</b>Độ dày (mm)</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="partner" id="partner">
+  <div class="partner-inner">
+    <div>
+      <div class="hero-eyebrow display" style="color:#a5d9b8">Đối tác chiến lược</div>
+      <h3>Tôn Tân Phước Khanh</h3>
+      <p>Hợp tác trực tiếp với nhà máy Tôn Tân Phước Khanh giúp KLC Steel chủ động nguồn tôn lạnh chất lượng cao, giá gốc nhà máy và tiến độ giao hàng ổn định.</p>
+    </div>
+    <a class="btn btn-ghost" href="#contact">Tìm hiểu thêm</a>
+  </div>
+</div>
+
+<section id="stats">
+  <div class="sec-head">
+    <h2>Năng lực <em>Cung ứng</em></h2>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">10<span>+</span></div><div class="l">Năm kinh nghiệm</div></div>
+    <div class="stat"><div class="n">5.000<span>T</span></div><div class="l">Tồn kho thường xuyên</div></div>
+    <div class="stat"><div class="n">300<span>+</span></div><div class="l">Khách hàng doanh nghiệp</div></div>
+    <div class="stat"><div class="n">24<span>h</span></div><div class="l">Báo giá &amp; xác nhận đơn</div></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-inner">
+    <div>
+      <div class="logo" style="margin-bottom:18px">
+        <div class="logo-mark">KLC</div>
+        <div class="logo-name">KLC <span>Steel</span></div>
+      </div>
+      <p>Chuyên cung cấp thép cán nguội, thép cán nóng, tôn lạnh cho công nghiệp và xây dựng.</p>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <a href="tel:0900000000">Hotline: 0900 000 000</a>
+      <a href="mailto:sales@klcsteel.vn">sales@klcsteel.vn</a>
+      <p>KCN ..., TP. Hồ Chí Minh</p>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="#products">Thép cán nguội</a>
+      <a href="#products">Thép cán nóng</a>
+      <a href="#products">Tôn lạnh</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 KLC Steel. Concept 9 — Industrial Dark 3D.</div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start } from '../assets/klc3d/runtime.js';
+import { createScene, COIL_FACTS } from './scene.js';
+
+// Industrial hall: cool overhead key, deep shadows, one green rim for the brand accent.
+const LOOK = {
+  toneMapping: 'ACESFilmicToneMapping',
+  exposure: 1.0,
+  sky: { zenith: '#242b32', horizon: '#0f1216' },
+  fog: { color: '#13171b', density: 0.028 },
+  environmentIntensity: 0.28,
+  palette: {
+    floor: '#22262a', steel: '#b6c1ca', steelDark: '#6b757d', groove: '#262c33',
+    machine: '#39424a', machineDark: '#2a3137', paint: '#1c7a3d', lamp: '#dceaf6'
+  },
+  light: {
+    // No coloured rim: a green directional light washes the whole floor green. The brand accent
+    // belongs on the machine paint and the strip's gauge mark, which are physical things.
+    color: '#e8f1f8', intensity: 2.6, elevationDeg: 62, azimuthDeg: 205,
+    rimIntensity: 0,
+    skyColor: '#4a5661', groundColor: '#171b1f', fillIntensity: 0.45,
+    shadowExtent: 12, distance: 24
+  },
+  camera: { fovDeg: 40, limits: { minDist: 1.8, maxDist: 18, minPolarDeg: 20, maxPolarDeg: 86 } }
+};
+
+const VIEWS = {
+  'Tổng thể': { position: [4.4, 2.55, 5.2], target: [0, 1.5, 1.3] },
+  'Mặt cuộn': { position: [3.1, 1.35, 1.0], target: [0.2, 1.05, 0.1] },
+  'Đầu dải': { position: [1.9, 2.35, 6.4], target: [0, 1.75, 4.6] }
+};
+
+const number = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
+const oneDecimal = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+const canvas = document.querySelector('#world');
+const stage = document.querySelector('#stage');
+const fallback = document.querySelector('#fallback');
+const set = (id, text) => { document.querySelector(id).innerHTML = text; };
+
+// The coil's fixed dimensions come from the same geometry the scene is built from, so they belong
+// on the page whether or not there is a WebGL context to draw it in.
+set('#hud-od', `${number.format(COIL_FACTS.outerDiameterMm)}<span>mm</span>`);
+set('#hud-width', `${number.format(COIL_FACTS.widthMm)}<span>mm</span>`);
+set('#hud-mass', `${oneDecimal.format(COIL_FACTS.massKg / 1000)}<span>tấn</span>`);
+set('#hud-length', `${number.format(COIL_FACTS.lengthM(1.2))}<span>m</span>`);
+set('#hud-paid', '0<span>m</span>');
+
+const scene = start({
+  canvas, viewport: stage, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    fallback.classList.add('on');
+    document.querySelector('#views').hidden = true;
+    document.querySelector('.controls').hidden = true;
+  }
+});
+
+if (scene) {
+  const world = scene.world;
+  const facts = world.facts;
+
+  function refresh() {
+    set('#hud-length', `${number.format(facts.lengthM(world.gaugeMm))}<span>m</span>`);
+    set('#hud-paid', `${number.format(world.paidOutM)}<span>m</span>`);
+  }
+  refresh();
+
+  // The HUD is a readout of the scene, so it is polled from the scene rather than kept in sync by
+  // hand: whatever the model is doing is what the numbers say. 4 Hz is enough to read.
+  setInterval(refresh, 250);
+
+  const viewButtons = document.querySelector('#views');
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => {
+      scene.setView(name);
+      for (const other of viewButtons.children) other.setAttribute('aria-current', String(other === button));
+    });
+    viewButtons.append(button);
+  }
+  viewButtons.firstElementChild.setAttribute('aria-current', 'true');
+
+  const gauges = document.querySelectorAll('#gauge button');
+  for (const button of gauges) {
+    button.addEventListener('click', () => {
+      world.setGauge(Number(button.dataset.gauge));
+      for (const other of gauges) other.setAttribute('aria-pressed', String(other === button));
+      refresh();
+    });
+  }
+
+  const speed = document.querySelector('#speed');
+  const speedValue = document.querySelector('#speed-value');
+  speed.addEventListener('input', () => {
+    world.setLineSpeed(Number(speed.value));
+    speedValue.textContent = `${speed.value} m/phút`;
+  });
+
+  const run = document.querySelector('#run');
+  function paintRun() {
+    const running = !scene.isPaused();
+    run.textContent = running ? 'Dừng dây' : 'Chạy dây';
+    run.setAttribute('aria-pressed', String(running));
+  }
+  run.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintRun(); });
+  paintRun();
+
+  document.querySelector('#reset').addEventListener('click', () => {
+    scene.reset();
+    for (const other of viewButtons.children) {
+      other.setAttribute('aria-current', String(other === viewButtons.firstElementChild));
+    }
+  });
+}
+</script>
+
+</body>
+</html>
