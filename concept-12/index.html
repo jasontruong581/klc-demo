@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 12: Modern Green 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#07281a;
+    --deep-2:#0b3a25;
+    --green:#17a45a;
+    --green-bright:#2fd47f;
+    --mint:#bfeed6;
+    --silver-1:#f2f5f4;
+    --silver-2:#c3cdc8;
+    --card:rgba(255,255,255,.055);
+    --border:rgba(255,255,255,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:radial-gradient(1200px 800px at 80% -10%, #10502f 0%, transparent 55%),
+               radial-gradient(900px 700px at -10% 40%, #0d4326 0%, transparent 50%),
+               var(--deep);
+    color:var(--silver-1);
+    font-family:'Manrope',sans-serif;line-height:1.65;
+  }
+  .display{font-family:'Space Grotesk',sans-serif}
+
+  nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;width:min(1140px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 22px;background:rgba(7,40,26,.7);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:16px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:700;font-size:18px;color:#fff}
+  .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--green),#0d7a3f);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+  .logo em{font-style:normal;background:linear-gradient(100deg,#e9efec,#9fb2a9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav ul{display:flex;gap:24px;list-style:none;align-items:center}
+  nav a{color:var(--silver-2);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s}
+  nav a:hover{color:#fff}
+  .nav-cta{background:var(--green);color:#fff!important;padding:10px 20px;border-radius:10px}
+  .nav-cta:hover{background:var(--green-bright);color:var(--deep)!important}
+
+  /* HERO STAGE */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;z-index:0}
+  .hero-copy{position:relative;z-index:2;max-width:min(600px,100%);padding:140px 24px 90px;margin-left:max(24px,calc((100vw - 1140px) / 2));pointer-events:none}
+  .hero-copy a,.hero-copy button{pointer-events:auto}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:rgba(7,40,26,.55);backdrop-filter:blur(10px);border-radius:99px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--mint);margin-bottom:26px}
+  .pill::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green-bright);box-shadow:0 0 10px var(--green-bright)}
+  h1{font-family:'Space Grotesk';font-weight:700;font-size:clamp(40px,5.4vw,74px);line-height:1.04;letter-spacing:-.03em}
+  .metal{background:linear-gradient(100deg,#ffffff 0%,#c8d4ce 30%,#8fa39a 50%,#e6ece9 70%,#aebbb4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .grn{background:linear-gradient(100deg,var(--green-bright),#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-copy p{margin-top:24px;font-size:17px;color:var(--silver-2);max-width:520px}
+  .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;transition:.2s;border:none;cursor:pointer;font-family:'Manrope',sans-serif}
+  .btn-solid{background:var(--green);color:#fff;box-shadow:0 12px 34px -12px rgba(23,164,90,.7)}
+  .btn-solid:hover{background:var(--green-bright);color:var(--deep);transform:translateY(-2px)}
+  .btn-glass{border:1px solid var(--border);background:var(--card);backdrop-filter:blur(10px);color:#fff}
+  .btn-glass:hover{border-color:var(--green-bright);color:var(--green-bright)}
+
+  .surface-switch{margin-top:40px;border:1px solid var(--border);background:rgba(7,40,26,.55);backdrop-filter:blur(12px);border-radius:16px;padding:18px 20px;max-width:460px;pointer-events:auto}
+  .surface-switch .lbl{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-bright);margin-bottom:12px}
+  .surface-switch .row{display:flex;gap:8px;flex-wrap:wrap}
+  .surface-switch button{flex:1;min-width:96px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--silver-2);border-radius:10px;padding:11px 10px;font-family:'Space Grotesk';font-size:13px;font-weight:600;cursor:pointer;transition:.18s}
+  .surface-switch button:hover{color:#fff;border-color:var(--green-bright)}
+  .surface-switch button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .surface-switch p{margin-top:12px;font-size:12.5px;color:var(--silver-2)}
+
+  .stage-tools{position:absolute;right:max(24px,calc((100vw - 1140px) / 2));bottom:36px;z-index:3;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .stage-tools button{border:1px solid var(--border);background:rgba(7,40,26,.6);backdrop-filter:blur(12px);color:var(--silver-2);border-radius:10px;padding:9px 15px;font-size:12.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:'Manrope',sans-serif}
+  .stage-tools button:hover{color:#fff;border-color:var(--green-bright)}
+  .stage-tools button[aria-current="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .hero-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:14px;z-index:3;font-size:11.5px;color:rgba(195,205,200,.7);pointer-events:none}
+
+  .hero-fallback{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center;padding:40px}
+  .hero-fallback.on{display:flex}
+  .hero-fallback div{border:1px solid var(--border);background:rgba(7,40,26,.6);backdrop-filter:blur(10px);border-radius:16px;padding:26px 30px;max-width:420px;text-align:center}
+  .hero-fallback strong{font-family:'Space Grotesk';font-size:19px;color:#fff;display:block;margin-bottom:8px}
+  .hero-fallback p{font-size:13.5px;color:var(--silver-2)}
+
+  section{max-width:1140px;margin:0 auto;padding:100px 24px}
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green-bright);margin-bottom:14px}
+  h2{font-family:'Space Grotesk';font-weight:700;font-size:clamp(30px,3.8vw,46px);letter-spacing:-.02em;line-height:1.1;color:#fff}
+  .sec-sub{margin-top:16px;color:var(--silver-2);max-width:560px;font-size:16px}
+
+  .cards{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{border:1px solid var(--border);background:var(--card);border-radius:20px;padding:30px;position:relative;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+  .card:hover,.card:focus-within{transform:translateY(-6px);border-color:rgba(47,212,127,.5);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+  .card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--green-bright),transparent)}
+  .card .code{font-family:'Space Grotesk';font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--green-bright);text-transform:uppercase}
+  .card h3{font-family:'Space Grotesk';font-size:24px;font-weight:700;color:#fff;margin:12px 0}
+  .card p{font-size:14.5px;color:var(--silver-2);flex:1}
+  .chiplist{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--mint);background:rgba(23,164,90,.08)}
+  .card button{margin-top:22px;background:none;border:none;color:#fff;font-weight:700;font-size:14px;text-align:left;padding:0;cursor:pointer;font-family:'Manrope',sans-serif}
+  .card button:hover{color:var(--green-bright)}
+
+  .partner{border:1px solid var(--border);border-radius:24px;background:linear-gradient(120deg,rgba(23,164,90,.22),rgba(23,164,90,.05));padding:54px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .partner h3{font-family:'Space Grotesk';font-size:clamp(24px,3vw,34px);font-weight:700;color:#fff;letter-spacing:-.01em}
+  .partner p{margin-top:12px;color:var(--silver-2);max-width:560px;font-size:15.5px}
+
+  .cta{text-align:center;border:1px solid var(--border);border-radius:24px;background:radial-gradient(600px 300px at 50% -20%,rgba(47,212,127,.25),transparent),var(--card);padding:78px 40px}
+  .cta h2{max-width:640px;margin:0 auto}
+  .cta p{margin:18px auto 0;max-width:480px;color:var(--silver-2)}
+  .cta .hero-actions{justify-content:center}
+
+  footer{border-top:1px solid var(--border);padding:54px 24px 36px}
+  .foot{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px}
+  footer h4{font-family:'Space Grotesk';font-size:14px;color:#fff;margin-bottom:16px}
+  footer p,footer a{font-size:14px;color:var(--silver-2);text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:var(--green-bright)}
+  .copyright{max-width:1140px;margin:40px auto 0;border-top:1px solid var(--border);padding-top:22px;font-size:12.5px;color:#8b9a92}
+
+  @media(max-width:980px){
+    nav ul{display:none}
+    .cards{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr}
+    .partner{padding:34px}
+    .hero-copy{margin-left:0;padding:130px 20px 220px}
+    .stage-tools{right:20px;left:20px;bottom:20px;justify-content:center}
+    section{padding:70px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><div class="logo-mark">KLC</div>KLC <em>Steel</em></div>
+  <ul>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#partner">Đối tác</a></li>
+    <li><a href="#cta">Liên hệ</a></li>
+    <li><a href="#cta" class="nav-cta">Báo giá ngay</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="hero">
+  <canvas id="world" role="img" aria-label="Mô hình 3D một dải thép cuộn hình xoắn ốc bằng kim loại, quay chậm giữa các tấm thép đã cắt đang lơ lửng"></canvas>
+  <div class="hero-fallback" id="fallback">
+    <div>
+      <strong>Không bật được WebGL</strong>
+      <p>Trình duyệt hiện tại không dựng được mô hình 3D. Toàn bộ nội dung và thông số sản phẩm phía dưới vẫn hoạt động bình thường.</p>
+    </div>
+  </div>
+
+  <div class="hero-copy">
+    <div class="pill">Đối tác chiến lược của Tôn Tân Phước Khanh</div>
+    <h1><span class="metal">Nền thép vững</span><br>cho mọi <span class="grn">công trình</span></h1>
+    <p>Thép cán nguội · Thép cán nóng · Tôn lạnh. Tồn kho lớn, cắt theo quy cách, báo giá trong 24 giờ và giao hàng toàn quốc.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#cta">Nhận báo giá 24h →</a>
+      <a class="btn btn-glass" href="#products">Khám phá sản phẩm</a>
+    </div>
+
+    <div class="surface-switch">
+      <div class="lbl" id="surface-label">Bề mặt thép trên mô hình</div>
+      <div class="row" id="surface" role="group" aria-labelledby="surface-label"></div>
+      <p id="surface-note">Ba dòng thép phản xạ ánh sáng khác nhau: cán nguội bóng mịn, cán nóng còn vảy cán, tôn lạnh có lớp mạ nhôm-kẽm sáng bạc.</p>
+    </div>
+  </div>
+
+  <div class="stage-tools" id="views" role="group" aria-label="Góc nhìn"></div>
+  <div class="hero-hint">Kéo để quay mô hình · cuộn chuột để phóng</div>
+</div>
+
+<section id="products">
+  <div class="eyebrow">Sản phẩm</div>
+  <h2>Ba dòng thép, một tiêu chuẩn chất lượng</h2>
+  <p class="sec-sub">Nguồn hàng ổn định từ các nhà máy lớn, đầy đủ chứng chỉ CO/CQ theo từng lô. Bấm vào một dòng để xem bề mặt của nó ngay trên mô hình 3D.</p>
+  <div class="cards">
+    <article class="card">
+      <div class="code">CRC · Cold Rolled</div>
+      <h3>Thép cán nguội</h3>
+      <p>Bề mặt mịn, dung sai thấp — tối ưu cho gia công dập, chấn, thiết bị gia dụng, tủ điện và chi tiết cơ khí chính xác.</p>
+      <div class="chiplist">
+        <span class="chip">0.18 – 3.0 mm</span>
+        <span class="chip">SPCC / SPCC-SD</span>
+        <span class="chip">Khổ 1000–1250</span>
+      </div>
+      <button type="button" data-surface="crc">Xem bề mặt CRC trên mô hình →</button>
+    </article>
+    <article class="card">
+      <div class="code">HRC · Hot Rolled</div>
+      <h3>Thép cán nóng</h3>
+      <p>Chịu lực tốt, giá cạnh tranh — tiêu chuẩn cho kết cấu nhà xưởng, bồn bể, cơ khí chế tạo và đóng tàu.</p>
+      <div class="chiplist">
+        <span class="chip">1.5 – 25 mm</span>
+        <span class="chip">SS400 / Q235B</span>
+        <span class="chip">Khổ 1250–1500</span>
+      </div>
+      <button type="button" data-surface="hrc">Xem bề mặt HRC trên mô hình →</button>
+    </article>
+    <article class="card">
+      <div class="code">GL · Galvalume</div>
+      <h3>Tôn lạnh</h3>
+      <p>Mạ hợp kim nhôm kẽm chống ăn mòn vượt trội — mái lợp, vách ngăn công nghiệp và dân dụng, nguồn hàng Tân Phước Khanh.</p>
+      <div class="chiplist">
+        <span class="chip">AZ50 – AZ150</span>
+        <span class="chip">0.25 – 0.5 mm</span>
+        <span class="chip">Cuộn / tấm cắt</span>
+      </div>
+      <button type="button" data-surface="gl">Xem bề mặt tôn lạnh trên mô hình →</button>
+    </article>
+  </div>
+</section>
+
+<section id="partner" style="padding-top:0">
+  <div class="partner">
+    <div>
+      <div class="eyebrow">Đối tác chiến lược</div>
+      <h3>Tôn Tân Phước Khanh × KLC Steel</h3>
+      <p>Hợp tác trực tiếp với nhà máy giúp KLC chủ động nguồn tôn lạnh chất lượng cao — giá gốc nhà máy, sản lượng ổn định cho các đơn hàng dự án lớn.</p>
+    </div>
+    <a class="btn btn-glass" href="#cta">Tìm hiểu hợp tác</a>
+  </div>
+</section>
+
+<section id="cta" style="padding-top:0">
+  <div class="cta">
+    <div class="eyebrow">Bắt đầu</div>
+    <h2>Gửi quy cách hôm nay, nhận giá trong 24 giờ</h2>
+    <p>Đội kinh doanh KLC hỗ trợ qua hotline, Zalo hoặc email — kèm tư vấn chọn mác thép phù hợp với ứng dụng.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="tel:0900000000">Gọi 0900 000 000</a>
+      <a class="btn btn-glass" href="mailto:sales@klcsteel.vn">sales@klcsteel.vn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>KLC Steel</h4>
+      <p>Chuyên cung cấp thép cán nguội, thép cán nóng, tôn lạnh cho công nghiệp và xây dựng.</p>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="#products">Thép cán nguội</a>
+      <a href="#products">Thép cán nóng</a>
+      <a href="#products">Tôn lạnh</a>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <p>Hotline: 0900 000 000</p>
+      <p>sales@klcsteel.vn</p>
+      <p>KCN ..., TP. Hồ Chí Minh</p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 KLC Steel. Concept 12 — Modern Green 3D.</div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start, prefersReducedMotion } from '../assets/klc3d/runtime.js';
+import { createScene } from './scene.js';
+import { STEEL } from '../assets/klc3d/scene-kit.js';
+
+// Transparent canvas: the page's own gradient is the sky, and the environment map does the
+// reflecting. One cool key, one green rim, no post-processing.
+const LOOK = {
+  alpha: true,
+  toneMapping: 'ACESFilmicToneMapping',
+  exposure: 1.15,
+  shadows: false,
+  environmentIntensity: 0.5,
+  palette: { core: '#4d5c55', ring: '#2fd47f', plate: '#aebbb4', mote: '#8ae7b6' },
+  light: {
+    keyColor: '#eef6ff', keyIntensity: 2.6,
+    rimColor: '#2fd47f', rimIntensity: 2.4,
+    skyColor: '#7f9c8c', groundColor: '#07281a', fillIntensity: 0.5
+  },
+  camera: { fovDeg: 42, limits: { minDist: 3.6, maxDist: 15, minPolarDeg: 30, maxPolarDeg: 140 } }
+};
+
+// On a wide screen the copy owns the left half, so the hero is framed right of centre. On a
+// narrow screen the copy stacks above it and the hero belongs in the middle.
+const wide = matchMedia('(min-width: 981px)').matches;
+const offset = wide ? -1.85 : 0;
+const VIEWS = {
+  'Tổng quan': { position: [offset + 0.9, 1.7, 9.6], target: [offset, 0.1, 0] },
+  'Cận dải thép': { position: [offset + 2.0, 0.5, 3.4], target: [offset, 0, 0] },
+  'Từ trên': { position: [offset + 0.2, 7.6, 1.8], target: [offset, 0, 0] }
+};
+
+const canvas = document.querySelector('#world');
+const hero = document.querySelector('#hero');
+
+const scene = start({
+  canvas, viewport: hero, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    document.querySelector('#fallback').classList.add('on');
+    document.querySelector('#views').hidden = true;
+    document.querySelector('.hero-hint').hidden = true;
+    document.querySelector('.surface-switch').hidden = true;
+  }
+});
+
+const SURFACE_NOTES = {
+  crc: 'Cán nguội (CRC): bề mặt mịn, phản xạ gọn và sắc — dấu hiệu của dung sai độ dày thấp.',
+  hrc: 'Cán nóng (HRC): bề mặt sẫm và tán xạ hơn do lớp vảy cán còn lại sau khi cán ở nhiệt độ cao.',
+  gl: 'Tôn lạnh (GL): lớp mạ hợp kim nhôm-kẽm cho bề mặt sáng bạc, hơi mờ vì cấu trúc tinh thể của lớp mạ.'
+};
+
+if (scene) {
+  const surface = document.querySelector('#surface');
+  const note = document.querySelector('#surface-note');
+  const shortLabel = { crc: 'Cán nguội', hrc: 'Cán nóng', gl: 'Tôn lạnh' };
+
+  function selectSurface(key) {
+    scene.world.setProduct(key);
+    note.textContent = SURFACE_NOTES[key];
+    for (const other of surface.children) other.setAttribute('aria-pressed', String(other.dataset.surface === key));
+  }
+
+  for (const key of Object.keys(STEEL)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.surface = key;
+    button.textContent = shortLabel[key];
+    button.setAttribute('aria-pressed', String(key === 'crc'));
+    button.addEventListener('click', () => selectSurface(key));
+    surface.append(button);
+  }
+  selectSurface('crc');
+
+  for (const button of document.querySelectorAll('[data-surface]')) {
+    if (button.closest('#surface')) continue;
+    button.addEventListener('click', () => {
+      selectSurface(button.dataset.surface);
+      hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  const viewButtons = document.querySelector('#views');
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => {
+      scene.setView(name);
+      for (const other of viewButtons.children) other.setAttribute('aria-current', String(other === button));
+    });
+    viewButtons.append(button);
+  }
+  viewButtons.firstElementChild.setAttribute('aria-current', 'true');
+
+  const motion = document.createElement('button');
+  motion.type = 'button';
+  function paintMotion() {
+    const running = !scene.isPaused();
+    motion.textContent = running ? 'Dừng chuyển động' : 'Bật chuyển động';
+    motion.setAttribute('aria-pressed', String(running));
+  }
+  motion.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintMotion(); });
+  paintMotion();
+  viewButtons.append(motion);
+
+  // Pointer parallax and scroll lift. Both are visitor-driven, so they stay live even when
+  // ambient motion is paused for prefers-reduced-motion.
+  if (!prefersReducedMotion()) {
+    hero.addEventListener('pointermove', (event) => {
+      const box = hero.getBoundingClientRect();
+      scene.world.setPointer(
+        ((event.clientX - box.left) / box.width) * 2 - 1,
+        ((event.clientY - box.top) / box.height) * 2 - 1);
+    });
+    hero.addEventListener('pointerleave', () => scene.world.setPointer(0, 0));
+    addEventListener('scroll', () => scene.world.setScroll(Math.min(window.scrollY, 900)), { passive: true });
+  }
+}
+</script>
+
+</body>
+</html>

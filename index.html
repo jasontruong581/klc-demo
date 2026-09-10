@@ -36,6 +36,20 @@
   .t3 b{color:#137a3f}
   .t4{background:radial-gradient(400px 260px at 70% 0%,#10502f,#07281a);color:#f2f5f4}
   .t4 b{background:linear-gradient(100deg,#2fd47f,#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .t9{background:#14171a;color:#e5eaef;background-image:radial-gradient(240px 160px at 78% 90%,rgba(35,160,79,.35),transparent)}
+  .t9 b{color:#23a04f}
+  .t10{background:#fff;color:#1a2620;border-bottom:1px solid var(--silver);background-image:repeating-linear-gradient(180deg,#eef2f0 0 7px,#fff 7px 14px)}
+  .t10 b{color:#0e7a3c}
+  .t11{background:#eef1ee;background-image:linear-gradient(#d3dbd3 1px,transparent 1px),linear-gradient(90deg,#d3dbd3 1px,transparent 1px);background-size:26px 26px;color:#20302a}
+  .t11 b{color:#137a3f}
+  .t12{background:radial-gradient(420px 280px at 30% 110%,#17a45a,#07281a);color:#f2f5f4}
+  .t12 b{background:linear-gradient(100deg,#2fd47f,#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .group{margin:0 0 18px}
+  .group + .grid{margin-bottom:52px}
+  .group h2{font-size:15px;font-weight:800;letter-spacing:.02em}
+  .group p{font-size:13.5px;color:var(--gray);margin-top:4px;max-width:640px}
+  .tag3d{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px;margin-left:8px;vertical-align:2px}
   .body{padding:22px 26px 26px}
   .num{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
   .body h2{font-size:19px;font-weight:700;margin:8px 0 8px}
@@ -51,10 +65,14 @@
 <header>
   <div class="logo"><div class="logo-mark">KLC</div>KLC<span>Steel</span></div>
   <h1>Chọn mẫu thiết kế website</h1>
-  <p>4 hướng thiết kế cho website KLC Steel. Bấm vào từng mẫu để xem bản demo hoàn chỉnh, xem tốt nhất trên máy tính.</p>
+  <p>Các hướng thiết kế cho website KLC Steel, gồm bản phẳng và bản dựng 3D tương tác. Bấm vào từng mẫu để xem bản demo hoàn chỉnh, xem tốt nhất trên máy tính.</p>
 </header>
 
 <main>
+  <div class="group">
+    <h2>Bản phẳng — mẫu 01 → 04</h2>
+    <p>Bốn hướng thiết kế nền tảng: khác nhau về tông màu, cách trình bày thông số và mức độ thiên về chuyển đổi đơn hàng.</p>
+  </div>
   <div class="grid">
     <a class="concept" href="/concept-1/">
       <div class="thumb t1">THÉP CÁN <b>&nbsp;CHUẨN</b></div>
@@ -90,6 +108,49 @@
         <h2>Modern Green — Hiện đại ánh kim</h2>
         <p>Gradient xanh đậm, chữ ánh kim bạc theo tinh thần logo, card kính mờ. Hình ảnh trẻ trung, hiện đại, thiên về marketing.</p>
         <span class="go">Xem mẫu 04 →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="group">
+    <h2>Bản dựng 3D — mẫu 09 → 12<span class="tag3d">WebGL</span></h2>
+    <p>Bốn mẫu 3D tương ứng với bốn hướng phẳng ở trên, dựng bằng Three.js ngay trong trình duyệt: xoay được, có thông số tính trực tiếp từ hình học và luôn có bản dự phòng khi máy không bật được WebGL.</p>
+  </div>
+  <div class="grid">
+    <a class="concept" href="/concept-9/">
+      <div class="thumb t9">DÂY XẢ <b>&nbsp;CUỘN 3D</b></div>
+      <div class="body">
+        <div class="num">Mẫu 09 · bản 3D của mẫu 01</div>
+        <h2>Industrial Dark 3D — Dây xả cuộn</h2>
+        <p>Cuộn thép trên trục xả nhả dải qua con lăn ép trong xưởng tối. Điều chỉnh tốc độ dây và độ dày dải, khối lượng và chiều dài cuộn tính trực tiếp từ hình học.</p>
+        <span class="go">Xem mẫu 09 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-10/">
+      <div class="thumb t10">CẤU HÌNH <b>&nbsp;BÓ THÉP</b></div>
+      <div class="body">
+        <div class="num">Mẫu 10 · bản 3D của mẫu 02</div>
+        <h2>Corporate Light 3D — Cấu hình bó thép</h2>
+        <p>Phiếu báo giá điều khiển mô hình: đổi quy cách và số tấm là bó thép trên bàn xoay dựng lại đúng tỷ lệ thật, kèm khối lượng và chiều cao bó.</p>
+        <span class="go">Xem mẫu 10 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-11/">
+      <div class="thumb t11">MẶT CẮT <b>&nbsp;TÁCH LỚP</b></div>
+      <div class="body">
+        <div class="num">Mẫu 11 · bản 3D của mẫu 03</div>
+        <h2>Technical Blueprint 3D — Mặt cắt tách lớp</h2>
+        <p>Mặt cắt tôn lạnh dựng theo hình chiếu trực giao, tách lớp được. Chọn độ dày toàn phần và lớp mạ AZ, chiều dày từng lớp suy ra theo công thức của nhà máy.</p>
+        <span class="go">Xem mẫu 11 →</span>
+      </div>
+    </a>
+    <a class="concept" href="/concept-12/">
+      <div class="thumb t12">DẢI THÉP <b>&nbsp;XOẮN</b></div>
+      <div class="body">
+        <div class="num">Mẫu 12 · bản 3D của mẫu 04</div>
+        <h2>Modern Green 3D — Hero toàn màn hình</h2>
+        <p>Dải thép xoắn kim loại chiếm cả khung hero, thẻ kính nổi phía trên. Đổi dòng sản phẩm là bề mặt trên mô hình đổi theo đúng đặc tính phản xạ của dòng đó.</p>
+        <span class="go">Xem mẫu 12 →</span>
       </div>
     </a>
   </div>
