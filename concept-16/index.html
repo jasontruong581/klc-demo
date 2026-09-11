@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 16: Kiến trúc sóng tôn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,540;1,9..144,340&family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f1;
+    --bg-2:#f2ede2;
+    --ink:#13291d;
+    --muted:#63705f;
+    --hair:#ddd5c4;
+    --green:#0b5c2a;
+    --green-2:#17843f;
+    --gold:#a97f2a;
+    --white:#fffdf9;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Be Vietnam Pro',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .kicker{font-size:11.5px;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);font-weight:600}
+  .rule{border:none;border-top:1px solid var(--hair)}
+
+  nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+  .nav-in{max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .brand img{width:42px;height:42px;object-fit:contain}
+  .brand b{font-family:var(--serif);font-weight:540;font-size:20px;letter-spacing:.01em}
+  .brand small{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
+  nav ul{display:flex;align-items:center;gap:28px;list-style:none}
+  nav ul a{text-decoration:none;color:var(--ink);font-size:13.5px}
+  nav ul a:hover{color:var(--green)}
+  .cta{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:10px 24px;border-radius:999px;font-size:13.5px;font-weight:500;transition:.2s}
+  .cta:hover{background:var(--green-2)}
+  .cta.ghost{background:transparent;color:var(--green);border:1px solid var(--green)}
+  .cta.ghost:hover{background:var(--green);color:#fff}
+
+  .hero{padding:72px 0 40px}
+  .hero h1{font-family:var(--serif);font-weight:340;font-size:clamp(40px,6.4vw,84px);line-height:1.04;letter-spacing:-.015em;max-width:15ch}
+  .hero h1 em{font-style:italic;font-weight:340;color:var(--green)}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+  .hero-side{max-width:330px;color:var(--muted);font-size:14.5px;padding-bottom:8px}
+  .hero-side b{color:var(--ink);font-weight:600}
+
+  /* ——— the profile studio ——— */
+  .studio{margin-top:44px;border:1px solid var(--hair);background:var(--white)}
+  .studio-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid var(--hair);font-size:11.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+  .studio-head b{color:var(--green);font-weight:600}
+  .stage{position:relative;overflow:hidden;aspect-ratio:16/9;min-height:380px;min-width:0;background:linear-gradient(#f8f5ee,#eee7d9)}
+  .stage canvas{display:block;width:100%;height:100%;touch-action:none}
+  .label-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .label{position:absolute;left:0;top:0;background:var(--white);border:1px solid var(--hair);border-bottom:2px solid var(--green);padding:5px 11px;white-space:nowrap;transition:opacity .25s;box-shadow:0 1px 6px rgba(19,41,29,.06)}
+  .label b{font-family:var(--serif);font-weight:540;font-size:15px;display:block;line-height:1.2}
+  .label i{font-style:normal;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .label.gold{border-bottom-color:var(--gold)}
+  .views{position:absolute;top:14px;left:16px;display:flex;gap:8px;z-index:4;flex-wrap:wrap}
+  .views button,.stage-tools button{background:var(--white);border:1px solid var(--hair);color:var(--ink);font-family:var(--sans);font-size:12px;letter-spacing:.04em;padding:7px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+  .views button:hover,.stage-tools button:hover{border-color:var(--green)}
+  .views button[aria-current="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .stage-tools{position:absolute;top:14px;right:16px;display:flex;gap:8px;z-index:4}
+  .stage-hint{position:absolute;bottom:12px;right:16px;font-size:11px;color:var(--muted);z-index:3;pointer-events:none}
+  .scale-note{position:absolute;bottom:12px;left:16px;font-size:11px;color:var(--gold);z-index:3;letter-spacing:.06em}
+  .stage-fallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:32px;background:var(--white);z-index:5}
+  .stage-fallback.on{display:flex}
+  .stage-fallback svg{width:min(560px,90%);height:auto}
+  .stage-fallback svg path{fill:none;stroke:var(--green);stroke-width:2.5}
+  .stage-fallback svg line{stroke:var(--hair)}
+  .stage-fallback p{font-size:13px;color:var(--muted);max-width:460px}
+  .stage-fallback strong{font-family:var(--serif);font-weight:540;font-size:20px}
+
+  .studio-controls{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 22px;border-top:1px solid var(--hair)}
+  .ctl .lbl{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:9px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chips button{background:transparent;border:1px solid var(--hair);color:var(--ink);font-family:var(--sans);font-size:13px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.15s}
+  .chips button:hover{border-color:var(--green)}
+  .chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+  .readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--hair)}
+  .readouts > div{padding:16px 22px;border-right:1px solid var(--hair)}
+  .readouts > div:last-child{border-right:none}
+  .readouts dt{font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+  .readouts dd{font-family:var(--serif);font-weight:540;font-size:22px;margin-top:2px}
+  .readouts dd small{font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:400}
+  .method{padding:13px 22px;border-top:1px solid var(--hair);font-size:12px;color:var(--muted);line-height:1.65}
+
+  section{padding:84px 0}
+  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:36px;flex-wrap:wrap}
+  .sec-head .no{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px}
+  h2{font-family:var(--serif);font-weight:340;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.01em}
+  h2 em{font-style:italic;color:var(--green)}
+
+  .profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .profile-card{background:var(--white);padding:30px 28px}
+  .profile-card svg{width:100%;height:auto;display:block;margin-bottom:20px}
+  .profile-card svg path{fill:none;stroke:var(--ink);stroke-width:2}
+  .profile-card svg line{stroke:var(--hair)}
+  .profile-card h3{font-family:var(--serif);font-weight:540;font-size:22px;margin-bottom:6px}
+  .profile-card .meta{font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
+  .profile-card p{font-size:14px;color:var(--muted)}
+
+  .products{display:grid;grid-template-columns:1.35fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .prod{background:var(--white);padding:36px 32px}
+  .prod.hero-line{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,var(--white),#f3f6f0)}
+  .prod h3{font-family:var(--serif);font-weight:540;font-size:26px}
+  .prod .std{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px}
+  .prod p{color:var(--muted);font-size:14.5px;max-width:52ch}
+  .spec-list{margin-top:22px;border-top:1px solid var(--hair)}
+  .spec-list div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:14px}
+  .spec-list dt{color:var(--muted)}
+  .spec-list dd{font-weight:600;text-align:right}
+  .prod a{color:var(--green);font-size:13.5px;font-weight:600;text-decoration:none}
+  .prod a:hover{text-decoration:underline}
+
+  .partner{border:1px solid var(--hair);background:var(--ink);color:#f2efe6;display:grid;grid-template-columns:1.2fr .8fr}
+  .partner .txt{padding:52px 48px}
+  .partner h3{font-family:var(--serif);font-weight:340;font-size:clamp(26px,3vw,38px);line-height:1.15}
+  .partner h3 em{font-style:italic;color:#8fd8ab}
+  .partner p{margin-top:16px;color:#b9c4b6;font-size:15px;max-width:52ch}
+  .partner .facts{border-left:1px solid rgba(242,239,230,.2);padding:52px 48px;display:flex;flex-direction:column;gap:26px;justify-content:center}
+  .partner .facts b{font-family:var(--serif);font-weight:540;font-size:22px;display:block}
+  .partner .facts span{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#8fa393}
+
+  .usps{display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+  .usp .n{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:17px}
+  .usp h4{font-family:var(--serif);font-weight:540;font-size:19px;margin:10px 0 6px}
+  .usp p{font-size:13.5px;color:var(--muted)}
+
+  .quote{background:var(--bg-2);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center}
+  .quote h2{max-width:22ch;margin:0 auto}
+  .quote p{margin:18px auto 30px;color:var(--muted);max-width:56ch}
+  .quote-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  footer{padding:56px 0 32px}
+  .foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px}
+  .foot img{width:52px;height:52px;object-fit:contain;margin-bottom:14px}
+  footer h4{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold);margin-bottom:14px}
+  footer p,footer a{font-size:14px;color:var(--muted);text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:var(--green)}
+  .colophon{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .colophon a{color:var(--green);text-decoration:none}
+  .colophon a:hover{text-decoration:underline}
+
+  @media(max-width:980px){
+    nav ul{display:none}
+    .profiles{grid-template-columns:minmax(0,1fr)}
+    .products{grid-template-columns:minmax(0,1fr)}
+    .prod.hero-line{grid-row:auto}
+    .partner{grid-template-columns:1fr}
+    .partner .facts{border-left:none;border-top:1px solid rgba(242,239,230,.2)}
+    .usps{grid-template-columns:1fr 1fr;gap:28px}
+    .foot{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 18px}
+    .nav-in{padding:12px 18px}
+    section{padding:60px 0}
+    .stage{aspect-ratio:4/5;min-height:300px}
+    .label b{font-size:12.5px}
+    .label{padding:3px 8px}
+    .stage-hint{display:none}
+    .stage-tools{top:auto;bottom:12px;right:12px}
+    .scale-note{bottom:46px}
+    .studio-controls{flex-direction:column;gap:18px}
+    .usps{grid-template-columns:1fr}
+    .readouts{grid-template-columns:1fr 1fr}
+    .readouts > div:nth-child(2n){border-right:none}
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Điều hướng chính">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel">
+      <span><b>KLC Steel</b><small>Thương mại thép &amp; tôn</small></span>
+    </a>
+    <ul>
+      <li><a href="#studio">Xưởng biên dạng</a></li>
+      <li><a href="#profiles">Biên dạng</a></li>
+      <li><a href="#products">Sản phẩm</a></li>
+      <li><a href="#partner">Nhà máy</a></li>
+    </ul>
+    <a class="cta" href="#quote">Báo giá</a>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="hero-top">
+    <div>
+      <p class="kicker">Tuyển tập biên dạng · Số 16</p>
+      <h1>Sóng tôn là một <em>đường nét kiến trúc</em> — hãy chọn nó như chọn vật liệu.</h1>
+    </div>
+    <p class="hero-side"><b>Đối tác thép tin cậy của mọi công trình.</b> KLC cung cấp tôn lạnh và thép cán cho mái, vách và kết cấu — bắt đầu từ việc chọn đúng biên dạng sóng cho từng mái nhà.</p>
+  </div>
+
+  <div class="studio" id="studio">
+    <div class="studio-head">
+      <span>Xưởng biên dạng — tấm tôn lạnh 1 m × 2 m</span>
+      <b id="head-profile">5 sóng vuông · 0,45 mm</b>
+    </div>
+    <div class="stage" id="stage">
+      <div class="views" id="views" role="group" aria-label="Góc nhìn dựng sẵn"></div>
+      <div class="stage-tools">
+        <button type="button" id="spin" aria-pressed="true">Dừng xoay</button>
+        <button type="button" id="reset">Về góc gốc</button>
+      </div>
+      <canvas id="world" role="img" aria-label="Mô hình 3D tấm tôn lạnh dựng từ mặt cắt sóng, nổi trên bệ trưng bày; đổi biên dạng và độ dày sẽ dựng lại hình khối"></canvas>
+      <div class="scale-note" id="scale-note">Độ dày vẽ phóng đại ×15</div>
+      <div class="stage-hint">Kéo để xoay · cuộn để phóng</div>
+      <div class="stage-fallback" id="fallback">
+        <strong>Trình duyệt không bật được WebGL</strong>
+        <svg id="fallback-svg" viewBox="0 0 560 130" role="img" aria-label="Mặt cắt sóng của biên dạng đang chọn">
+          <line x1="10" y1="118" x2="550" y2="118"></line>
+          <path id="fallback-path" d=""></path>
+        </svg>
+        <p>Mặt cắt 2D ở trên vẫn đổi theo nút biên dạng, và mọi thông số bên dưới vẫn được tính từ chính đường mặt cắt đó.</p>
+      </div>
+    </div>
+    <div class="studio-controls">
+      <div class="ctl">
+        <span class="lbl" id="profile-label">Biên dạng sóng</span>
+        <div class="chips" id="profile-chips" role="group" aria-labelledby="profile-label"></div>
+      </div>
+      <div class="ctl">
+        <span class="lbl" id="gauge-label">Độ dày TCT (mm)</span>
+        <div class="chips" id="gauge-chips" role="group" aria-labelledby="gauge-label"></div>
+      </div>
+    </div>
+    <dl class="readouts">
+      <div><dt>Khổ hữu dụng</dt><dd id="out-cover">—</dd></div>
+      <div><dt>Cao sóng</dt><dd id="out-height">—</dd></div>
+      <div><dt>Số sóng</dt><dd id="out-waves">—</dd></div>
+      <div><dt>Dài triển khai</dt><dd id="out-dev">—<small> mm/khổ</small></dd></div>
+      <div><dt>Khối lượng</dt><dd id="out-mass">—</dd></div>
+      <div><dt>Cả tấm 2 m</dt><dd id="out-sheet">—</dd></div>
+    </dl>
+    <p class="method">Mọi thông số được tính từ chính đường mặt cắt đang vẽ, không nhập tay: <em>dài triển khai</em> lấy tích phân theo polyline biên dạng; <em>khối lượng/m² mái</em> = (dài triển khai ÷ khổ hữu dụng) × độ dày × 7.850 kg/m³. Trên mô hình, chỉ độ dày tấm được phóng đại ×15 để nhìn thấy được — kích thước sóng và khổ tấm ở tỷ lệ thật.</p>
+  </div>
+</header>
+
+<section id="profiles">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">— 02</span><h2>Chọn đúng <em>biên dạng</em> trước khi chọn màu</h2></div>
+    <div class="profiles" id="profile-cards"></div>
+  </div>
+</section>
+
+<section id="products" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">— 03</span><h2>Hai dòng chủ lực, <em>một chuỗi cung</em></h2></div>
+    <div class="products">
+      <article class="prod hero-line">
+        <div>
+          <h3>Tôn lạnh — GL</h3>
+          <p class="std">JIS G3302 · EN 10327</p>
+          <p>Tôn mạ nhôm-kẽm cho mái và vách kiến trúc: bề mặt hoa mạ đều, phản xạ nhiệt tốt, cán được cả ba biên dạng ở trên. Nguồn cuộn trực tiếp từ nhà máy Tôn Tân Phước Khánh.</p>
+          <dl class="spec-list">
+            <div><dt>Độ dày</dt><dd>0,15 – 1,2 mm</dd></div>
+            <div><dt>Lớp mạ</dt><dd>60 – 275 g/m²</dd></div>
+            <div><dt>Dạng hàng</dt><dd>Cuộn · tấm cán sóng theo yêu cầu</dd></div>
+          </dl>
+        </div>
+        <p style="margin-top:24px"><a href="#quote">Báo giá tôn lạnh →</a></p>
+      </article>
+      <article class="prod">
+        <h3>Thép cán nguội — CRC</h3>
+        <p class="std">JIS G3141 · ASTM A1008</p>
+        <p>Nền phẳng, dung sai chặt cho chi tiết chấn gập, phụ kiện mái và cơ khí chính xác.</p>
+        <dl class="spec-list">
+          <div><dt>Độ dày</dt><dd>0,3 – 3,0 mm</dd></div>
+          <div><dt>Khổ rộng</dt><dd>600 – 1.250 mm</dd></div>
+        </dl>
+      </article>
+      <article class="prod">
+        <h3>Thép cán nóng — HRC</h3>
+        <p class="std">JIS G3101 · ASTM A36</p>
+        <p>Dòng phụ trợ cho xà gồ, khung kèo và kết cấu đỡ chính bộ mái.</p>
+        <dl class="spec-list">
+          <div><dt>Độ dày</dt><dd>2,0 – 25 mm</dd></div>
+          <div><dt>Khổ rộng</dt><dd>600 – 2.000 mm</dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="partner" style="padding-top:0">
+  <div class="wrap">
+    <div class="partner">
+      <div class="txt">
+        <p class="kicker" style="color:#8fd8ab">Hợp tác nhà máy</p>
+        <h3 style="margin-top:12px">Lớp mạ ổn định, vì cuộn tôn đi thẳng từ <em>Tôn Tân Phước Khánh</em>.</h3>
+        <p>KLC hợp tác trực tiếp với nhà máy Tôn Tân Phước Khánh: cùng một dây chuyền mạ cho mọi lô hàng, nên độ dày lớp mạ và bề mặt hoa mạ lặp lại được giữa các đợt giao — điều một mái nhà lợp thành nhiều giai đoạn cần nhất.</p>
+      </div>
+      <div class="facts">
+        <div><b>Giá gốc dây chuyền</b><span>Không qua tầng trung gian</span></div>
+        <div><b>Sản lượng chủ động</b><span>Ổn định đầu ra cho dự án</span></div>
+        <div><b>CO / CQ theo lô</b><span>Chứng từ nhà máy đầy đủ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usp" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">— 04</span><h2>Chất lượng — <em>Uy tín</em> — Bền vững</h2></div>
+    <div class="usps">
+      <div class="usp"><span class="n">i.</span><h4>Trực tiếp nhà máy</h4><p>Hợp tác Tôn Tân Phước Khánh — nguồn cuộn ổn định, không phụ thuộc chợ hàng.</p></div>
+      <div class="usp"><span class="n">ii.</span><h4>Giá cạnh tranh</h4><p>Mua tận gốc nên báo giá sát biến động thị trường, giữ giá theo tiến độ.</p></div>
+      <div class="usp"><span class="n">iii.</span><h4>Nguồn hàng chất lượng</h4><p>Tiêu chuẩn JIS / ASTM / EN, kiểm tra độ dày và lớp mạ trước khi xuất kho.</p></div>
+      <div class="usp"><span class="n">iv.</span><h4>Ổn định đầu ra</h4><p>Cam kết sản lượng cho nhà thầu — đủ tôn cho mái lớn, đúng đợt thi công.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote" id="quote">
+  <div class="wrap">
+    <p class="kicker">Báo giá trong 24 giờ</p>
+    <h2 style="margin-top:14px">Gửi bản vẽ mái — nhận <em>báo giá</em> trong 24h.</h2>
+    <p>Đính kèm mặt bằng mái hoặc khối lượng dự kiến; KLC tư vấn biên dạng, độ dày, lớp mạ và báo giá kèm tiến độ giao.</p>
+    <div class="quote-actions">
+      <a class="cta" href="tel:0902351396">Gọi 0902 351 396</a>
+      <a class="cta ghost" href="mailto:ctykc@gmail.com">Email ctykc@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel">
+        <p><b style="font-family:var(--serif);color:var(--ink)">Công ty KLC</b> — thương mại thép &amp; tôn. Đối tác thép tin cậy của mọi công trình.</p>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <a href="tel:0902351396">Hotline 0902 351 396</a>
+        <a href="mailto:ctykc@gmail.com">ctykc@gmail.com</a>
+        <p>40 Lý Tự Trọng, Phường Vũng Tàu, TP HCM</p>
+      </div>
+      <div>
+        <h4>Sản phẩm</h4>
+        <a href="#products">Tôn lạnh (GL)</a>
+        <a href="#products">Thép cán nguội (CRC)</a>
+        <a href="#products">Thép cán nóng (HRC)</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>Concept 16 — “Kiến trúc sóng tôn” · biên dạng dựng tham số từ mặt cắt</span>
+      <a href="../">← Tất cả concept</a>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start } from '../assets/klc3d/runtime.js';
+import {
+  createScene, deriveSpecs, svgPathFor,
+  PROFILES, GAUGES_MM, THICKNESS_EXAGGERATION
+} from './scene.js';
+
+// A gallery, not a factory: warm near-white light, soft shadow, filmic tone.
+const LOOK = {
+  toneMapping: 'ACESFilmicToneMapping',
+  exposure: 1.08,
+  palette: { skyTop: '#f8f5ee', skyBottom: '#ece4d3', floor: '#f1ebdd', plinth: '#e7dfcd' },
+  camera: {
+    fovDeg: 35, near: 0.05, far: 60,
+    limits: { minDist: 1.1, maxDist: 9, maxPolarDeg: 92 }
+  }
+};
+
+const VIEWS = {
+  'Phối cảnh': { position: [1.75, 1.2, 2.05], target: [0, 0.55, 0] },
+  'Mặt cắt sóng': { position: [0, 0.72, 2.15], target: [0, 0.63, 0] },
+  'Trên mái': { position: [0.02, 4.3, 0.02], target: [0, 0.6, 0] }
+};
+// Views that only mean something when the coupon sits square to the axes.
+const SQUARED_VIEWS = new Set(['Mặt cắt sóng', 'Trên mái']);
+
+const whole = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
+const two = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+const canvas = document.querySelector('#world');
+const stage = document.querySelector('#stage');
+const scene = start({
+  canvas, viewport: stage, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    document.querySelector('#fallback').classList.add('on');
+    document.querySelector('#views').hidden = true;
+    document.querySelector('.stage-tools').hidden = true;
+    document.querySelector('#scale-note').hidden = true;
+  }
+});
+
+const state = { profileId: 'vuong5', gaugeMm: 0.45 };
+
+function apply(next = {}) {
+  Object.assign(state, next);
+  const specs = deriveSpecs(state);
+  document.querySelector('#out-cover').textContent = `${whole.format(specs.coverMm)} mm`;
+  document.querySelector('#out-height').textContent = `${whole.format(specs.waveHeightMm)} mm`;
+  document.querySelector('#out-waves').textContent =
+    `${specs.waveCount} ${PROFILES[state.profileId].waveWord}`;
+  document.querySelector('#out-dev').innerHTML =
+    `${whole.format(specs.developedMm)}<small> mm/khổ</small>`;
+  document.querySelector('#out-mass').innerHTML =
+    `${two.format(specs.massKgM2)}<small> kg/m² mái</small>`;
+  document.querySelector('#out-sheet').innerHTML =
+    `${two.format(specs.sheetMassKg)}<small> kg/tấm</small>`;
+  document.querySelector('#head-profile').textContent =
+    `${PROFILES[state.profileId].label} · ${two.format(state.gaugeMm)} mm`;
+  document.querySelector('#fallback-path').setAttribute('d', svgPathFor(state.profileId, 560, 118, 12));
+  scene?.world.apply(state);
+}
+
+// Profile buttons and gauge chips, both generated from the same source the scene reads.
+const profileChips = document.querySelector('#profile-chips');
+for (const [id, profile] of Object.entries(PROFILES)) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = profile.label;
+  button.dataset.profile = id;
+  button.setAttribute('aria-pressed', String(id === state.profileId));
+  profileChips.append(button);
+}
+profileChips.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-profile]');
+  if (!button) return;
+  for (const other of profileChips.children) other.setAttribute('aria-pressed', String(other === button));
+  apply({ profileId: button.dataset.profile });
+});
+
+const gaugeChips = document.querySelector('#gauge-chips');
+for (const gauge of GAUGES_MM) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = two.format(gauge);
+  button.dataset.gauge = String(gauge);
+  button.setAttribute('aria-pressed', String(gauge === state.gaugeMm));
+  gaugeChips.append(button);
+}
+gaugeChips.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-gauge]');
+  if (!button) return;
+  for (const other of gaugeChips.children) other.setAttribute('aria-pressed', String(other === button));
+  apply({ gaugeMm: Number(button.dataset.gauge) });
+});
+
+// The "chọn đúng biên dạng" cards draw their cross-sections from the same polylines.
+const cards = document.querySelector('#profile-cards');
+for (const [id, profile] of Object.entries(PROFILES)) {
+  const specs = deriveSpecs({ profileId: id, gaugeMm: 0.45 });
+  const card = document.createElement('article');
+  card.className = 'profile-card';
+  card.innerHTML = `
+    <svg viewBox="0 0 320 96" role="img" aria-label="Mặt cắt ${profile.label}">
+      <line x1="6" y1="88" x2="314" y2="88"></line>
+      <path d="${svgPathFor(id, 320, 88, 8)}"></path>
+    </svg>
+    <p class="meta">Khổ ${whole.format(specs.coverMm)} mm · cao sóng ${whole.format(specs.waveHeightMm)} mm</p>
+    <h3>${profile.label}</h3>
+    <p>${profile.use}</p>`;
+  cards.append(card);
+}
+
+apply();
+
+if (scene) {
+  const spin = document.querySelector('#spin');
+  function paintSpin() {
+    const spinning = !scene.isPaused();
+    spin.textContent = spinning ? 'Dừng xoay' : 'Xoay tấm';
+    spin.setAttribute('aria-pressed', String(spinning));
+  }
+
+  // Edge-on and top views promise a silhouette, so taking them squares and stills the coupon.
+  function prepareView(name) {
+    if (!SQUARED_VIEWS.has(name)) return;
+    scene.world.square();
+    scene.setPaused(true);
+    paintSpin();
+  }
+  const viewer = window.__viewer;
+  const rawSetView = viewer.setView;
+  viewer.setView = (name) => { prepareView(name); return rawSetView(name); };
+
+  const viewButtons = document.querySelector('#views');
+  const markCurrent = (current) => {
+    for (const other of viewButtons.children) {
+      other.setAttribute('aria-current', String(other === current));
+    }
+  };
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => { viewer.setView(name); markCurrent(button); });
+    viewButtons.append(button);
+  }
+  markCurrent(viewButtons.firstElementChild);
+
+  spin.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintSpin(); });
+  paintSpin();
+
+  document.querySelector('#reset').addEventListener('click', () => {
+    scene.reset();
+    markCurrent(viewButtons.firstElementChild);
+  });
+}
+</script>
+
+</body>
+</html>

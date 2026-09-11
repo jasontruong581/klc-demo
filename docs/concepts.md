@@ -122,3 +122,72 @@ page live in the copy and the spec chips.
 stay live when ambient motion is paused, because they are visitor-driven rather than ambient.
 
 **Controls:** three surface switches, three named views, motion stop/start.
+
+## KLC Brand Edition (13–16)
+
+Four independent directions built only from the company identity — the real logo (green oval,
+chrome KLC letters wound by a steel strip, gold ring), the green brand palette, the real product
+ranges and the real contact details from klcsteel.vercel.app — deliberately **not** derived from
+concepts 01–12. Each follows the same 3D rules: an authoritative state, readouts computed from the
+geometry, named Vietnamese views, a no-WebGL fallback that keeps the page useful.
+
+### 13 — Sàn giao dịch thép ([concept-13/](../concept-13/))
+
+Futuristic trading-terminal: near-black green void, neon-emerald glassmorphism HUD, scanline
+overlay, Space Grotesk + JetBrains Mono.
+
+**Subject:** a holographic coil floating over a pulsing pedestal disc on a gridded trading floor,
+with a counter-rotating data ring.
+
+**Authoritative state:** product line and coil weight target (5–20 t). The radius is solved from
+the mass — R = √(r² + m/(π·w·ρ)) — so the slider physically grows the coil; OD, strip length
+π(R²−r²)/t, real wrap count and demo lot value are all derived from the same formula. Drawn wraps
+(14) vs real wraps (hundreds) is stated on the stage.
+
+**Controls:** three product switches, weight slider, run/pause, views "Toàn cảnh", "Mặt cuộn",
+"Sàn giao dịch".
+
+### 14 — Kho hàng thông minh ([concept-14/](../concept-14/))
+
+Bright logistics dashboard: white/light-gray cards, deep green primary, gold accents, Manrope +
+IBM Plex Mono.
+
+**Subject:** one warehouse bay — two green racks with coils in cradles, sheet-stack pallets, an
+AGV cart drifting the aisle as ambient motion.
+
+**Authoritative state:** product line and stock level (4–16 coils). Inventory readouts are summed
+over the drawn coils — tồn kho Σ π(R²−r²)·w·7850, mét dài Σ π(R²−r²)/t at a stated gauge, coil
+count = mesh count — so the slider and the panel cannot disagree.
+
+**Controls:** three product switches, stock slider, run/pause, views "Toàn kho", "Dãy kệ",
+"Cận cuộn".
+
+### 15 — Chuỗi cung ứng liền mạch ([concept-15/](../concept-15/))
+
+Warm-paper corporate: rounded cards, organic shapes, Be Vietnam Pro.
+
+**Subject:** a low-poly island diorama of the supply route — Tân Phước Khánh mill → KLC warehouse
+→ construction site — with a flatbed truck looping the road.
+
+**Authoritative state:** journey stage and truck progress on the road curve. Leg distances are
+sampled from the same CatmullRom curve the truck drives (stated scale 1 m ≈ 2 km) and delivery
+minutes derived at 40 km/h. Station buttons swap the story panel, the 3D highlight and the
+matching named view together.
+
+**Controls:** three station buttons, truck run/pause, views "Toàn cảnh", "Nhà máy Tân Phước
+Khánh", "Kho KLC", "Công trình".
+
+### 16 — Kiến trúc sóng tôn ([concept-16/](../concept-16/))
+
+Gallery-editorial: near-white background, emerald ink, hairline rules, Fraunces display serif.
+
+**Subject:** a 1 × 2 m tôn lạnh coupon floating over a plinth, built parametrically from a
+cross-section polyline per profile — 5 sóng vuông, 9 sóng tròn, cliplock sóng đứng.
+
+**Authoritative state:** profile and gauge (0,35/0,45/0,50 mm). Cover width, wave height,
+developed length and kg/m² are integrated from the actual polyline (developed length ×
+gauge × 7850); thickness is drawn ×15 with the factor printed on the stage. The no-WebGL fallback
+renders the same polylines as SVG.
+
+**Controls:** three profile switches, three gauge chips, turntable run/pause, views "Phối cảnh",
+"Mặt cắt sóng", "Trên mái".
