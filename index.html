@@ -3,160 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KLC Steel — Chọn mẫu thiết kế website</title>
+<meta name="description" content="So sánh 12 concept website KLC Steel, gồm bốn thiết kế gốc và tám phiên bản 3D tương ứng.">
+<title>KLC Steel — So sánh 12 concept website</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#f4f7f5;
-    --ink:#1a2620;
-    --gray:#5c6b63;
-    --green:#0e7a3c;
-    --silver:#dde3e0;
-  }
+  :root{--bg:#f1f5f2;--ink:#17231d;--gray:#5c6b63;--green:#0e7a3c;--line:#d8e0dc;--white:#fff}
   *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
-  header{text-align:center;padding:70px 24px 40px}
-  .logo{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:22px;margin-bottom:24px}
-  .logo-mark{width:44px;height:44px;border-radius:10px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
-  .logo span{color:var(--green)}
-  h1{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
-  header p{margin-top:12px;color:var(--gray);max-width:560px;margin-left:auto;margin-right:auto}
-
-  main{flex:1;max-width:1180px;margin:0 auto;padding:20px 24px 80px;width:100%}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
-  .concept{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--silver);border-radius:16px;overflow:hidden;transition:.22s}
-  .concept:hover{transform:translateY(-4px);box-shadow:0 22px 48px -24px rgba(26,38,32,.3);border-color:var(--green)}
-  .thumb{height:190px;position:relative;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;letter-spacing:-.01em}
-  .t1{background:#14171a;color:#e5eaef}
-  .t1 b{color:#23a04f}
-  .t2{background:#fff;color:#1a2620;border-bottom:1px solid var(--silver)}
-  .t2 b{color:#0e7a3c}
-  .t3{background:#eef1ee;background-image:linear-gradient(#d3dbd3 1px,transparent 1px),linear-gradient(90deg,#d3dbd3 1px,transparent 1px);background-size:26px 26px;color:#20302a}
-  .t3 b{color:#137a3f}
-  .t4{background:radial-gradient(400px 260px at 70% 0%,#10502f,#07281a);color:#f2f5f4}
-  .t4 b{background:linear-gradient(100deg,#2fd47f,#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .t9{background:#14171a;color:#e5eaef;background-image:radial-gradient(240px 160px at 78% 90%,rgba(35,160,79,.35),transparent)}
-  .t9 b{color:#23a04f}
-  .t10{background:#fff;color:#1a2620;border-bottom:1px solid var(--silver);background-image:repeating-linear-gradient(180deg,#eef2f0 0 7px,#fff 7px 14px)}
-  .t10 b{color:#0e7a3c}
-  .t11{background:#eef1ee;background-image:linear-gradient(#d3dbd3 1px,transparent 1px),linear-gradient(90deg,#d3dbd3 1px,transparent 1px);background-size:26px 26px;color:#20302a}
-  .t11 b{color:#137a3f}
-  .t12{background:radial-gradient(420px 280px at 30% 110%,#17a45a,#07281a);color:#f2f5f4}
-  .t12 b{background:linear-gradient(100deg,#2fd47f,#8ae7b6);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-  .group{margin:0 0 18px}
-  .group + .grid{margin-bottom:52px}
-  .group h2{font-size:15px;font-weight:800;letter-spacing:.02em}
-  .group p{font-size:13.5px;color:var(--gray);margin-top:4px;max-width:640px}
-  .tag3d{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px;margin-left:8px;vertical-align:2px}
-  .body{padding:22px 26px 26px}
-  .num{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
-  .body h2{font-size:19px;font-weight:700;margin:8px 0 8px}
-  .body p{font-size:13.5px;color:var(--gray)}
-  .body .go{display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:var(--green)}
-
-  footer{text-align:center;padding:26px;font-size:12.5px;color:var(--gray);border-top:1px solid var(--silver)}
-  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  header{text-align:center;padding:68px 24px 34px}
+  .logo{display:inline-flex;align-items:center;gap:12px;font-size:22px;font-weight:800;margin-bottom:22px}.logo-mark{width:44px;height:44px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:13px}.logo span,.accent{color:var(--green)}
+  h1{font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-.04em;line-height:1.15}header p{margin:14px auto 0;color:var(--gray);max-width:720px}
+  .legend{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}.legend span{border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.7);padding:7px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.legend .edition{background:#113c28;color:#8ef0b8;border-color:#236743}
+  main{flex:1;max-width:1320px;margin:0 auto;padding:22px 24px 84px;width:100%}.pair{margin-top:42px}.pair:first-child{margin-top:0}.pair-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:13px;padding:0 4px}.pair-kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}.pair-head h2{font-size:clamp(19px,2.5vw,25px);letter-spacing:-.025em;line-height:1.2;margin-top:3px}.pair-head p{font-size:12px;color:var(--gray);white-space:nowrap}
+  .pair-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.concept{display:block;text-decoration:none;color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}.concept:hover{transform:translateY(-4px);box-shadow:0 22px 48px -24px rgba(26,38,32,.34);border-color:var(--green)}.concept:focus-visible{outline:3px solid #32b86c;outline-offset:4px}.concept.is-3d{border-color:#a9c9b7;box-shadow:0 12px 28px -24px rgba(14,122,60,.65)}
+  .thumb{height:176px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:clamp(17px,2vw,24px);font-weight:800;letter-spacing:-.02em}.thumb::after{content:'';position:absolute;inset:0;pointer-events:none}
+  .t1,.t9{background:#14171a;color:#e5eaef}.t1 b,.t9 b{color:#23a04f}.t2{background:#fff;color:#1a2620}.t2 b,.t10 b{color:#0e7a3c}.t3,.t7,.t11{background-color:#e8eeea;background-image:linear-gradient(#cbd8d0 1px,transparent 1px),linear-gradient(90deg,#cbd8d0 1px,transparent 1px);background-size:24px 24px;color:#20302a}.t3 b,.t11 b{color:#137a3f}.t4,.t8,.t12{background:radial-gradient(420px 280px at 65% 15%,#17643c,#062319 66%,#03130d);color:#f2f5f4}.t4 b,.t12 b{color:#8ae7b6}
+  .t5{background:radial-gradient(circle at 62% 42%,#26322c 0,#0f1412 55%,#080b0a 100%)}.t5::before{content:'';width:108px;height:108px;border-radius:50%;background:radial-gradient(circle,#0c1510 0 24%,#90a39a 26% 31%,#26332d 33% 39%,#c3cdc8 41% 44%,#303e37 46% 52%,#8cf0b7 53% 55%,#1b2721 57%);box-shadow:20px 16px 44px #000,0 0 42px rgba(47,212,127,.22);transform:perspective(380px) rotateX(63deg) rotateZ(-24deg)}
+  .t6,.t10{background:linear-gradient(145deg,#fff,#e6ede9)}.t6::before{content:'';width:210px;height:92px;background:radial-gradient(ellipse at 18% 54%,transparent 0 20px,#bdc8c2 21px 28px,#eef2f0 29px 38px,transparent 39px),radial-gradient(ellipse at 50% 50%,transparent 0 18px,#909e97 19px 28px,#dce3df 29px 38px,transparent 39px),radial-gradient(ellipse at 82% 54%,transparent 0 20px,#7da58d 21px 28px,#d6e8dd 29px 38px,transparent 39px);filter:drop-shadow(0 18px 12px rgba(28,56,42,.18));transform:perspective(420px) rotateX(58deg)}.t7::before{content:'';width:190px;height:68px;border:2px solid #167b43;box-shadow:12px -12px 0 -2px #e8eeea,12px -12px 0 0 #167b43,24px -24px 0 -2px #e8eeea,24px -24px 0 0 #167b43;transform:skewY(-7deg) rotate(-4deg)}.t8::before{content:'';width:174px;height:82px;border:17px solid transparent;border-top-color:#bce6cf;border-right-color:#3adb82;border-radius:50%;box-shadow:0 -5px 22px rgba(92,233,151,.42);transform:rotate(-14deg) skewX(-10deg)}
+  .t9{background-image:radial-gradient(240px 160px at 78% 90%,rgba(35,160,79,.35),transparent)}.t10{background-image:repeating-linear-gradient(180deg,#eef2f0 0 7px,#fff 7px 14px)}.t12{background:radial-gradient(420px 280px at 30% 110%,#17a45a,#07281a)}
+  .badge{position:absolute;z-index:2;top:13px;left:13px;padding:6px 9px;border-radius:999px;background:rgba(6,34,22,.88);color:#8ef0b8;border:1px solid rgba(142,240,184,.28);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.body{padding:20px 23px 23px}.meta{display:flex;align-items:center;justify-content:space-between;gap:10px}.num{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}.version{font-size:10px;font-weight:700;color:#728077;text-transform:uppercase;letter-spacing:.08em}.body h3{font-size:18px;font-weight:700;margin:7px 0;letter-spacing:-.015em}.body p{font-size:13px;color:var(--gray)}.go{display:inline-block;margin-top:13px;font-size:13px;font-weight:800;color:var(--green)}
+  footer{text-align:center;padding:26px;font-size:12px;color:var(--gray);border-top:1px solid var(--line)}
+  @media(max-width:980px){.pair-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:680px){header{padding-top:48px}.pair-grid{grid-template-columns:1fr}.pair-head{align-items:flex-start}.pair-head p{display:none}.thumb{height:166px}.concept:hover{transform:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.concept{transition:none}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo"><div class="logo-mark">KLC</div>KLC<span>Steel</span></div>
-  <h1>Chọn mẫu thiết kế website</h1>
-  <p>Các hướng thiết kế cho website KLC Steel, gồm bản phẳng và bản dựng 3D tương tác. Bấm vào từng mẫu để xem bản demo hoàn chỉnh, xem tốt nhất trên máy tính.</p>
-</header>
-
+<header><div class="logo"><div class="logo-mark">KLC</div>KLC<span>Steel</span></div><h1>So sánh <span class="accent">12 concept</span> website</h1><p>Bốn hướng thiết kế gốc và hai cách triển khai 3D cho mỗi hướng. Chọn từng mẫu để so sánh trực tiếp trải nghiệm hình ảnh và mức độ tương tác.</p><div class="legend" role="group" aria-label="Chú thích phiên bản"><span>Bản gốc 2D</span><span class="edition">3D Studio · Mẫu 05–08</span><span class="edition">3D Configurator · Mẫu 09–12</span></div></header>
 <main>
-  <div class="group">
-    <h2>Bản phẳng — mẫu 01 → 04</h2>
-    <p>Bốn hướng thiết kế nền tảng: khác nhau về tông màu, cách trình bày thông số và mức độ thiên về chuyển đổi đơn hàng.</p>
-  </div>
-  <div class="grid">
-    <a class="concept" href="/concept-1/">
-      <div class="thumb t1">THÉP CÁN <b>&nbsp;CHUẨN</b></div>
-      <div class="body">
-        <div class="num">Mẫu 01</div>
-        <h2>Industrial Dark — Công nghiệp mạnh mẽ</h2>
-        <p>Nền tối màu gang thép, chữ tiêu đề cực lớn, vòng cuộn thép chuyển động. Ấn tượng thị giác mạnh, đậm chất nhà máy.</p>
-        <span class="go">Xem mẫu 01 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-2/">
-      <div class="thumb t2">Đúng quy cách, <b>&nbsp;đúng tiến độ</b></div>
-      <div class="body">
-        <div class="num">Mẫu 02</div>
-        <h2>Corporate Light — Doanh nghiệp chuyên nghiệp</h2>
-        <p>Giao diện sáng, sạch, form báo giá nhanh ngay đầu trang và bảng quy cách chi tiết. Thiên về chuyển đổi đơn hàng B2B.</p>
-        <span class="go">Xem mẫu 02 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-3/">
-      <div class="thumb t3">BẢN VẼ <b>&nbsp;KLC-2026</b></div>
-      <div class="body">
-        <div class="num">Mẫu 03</div>
-        <h2>Technical Blueprint — Bản vẽ kỹ thuật</h2>
-        <p>Phong cách bản vẽ CAD: lưới tọa độ, sơ đồ mặt cắt tôn lạnh có chú thích, bảng spec sheet. Khác biệt, hợp khách kỹ thuật.</p>
-        <span class="go">Xem mẫu 03 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-4/">
-      <div class="thumb t4">Nền thép <b>&nbsp;vững</b></div>
-      <div class="body">
-        <div class="num">Mẫu 04</div>
-        <h2>Modern Green — Hiện đại ánh kim</h2>
-        <p>Gradient xanh đậm, chữ ánh kim bạc theo tinh thần logo, card kính mờ. Hình ảnh trẻ trung, hiện đại, thiên về marketing.</p>
-        <span class="go">Xem mẫu 04 →</span>
-      </div>
-    </a>
-  </div>
-
-  <div class="group">
-    <h2>Bản dựng 3D — mẫu 09 → 12<span class="tag3d">WebGL</span></h2>
-    <p>Bốn mẫu 3D tương ứng với bốn hướng phẳng ở trên, dựng bằng Three.js ngay trong trình duyệt: xoay được, có thông số tính trực tiếp từ hình học và luôn có bản dự phòng khi máy không bật được WebGL.</p>
-  </div>
-  <div class="grid">
-    <a class="concept" href="/concept-9/">
-      <div class="thumb t9">DÂY XẢ <b>&nbsp;CUỘN 3D</b></div>
-      <div class="body">
-        <div class="num">Mẫu 09 · bản 3D của mẫu 01</div>
-        <h2>Industrial Dark 3D — Dây xả cuộn</h2>
-        <p>Cuộn thép trên trục xả nhả dải qua con lăn ép trong xưởng tối. Điều chỉnh tốc độ dây và độ dày dải, khối lượng và chiều dài cuộn tính trực tiếp từ hình học.</p>
-        <span class="go">Xem mẫu 09 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-10/">
-      <div class="thumb t10">CẤU HÌNH <b>&nbsp;BÓ THÉP</b></div>
-      <div class="body">
-        <div class="num">Mẫu 10 · bản 3D của mẫu 02</div>
-        <h2>Corporate Light 3D — Cấu hình bó thép</h2>
-        <p>Phiếu báo giá điều khiển mô hình: đổi quy cách và số tấm là bó thép trên bàn xoay dựng lại đúng tỷ lệ thật, kèm khối lượng và chiều cao bó.</p>
-        <span class="go">Xem mẫu 10 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-11/">
-      <div class="thumb t11">MẶT CẮT <b>&nbsp;TÁCH LỚP</b></div>
-      <div class="body">
-        <div class="num">Mẫu 11 · bản 3D của mẫu 03</div>
-        <h2>Technical Blueprint 3D — Mặt cắt tách lớp</h2>
-        <p>Mặt cắt tôn lạnh dựng theo hình chiếu trực giao, tách lớp được. Chọn độ dày toàn phần và lớp mạ AZ, chiều dày từng lớp suy ra theo công thức của nhà máy.</p>
-        <span class="go">Xem mẫu 11 →</span>
-      </div>
-    </a>
-    <a class="concept" href="/concept-12/">
-      <div class="thumb t12">DẢI THÉP <b>&nbsp;XOẮN</b></div>
-      <div class="body">
-        <div class="num">Mẫu 12 · bản 3D của mẫu 04</div>
-        <h2>Modern Green 3D — Hero toàn màn hình</h2>
-        <p>Dải thép xoắn kim loại chiếm cả khung hero, thẻ kính nổi phía trên. Đổi dòng sản phẩm là bề mặt trên mô hình đổi theo đúng đặc tính phản xạ của dòng đó.</p>
-        <span class="go">Xem mẫu 12 →</span>
-      </div>
-    </a>
-  </div>
+  <section class="pair" aria-labelledby="pair-industrial"><div class="pair-head"><div><div class="pair-kicker">Hướng thiết kế 01</div><h2 id="pair-industrial">Industrial Dark</h2></div><p>Công nghiệp mạnh mẽ</p></div><div class="pair-grid">
+    <a class="concept" href="./concept-1/"><div class="thumb t1">THÉP CÁN <b>&nbsp;CHUẨN</b></div><div class="body"><div class="meta"><div class="num">Mẫu 01</div><div class="version">Bản gốc 2D</div></div><h3>Công nghiệp mạnh mẽ</h3><p>Nền gang thép, headline lớn và ngôn ngữ nhà máy.</p><span class="go">Xem mẫu 01 →</span></div></a>
+    <a class="concept is-3d" href="./concept-5/"><div class="thumb t5"><span class="badge">3D Studio</span></div><div class="body"><div class="meta"><div class="num">Mẫu 05</div><div class="version">Từ mẫu 01</div></div><h3>Industrial Steel Studio</h3><p>Cuộn thép procedural với vật liệu PBR, studio tối và chuyển động có chiều sâu.</p><span class="go">Khám phá 3D →</span></div></a>
+    <a class="concept is-3d" href="./concept-9/"><div class="thumb t9">DÂY XẢ <b>&nbsp;CUỘN 3D</b><span class="badge">Configurator</span></div><div class="body"><div class="meta"><div class="num">Mẫu 09</div><div class="version">Từ mẫu 01</div></div><h3>Dây xả cuộn tương tác</h3><p>Điều chỉnh tốc độ, độ dày và xem thông số tính trực tiếp từ hình học.</p><span class="go">Mở cấu hình 3D →</span></div></a>
+  </div></section>
+  <section class="pair" aria-labelledby="pair-corporate"><div class="pair-head"><div><div class="pair-kicker">Hướng thiết kế 02</div><h2 id="pair-corporate">Corporate Light</h2></div><p>Doanh nghiệp chuyên nghiệp</p></div><div class="pair-grid">
+    <a class="concept" href="./concept-2/"><div class="thumb t2">Đúng quy cách, <b>&nbsp;đúng tiến độ</b></div><div class="body"><div class="meta"><div class="num">Mẫu 02</div><div class="version">Bản gốc 2D</div></div><h3>Chuyển đổi B2B</h3><p>Giao diện sáng, form báo giá nhanh và bảng quy cách chi tiết.</p><span class="go">Xem mẫu 02 →</span></div></a>
+    <a class="concept is-3d" href="./concept-6/"><div class="thumb t6"><span class="badge">3D Studio</span></div><div class="body"><div class="meta"><div class="num">Mẫu 06</div><div class="version">Từ mẫu 02</div></div><h3>Corporate Product Stage</h3><p>Bộ ba CRC, HRC và GL trên sân khấu sáng, tập trung vào sản phẩm và báo giá.</p><span class="go">Khám phá 3D →</span></div></a>
+    <a class="concept is-3d" href="./concept-10/"><div class="thumb t10">CẤU HÌNH <b>&nbsp;BÓ THÉP</b><span class="badge">Configurator</span></div><div class="body"><div class="meta"><div class="num">Mẫu 10</div><div class="version">Từ mẫu 02</div></div><h3>Cấu hình bó thép</h3><p>Phiếu báo giá điều khiển quy cách và tỷ lệ mô hình trên bàn xoay.</p><span class="go">Mở cấu hình 3D →</span></div></a>
+  </div></section>
+  <section class="pair" aria-labelledby="pair-technical"><div class="pair-head"><div><div class="pair-kicker">Hướng thiết kế 03</div><h2 id="pair-technical">Technical Blueprint</h2></div><p>Bản vẽ kỹ thuật</p></div><div class="pair-grid">
+    <a class="concept" href="./concept-3/"><div class="thumb t3">BẢN VẼ <b>&nbsp;KLC-2026</b></div><div class="body"><div class="meta"><div class="num">Mẫu 03</div><div class="version">Bản gốc 2D</div></div><h3>CAD &amp; Spec Sheet</h3><p>Lưới tọa độ, sơ đồ mặt cắt và bảng thông số dành cho khách kỹ thuật.</p><span class="go">Xem mẫu 03 →</span></div></a>
+    <a class="concept is-3d" href="./concept-7/"><div class="thumb t7"><span class="badge">Interactive CAD</span></div><div class="body"><div class="meta"><div class="num">Mẫu 07</div><div class="version">Từ mẫu 03</div></div><h3>Exploded Technical View</h3><p>Cấu trúc nhiều lớp được tách trong không gian 3D với đường biên kỹ thuật.</p><span class="go">Khám phá 3D →</span></div></a>
+    <a class="concept is-3d" href="./concept-11/"><div class="thumb t11">MẶT CẮT <b>&nbsp;TÁCH LỚP</b><span class="badge">Configurator</span></div><div class="body"><div class="meta"><div class="num">Mẫu 11</div><div class="version">Từ mẫu 03</div></div><h3>Mặt cắt tách lớp</h3><p>Thay đổi độ dày và lớp mạ trong hình chiếu trực giao chính xác.</p><span class="go">Mở cấu hình 3D →</span></div></a>
+  </div></section>
+  <section class="pair" aria-labelledby="pair-modern"><div class="pair-head"><div><div class="pair-kicker">Hướng thiết kế 04</div><h2 id="pair-modern">Modern Green</h2></div><p>Hiện đại ánh kim</p></div><div class="pair-grid">
+    <a class="concept" href="./concept-4/"><div class="thumb t4">Nền thép <b>&nbsp;vững</b></div><div class="body"><div class="meta"><div class="num">Mẫu 04</div><div class="version">Bản gốc 2D</div></div><h3>Premium Marketing</h3><p>Gradient xanh đậm, typography ánh kim và những lớp kính mờ.</p><span class="go">Xem mẫu 04 →</span></div></a>
+    <a class="concept is-3d" href="./concept-8/"><div class="thumb t8"><span class="badge">Immersive 3D</span></div><div class="body"><div class="meta"><div class="num">Mẫu 08</div><div class="version">Từ mẫu 04</div></div><h3>Metal Ribbon Experience</h3><p>Dải thép uốn lượn thành sculpture ánh kim trong không gian xanh nhiều lớp.</p><span class="go">Khám phá 3D →</span></div></a>
+    <a class="concept is-3d" href="./concept-12/"><div class="thumb t12">DẢI THÉP <b>&nbsp;XOẮN</b><span class="badge">Configurator</span></div><div class="body"><div class="meta"><div class="num">Mẫu 12</div><div class="version">Từ mẫu 04</div></div><h3>Hero vật liệu tương tác</h3><p>Đổi dòng sản phẩm để bề mặt dải thép phản xạ theo từng vật liệu.</p><span class="go">Mở cấu hình 3D →</span></div></a>
+  </div></section>
 </main>
-
 <footer>© 2026 KLC Steel — Bản demo thiết kế, nội dung và số liệu chỉ mang tính minh hoạ.</footer>
-
 </body>
 </html>
