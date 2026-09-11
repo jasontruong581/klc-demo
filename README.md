@@ -5,8 +5,9 @@ Vietnamese supplier of cold-rolled steel (CRC), hot-rolled steel (HRC) and galva
 (tôn lạnh). The root page is a picker; each concept is a full, self-contained landing page the
 client can click through and compare.
 
-All content is in Vietnamese. Company figures, contact details and prices are **placeholder demo
-data**, not KLC's real numbers.
+All content is in Vietnamese. Company figures and prices are **placeholder demo data**. Concepts
+01–12 also use placeholder contact details; concepts 13–16 (the KLC Brand Edition) carry the real
+logo and the real contact details published on [klcsteel.vercel.app](https://klcsteel.vercel.app/).
 
 ## Concepts
 
@@ -16,17 +17,24 @@ data**, not KLC's real numbers.
 | 02 | [Corporate Light](concept-2/) | Bright and clean, quote form above the fold, B2B conversion focus |
 | 03 | [Technical Blueprint](concept-3/) | CAD drawing language: coordinate grid, annotated section, spec sheet |
 | 04 | [Modern Green](concept-4/) | Deep green gradient, metallic type, frosted-glass cards, marketing-led |
+| 05 | [Industrial Steel Studio](concept-5/) | 01 as an immersive dark studio around a procedural PBR coil |
+| 06 | [Corporate Product Stage](concept-6/) | 02 as a bright product stage for the three lines |
+| 07 | [Exploded Blueprint 3D](concept-7/) | 03 with the material layers separated in 3D space |
+| 08 | [Metal Ribbon Experience](concept-8/) | 04 as an immersive metal-ribbon sculpture |
 | 09 | [Industrial Dark 3D](concept-9/) | 01 with a live WebGL decoiler line |
 | 10 | [Corporate Light 3D](concept-10/) | 02 with the quote form driving a true-scale bundle |
 | 11 | [Technical Blueprint 3D](concept-11/) | 03 with an explodable orthographic section |
 | 12 | [Modern Green 3D](concept-12/) | 04 with a full-bleed WebGL hero |
+| 13 | [Sàn giao dịch thép](concept-13/) | New direction: futuristic HUD trading terminal, holographic coil configurator |
+| 14 | [Kho hàng thông minh](concept-14/) | New direction: bright logistics dashboard, warehouse bay with geometry-derived inventory |
+| 15 | [Chuỗi cung ứng liền mạch](concept-15/) | New direction: low-poly supply-route diorama, TPK mill → KLC warehouse → site |
+| 16 | [Kiến trúc sóng tôn](concept-16/) | New direction: architectural editorial, parametric roofing-profile studio |
 
-Concepts 09–12 are the 3D counterparts of 01–04 in the same order. See
+Concepts 05–08 and 09–12 are 3D takes on 01–04 in the same order. Concepts 13–16 are the **KLC
+Brand Edition**: four independent directions built only from the company identity (real logo,
+green brand palette, real product ranges), deliberately not derived from concepts 01–12. See
 [docs/concepts.md](docs/concepts.md) for what each one is trying to prove, and
 [docs/3d-architecture.md](docs/3d-architecture.md) for how the 3D pages are built.
-
-**Numbers 05–08 are reserved** for a separate workstream; leave that range free when adding
-concepts.
 
 ## Layout
 
@@ -35,6 +43,7 @@ index.html            the picker page: every concept as a card
 concept-<n>/          one concept per folder
   index.html            the whole page — markup, CSS and page script inline
   scene.js              3D concepts only: the subject, its state and its behaviour
+assets/img/           the real KLC logo (used by concepts 13–16)
 assets/klc3d/         shared 3D modules (concepts 09+ only)
   runtime.js            renderer, render loop, orbit rig, named-view contract, lifecycle
   scene-kit.js          lighting rigs, material cache, steel surfaces, labels, coil geometry
@@ -66,13 +75,15 @@ CDN at runtime through the import map in each 3D page, pinned to an exact versio
   proposal, not a component library.
 - **Vietnamese copy, `lang="vi"`,** and Vietnamese number formatting (`.` thousands separator,
   `,` decimal separator) in body text and in any figure rendered by script.
-- **Demo data stays obviously demo.** `0900 000 000`, `sales@klcsteel.vn`, `KCN ...`.
+- **Demo data stays obviously demo** on concepts 01–12 (`0900 000 000`, `sales@klcsteel.vn`).
+  Concepts 13–16 use the real contact details from klcsteel.vercel.app by request; prices and
+  capability figures remain demo everywhere and are marked as such on the page.
 - **Only the 3D pages share code**, and only through `assets/klc3d/`. See the architecture notes
   for the boundary between the shared runtime and a concept's own `scene.js`.
 
 ## Adding a concept
 
-1. Pick the next free number, avoiding the reserved 05–08 range.
+1. Pick the next free number (17 onwards).
 2. Create `concept-<n>/index.html`. For a flat concept, copy the nearest existing one and replace
    the palette, type and layout. For a 3D concept, follow
    [docs/3d-architecture.md](docs/3d-architecture.md).

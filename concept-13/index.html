@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLC Steel — Concept 13: Sàn giao dịch thép</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#020a06;
+    --void-2:#04180e;
+    --panel:rgba(6,32,19,.62);
+    --line:rgba(47,224,138,.22);
+    --line-strong:rgba(47,224,138,.5);
+    --emerald:#2fe08a;
+    --emerald-dim:#17843f;
+    --gold:#f2c33d;
+    --chrome:#dfe8e3;
+    --dim:#8fb3a0;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1000px 620px at 85% -10%, rgba(23,132,63,.28) 0%, transparent 60%),
+      radial-gradient(800px 600px at -5% 30%, rgba(11,92,42,.22) 0%, transparent 55%),
+      var(--void);
+    color:var(--chrome);
+    font-family:'Space Grotesk',sans-serif;line-height:1.6;
+  }
+  /* scanline motif over the whole terminal */
+  body::before{content:'';position:fixed;inset:0;z-index:200;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 4px);opacity:.35}
+  .mono{font-family:var(--mono)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
+
+  nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;width:min(1180px,calc(100% - 28px));
+    display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 16px;
+    background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.4),0 0 24px -8px rgba(47,224,138,.35)}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+  .brand img{width:40px;height:40px;object-fit:contain}
+  .brand b{font-size:17px;letter-spacing:.02em}
+  .brand span{display:block;font-family:var(--mono);font-size:10px;color:var(--emerald);letter-spacing:.22em;text-transform:uppercase}
+  nav ul{display:flex;gap:20px;list-style:none;align-items:center}
+  nav ul a{color:var(--dim);text-decoration:none;font-size:14px;font-weight:600}
+  nav ul a:hover{color:var(--emerald)}
+  .nav-cta{border:1px solid var(--line-strong);background:linear-gradient(120deg,rgba(47,224,138,.2),rgba(23,132,63,.28));
+    color:#fff!important;padding:9px 18px;border-radius:9px;font-family:var(--mono);font-size:13px!important}
+  .nav-cta:hover{background:var(--emerald);color:var(--void)!important}
+
+  /* ---- HERO ---- */
+  .hero{position:relative;padding:118px 0 0;overflow:hidden}
+  .hero-head{max-width:1180px;margin:0 auto;padding:26px 22px 20px}
+  .tag{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--panel);
+    border-radius:6px;padding:7px 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--emerald)}
+  .tag::before{content:'';width:7px;height:7px;background:var(--emerald);box-shadow:0 0 10px var(--emerald);border-radius:1px;animation:blink 2.2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+  h1{margin-top:18px;font-weight:700;font-size:clamp(34px,4.8vw,64px);line-height:1.06;letter-spacing:-.02em;color:#fff;max-width:820px}
+  h1 em{font-style:normal;color:transparent;background:linear-gradient(100deg,var(--emerald),#9ff0c6 55%,var(--gold));-webkit-background-clip:text;background-clip:text}
+  .hero-head>p{margin-top:16px;max-width:620px;color:var(--dim);font-size:16.5px}
+  .hero-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;font-weight:700;font-size:14.5px;
+    text-decoration:none;cursor:pointer;border:1px solid var(--line-strong);transition:.2s;font-family:'Space Grotesk',sans-serif}
+  .btn-hot{background:var(--emerald);color:var(--void);border-color:var(--emerald);box-shadow:0 0 34px -8px var(--emerald)}
+  .btn-hot:hover{background:#9ff0c6}
+  .btn-ghost{background:var(--panel);color:var(--chrome);backdrop-filter:blur(8px)}
+  .btn-ghost:hover{border-color:var(--emerald);color:var(--emerald)}
+
+  .stage-wrap{position:relative;max-width:1180px;margin:8px auto 0;padding:0 22px}
+  .stage{position:relative;height:clamp(400px,62vh,640px);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:linear-gradient(180deg,var(--void-2),var(--void));box-shadow:inset 0 0 80px rgba(2,10,6,.9),0 0 44px -18px rgba(47,224,138,.4)}
+  .stage::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:18px;
+    background:linear-gradient(180deg,rgba(47,224,138,.06),transparent 22%),repeating-linear-gradient(90deg,rgba(47,224,138,.03) 0 1px,transparent 1px 90px)}
+  .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+  .stage-corner{position:absolute;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:rgba(143,179,160,.75);text-transform:uppercase;pointer-events:none}
+  .stage-corner.tl{top:14px;left:16px}
+  .stage-corner.bl{bottom:12px;left:16px;max-width:60%}
+
+  /* HUD side panel — real DOM, not canvas. Overlays the stage on desktop, flows below on mobile. */
+  .hud{position:absolute;z-index:3;top:18px;right:40px;width:min(310px,calc(100% - 80px));
+    border:1px solid var(--line);border-radius:14px;background:var(--panel);backdrop-filter:blur(14px);
+    padding:16px 18px;box-shadow:0 18px 44px -20px rgba(0,0,0,.8)}
+  .hud h2{font-size:11px;font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);
+    display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .hud dl{margin-top:10px;display:grid;grid-template-columns:auto 1fr;gap:7px 12px;font-size:13px}
+  .hud dt{color:var(--dim)}
+  .hud dd{font-family:var(--mono);color:#fff;text-align:right;font-size:13px}
+  .hud dd b{color:var(--emerald);font-weight:700}
+  .hud dd.price b{color:var(--gold)}
+  .hud small{display:block;margin-top:10px;font-size:11px;color:var(--dim);line-height:1.5}
+
+  /* fallback hologram when WebGL is unavailable */
+  .fallback{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:24px;text-align:center}
+  .fallback.on{display:flex}
+  .fallback svg{width:min(300px,58%);height:auto;filter:drop-shadow(0 0 24px rgba(47,224,138,.45))}
+  .fallback p{font-size:13px;color:var(--dim);max-width:380px}
+
+  /* console: every control, DOM-side */
+  .console{max-width:1180px;margin:14px auto 0;padding:0 22px;display:flex;gap:12px;flex-wrap:wrap;align-items:stretch}
+  .pod{border:1px solid var(--line);border-radius:12px;background:var(--panel);backdrop-filter:blur(12px);padding:12px 14px;flex:1;min-width:230px}
+  .pod>span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--emerald);margin-bottom:9px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .seg button{flex:1;min-width:72px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--dim);
+    border-radius:8px;padding:9px 8px;font-family:var(--mono);font-size:12px;font-weight:500;cursor:pointer;transition:.18s}
+  .seg button:hover{color:#fff;border-color:var(--emerald)}
+  .seg button[aria-pressed="true"]{background:rgba(47,224,138,.16);border-color:var(--emerald);color:var(--emerald)}
+  .weight{display:flex;align-items:center;gap:12px}
+  .weight input{flex:1;accent-color:var(--emerald);min-width:110px}
+  .weight output{font-family:var(--mono);font-size:13px;color:#fff;min-width:74px;text-align:right}
+  .seg button[aria-current="true"]{background:rgba(47,224,138,.16);border-color:var(--emerald);color:var(--emerald)}
+
+  /* ---- price ticker strip ---- */
+  .ticker{margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(4,24,14,.7);overflow:hidden}
+  .ticker-inner{display:flex;width:max-content;animation:tick 36s linear infinite}
+  .ticker-inner:hover{animation-play-state:paused}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker-inner{animation:none}.tag::before{animation:none}}
+  .ticker ul{display:flex;list-style:none;gap:0}
+  .ticker li{display:flex;align-items:center;gap:10px;padding:12px 28px;border-right:1px solid var(--line);font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+  .ticker li b{color:#fff;font-weight:500}
+  .up{color:var(--emerald)} .down{color:#ff7d6b} .note-chip{color:var(--gold)}
+
+  /* ---- sections ---- */
+  section{max-width:1180px;margin:0 auto;padding:88px 22px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px}
+  section h2,.partner h2{font-weight:700;font-size:clamp(27px,3.4vw,42px);letter-spacing:-.015em;color:#fff;line-height:1.12}
+  .sub{margin-top:14px;color:var(--dim);max-width:600px;font-size:15.5px}
+
+  .cards{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:26px;display:flex;flex-direction:column;position:relative;transition:.22s}
+  .card:hover,.card:focus-within{border-color:var(--line-strong);transform:translateY(-4px);box-shadow:0 24px 48px -26px rgba(0,0,0,.85)}
+  .card .code{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--emerald);text-transform:uppercase}
+  .card.gold .code{color:var(--gold)}
+  .card h3{font-size:22px;color:#fff;margin:10px 0 8px}
+  .card>p{font-size:14px;color:var(--dim);flex:1}
+  .specs{margin-top:16px;display:grid;gap:6px;font-family:var(--mono);font-size:12px}
+  .specs div{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed var(--line);padding-top:6px}
+  .specs span{color:var(--dim)} .specs b{color:#fff;font-weight:500;text-align:right}
+  .card button{margin-top:20px;border:1px solid var(--line);background:none;color:var(--emerald);border-radius:8px;
+    padding:10px;font-family:var(--mono);font-size:12.5px;cursor:pointer;transition:.18s}
+  .card button:hover{background:rgba(47,224,138,.14);border-color:var(--emerald)}
+
+  .usps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+  .usp{border:1px solid var(--line);border-left:3px solid var(--emerald);border-radius:12px;background:var(--panel);padding:20px}
+  .usp .mono{font-size:11px;color:var(--emerald);letter-spacing:.16em}
+  .usp h3{font-size:16.5px;color:#fff;margin:8px 0 6px}
+  .usp p{font-size:13px;color:var(--dim)}
+
+  .partner{border:1px solid var(--line);border-radius:20px;background:linear-gradient(115deg,rgba(23,132,63,.26),rgba(242,195,61,.07)),var(--panel);
+    padding:46px;display:flex;justify-content:space-between;align-items:center;gap:36px;flex-wrap:wrap}
+  .partner p{margin-top:12px;color:var(--dim);max-width:580px;font-size:15px}
+  .partner .mono{color:var(--gold);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase}
+
+  .cta-box{text-align:center;border:1px solid var(--line-strong);border-radius:20px;padding:66px 34px;
+    background:radial-gradient(560px 260px at 50% -30%,rgba(47,224,138,.3),transparent),var(--panel)}
+  .cta-box h2{max-width:620px;margin:0 auto}
+  .cta-box p{margin:16px auto 0;max-width:480px;color:var(--dim);font-size:15px}
+  .cta-box .hero-actions{justify-content:center;margin-top:28px}
+
+  footer{border-top:1px solid var(--line);padding:50px 22px 32px;background:rgba(2,10,6,.8)}
+  .foot{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1.2fr;gap:38px}
+  footer h4{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--emerald);margin-bottom:14px}
+  footer p,footer a{font-size:14px;color:var(--dim);text-decoration:none;display:block;margin-bottom:8px}
+  footer a:hover{color:var(--emerald)}
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .foot-brand img{width:44px;height:44px;object-fit:contain}
+  .foot-brand b{color:#fff;font-size:16px}
+  .legal{max-width:1180px;margin:36px auto 0;border-top:1px solid var(--line);padding-top:20px;font-family:var(--mono);
+    font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+  @media(max-width:1000px){
+    nav ul li:not(:last-child){display:none}
+    .cards,.usps{grid-template-columns:1fr 1fr}
+    .foot{grid-template-columns:1fr}
+    .hud{position:static;width:100%;margin:12px 0 0}
+    .stage{height:clamp(340px,52vh,480px)}
+    .partner{padding:30px}
+  }
+  @media(max-width:620px){
+    .cards,.usps{grid-template-columns:1fr}
+    section{padding:64px 18px}
+    .hero-head{padding:20px 18px 14px}
+    .stage-wrap,.console{padding:0 18px}
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Điều hướng chính">
+  <a class="brand" href="../">
+    <img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel">
+    <span><b>KLC Steel</b><span>Sàn giao dịch thép</span></span>
+  </a>
+  <ul>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#partner">Nguồn hàng</a></li>
+    <li><a href="#contact">Liên hệ</a></li>
+    <li><a href="#contact" class="nav-cta">Báo giá</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-head">
+    <span class="tag">Phiên demo · KLC Trading Terminal</span>
+    <h1>Thương mại thép <em>thế hệ mới</em> — chọn cuộn, xem số, chốt giá</h1>
+    <p>Đối tác thép tin cậy của mọi công trình. Chọn dòng sản phẩm và khối lượng cuộn mục tiêu:
+      mô hình 3D và mọi thông số bên phải được tính trực tiếp từ công thức khối lượng thép — không có con số gõ tay.</p>
+    <div class="hero-actions">
+      <a class="btn btn-hot" href="#contact">Nhận báo giá →</a>
+      <a class="btn btn-ghost" href="#products">Xem ba dòng thép</a>
+    </div>
+  </div>
+
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <canvas id="world" role="img" aria-label="Mô hình 3D dạng hologram: một cuộn thép nổi trên bệ đỡ phát sáng, xung quanh là vòng dữ liệu quay chậm và lưới sàn giao dịch"></canvas>
+      <span class="stage-corner tl mono">KLC/COIL-VIEW · v13</span>
+      <span class="stage-corner bl mono" id="model-note">Mô hình vẽ 14 vòng thay cho số vòng thực (phóng đại bề dày để nhìn thấy được) · lõi Ø508 mm · khổ 1.200 mm</span>
+
+      <div class="fallback" id="fallback">
+        <svg viewBox="0 0 220 160" aria-hidden="true">
+          <defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="#2fe08a" stop-opacity=".9"/><stop offset="100%" stop-color="#17843f" stop-opacity="0"/></radialGradient></defs>
+          <g stroke="#17843f" stroke-width="1" opacity=".5">
+            <path d="M10 130 H210 M30 140 H190 M50 150 H170"/><path d="M40 130 L60 150 M110 130 V150 M180 130 L160 150"/>
+          </g>
+          <ellipse cx="110" cy="128" rx="62" ry="8" fill="url(#g)"/>
+          <g transform="translate(110 70)" fill="none">
+            <circle r="52" stroke="#2fe08a" stroke-width="2.5"/>
+            <circle r="42" stroke="#8fb3a0" stroke-width="1.4" opacity=".8"/>
+            <circle r="33" stroke="#2fe08a" stroke-width="1" opacity=".7"/>
+            <circle r="25" stroke="#8fb3a0" stroke-width="1" opacity=".6"/>
+            <circle r="16" stroke="#f2c33d" stroke-width="2"/>
+            <circle r="60" stroke="#2fe08a" stroke-width=".8" stroke-dasharray="3 7" opacity=".8"/>
+          </g>
+        </svg>
+        <p><strong style="color:#fff">Chế độ tĩnh — trình duyệt không bật được WebGL.</strong><br>
+          Bảng thông số bên cạnh vẫn tính trực tiếp theo lựa chọn của bạn.</p>
+      </div>
+
+    </div>
+
+    <aside class="hud" aria-label="Bảng thông số cuộn thép" aria-live="polite">
+      <h2><span id="hud-line">TÔN LẠNH · GL</span><span>LIVE</span></h2>
+      <dl>
+        <dt>Khối lượng</dt><dd><b id="r-mass">—</b></dd>
+        <dt>Đường kính ngoài</dt><dd id="r-od">—</dd>
+        <dt>Chiều dài dải ≈</dt><dd id="r-len">—</dd>
+        <dt>Độ dày tính toán</dt><dd id="r-gauge">—</dd>
+        <dt>Số vòng thực ≈</dt><dd id="r-wraps">—</dd>
+        <dt class="price">Đơn giá demo</dt><dd class="price"><b id="r-price">—</b></dd>
+        <dt>Giá trị lô ≈</dt><dd id="r-total">—</dd>
+      </dl>
+      <small>Đơn giá là <b>giá tham khảo minh hoạ</b>, không phải giá chào bán. Kích thước suy ra từ
+        khối lượng = π(R²−r²)·khổ·7.850 kg/m³.</small>
+    </aside>
+
+    <div class="console">
+      <div class="pod">
+        <span id="lbl-product">Dòng sản phẩm</span>
+        <div class="seg" id="product-seg" role="group" aria-labelledby="lbl-product"></div>
+      </div>
+      <div class="pod">
+        <span><label for="weight">Khối lượng cuộn mục tiêu</label></span>
+        <div class="weight">
+          <input type="range" id="weight" min="5" max="20" step="0.5" value="10" aria-describedby="weight-out">
+          <output id="weight-out" for="weight">10,0 tấn</output>
+        </div>
+      </div>
+      <div class="pod" id="view-pod">
+        <span id="lbl-views">Góc nhìn &amp; chuyển động</span>
+        <div class="seg" id="views" role="group" aria-labelledby="lbl-views"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-label="Bảng giá trực tiếp (số liệu minh hoạ)">
+    <div class="ticker-inner">
+      <ul id="tape"></ul>
+      <ul id="tape-dup" aria-hidden="true"></ul>
+    </div>
+  </div>
+</header>
+
+<section id="products">
+  <div class="eyebrow">Danh mục giao dịch</div>
+  <h2>Ba mã hàng, một chuẩn chứng từ</h2>
+  <p class="sub">Tôn lạnh và thép cán nguội là hai dòng chủ lực của KLC; thép cán nóng phục vụ kết cấu.
+    Đầy đủ CO/CQ theo lô. Bấm "Nạp lên mô hình" để xem bề mặt của dòng đó trên hologram.</p>
+  <div class="cards">
+    <article class="card">
+      <div class="code">GL · Tôn lạnh — chủ lực</div>
+      <h3>Tôn lạnh (GL)</h3>
+      <p>Mạ hợp kim nhôm–kẽm chống ăn mòn vượt trội cho mái lợp và vách công nghiệp. Nguồn trực tiếp từ nhà máy Tôn Tân Phước Khánh.</p>
+      <div class="specs">
+        <div><span>Độ dày</span><b>0,15 – 1,2 mm</b></div>
+        <div><span>Lớp mạ</span><b>60 – 275 g/m²</b></div>
+        <div><span>Tiêu chuẩn</span><b>JIS G3302 · EN 10327</b></div>
+      </div>
+      <button type="button" data-line="gl">Nạp GL lên mô hình →</button>
+    </article>
+    <article class="card">
+      <div class="code">CRC · Cán nguội — chủ lực</div>
+      <h3>Thép cán nguội (CRC)</h3>
+      <p>Bề mặt mịn, dung sai thấp cho dập, chấn, thiết bị gia dụng, tủ điện và chi tiết cơ khí chính xác.</p>
+      <div class="specs">
+        <div><span>Độ dày</span><b>0,3 – 3,0 mm</b></div>
+        <div><span>Khổ rộng</span><b>600 – 1.250 mm</b></div>
+        <div><span>Tiêu chuẩn</span><b>JIS G3141 · ASTM A1008</b></div>
+      </div>
+      <button type="button" data-line="crc">Nạp CRC lên mô hình →</button>
+    </article>
+    <article class="card gold">
+      <div class="code">HRC · Cán nóng</div>
+      <h3>Thép cán nóng (HRC)</h3>
+      <p>Chịu lực tốt, giá cạnh tranh cho kết cấu nhà xưởng, bồn bể và cơ khí chế tạo.</p>
+      <div class="specs">
+        <div><span>Độ dày</span><b>2,0 – 25 mm</b></div>
+        <div><span>Khổ rộng</span><b>600 – 2.000 mm</b></div>
+        <div><span>Tiêu chuẩn</span><b>JIS G3101 · ASTM A36</b></div>
+      </div>
+      <button type="button" data-line="hrc">Nạp HRC lên mô hình →</button>
+    </article>
+  </div>
+</section>
+
+<section id="usp" style="padding-top:0">
+  <div class="eyebrow">Vì sao chọn KLC</div>
+  <h2>Chất lượng – Uy tín – Bền vững</h2>
+  <div class="usps">
+    <div class="usp"><span class="mono">USP-01</span><h3>Trực tiếp từ nhà máy</h3><p>Hợp tác trực tiếp với nhà máy Tôn Tân Phước Khánh — không qua trung gian.</p></div>
+    <div class="usp"><span class="mono">USP-02</span><h3>Giá cạnh tranh</h3><p>Cơ chế giá sát thị trường, cập nhật theo phiên như một sàn giao dịch thực thụ.</p></div>
+    <div class="usp"><span class="mono">USP-03</span><h3>Nguồn hàng chất lượng</h3><p>CO/CQ đầy đủ theo từng lô, kiểm soát tiêu chuẩn JIS / ASTM / EN.</p></div>
+    <div class="usp"><span class="mono">USP-04</span><h3>Ổn định đầu ra</h3><p>Sản lượng cam kết cho đại lý và nhà thầu — kế hoạch giao hàng dài hạn.</p></div>
+  </div>
+</section>
+
+<section id="partner" style="padding-top:0">
+  <div class="partner">
+    <div>
+      <span class="mono">Chuỗi cung ứng · Sourcing</span>
+      <h2>Tôn Tân Phước Khánh × KLC</h2>
+      <p>Quan hệ hợp tác trực tiếp với nhà máy giúp KLC chủ động nguồn tôn lạnh: giá gốc, sản lượng
+        ổn định và truy xuất được lô hàng từ dây chuyền mạ đến kho giao — nền tảng cho cam kết
+        "ổn định đầu ra" với khách dự án.</p>
+    </div>
+    <a class="btn btn-ghost" href="#contact">Hỏi về nguồn hàng</a>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0">
+  <div class="cta-box">
+    <div class="eyebrow">Mở phiên báo giá</div>
+    <h2>Gửi quy cách — nhận giá theo phiên trong ngày</h2>
+    <p>Đội kinh doanh KLC báo giá theo khối lượng, quy cách và tiến độ nhận hàng của bạn.</p>
+    <div class="hero-actions">
+      <a class="btn btn-hot" href="tel:0902351396">Gọi 0902 351 396</a>
+      <a class="btn btn-ghost" href="mailto:ctykc@gmail.com">ctykc@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="foot-brand"><img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel"><b>Công ty KLC</b></div>
+      <p>Thương mại thép &amp; tôn: tôn lạnh, thép cán nguội, thép cán nóng. Đối tác thép tin cậy của mọi công trình.</p>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="#products">Tôn lạnh (GL)</a>
+      <a href="#products">Thép cán nguội (CRC)</a>
+      <a href="#products">Thép cán nóng (HRC)</a>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <p>Hotline 0902 351 396</p>
+      <p>Email ctykc@gmail.com</p>
+      <p>40 Lý Tự Trọng, Phường Vũng Tàu, TP HCM</p>
+      <a href="../">← Tất cả concept</a>
+    </div>
+  </div>
+  <div class="legal"><span>© 2026 Công ty KLC.</span><span>Concept 13 — Sàn giao dịch thép · giá hiển thị là số liệu minh hoạ.</span></div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import { start } from '../assets/klc3d/runtime.js';
+import { createScene, deriveCoil, GAUGE_MM, DEMO_PRICE_VND_PER_KG } from './scene.js';
+
+const LOOK = {
+  toneMapping: 'ACESFilmicToneMapping',
+  exposure: 1.1,
+  shadows: false,
+  environmentIntensity: 0.5,
+  sky: { zenith: '#04180e', horizon: '#010805', fog: '#02120a' },
+  camera: { fovDeg: 42, limits: { minDist: 2.4, maxDist: 13, minPolarDeg: 18, maxPolarDeg: 88 } }
+};
+
+// First view is home. The coil floats around y ≈ 1.5.
+const VIEWS = {
+  'Toàn cảnh': { position: [3.6, 2.6, 4.8], target: [0, 1.35, 0] },
+  'Mặt cuộn': { position: [4.4, 1.6, 0.5], target: [0, 1.5, 0] },
+  'Sàn giao dịch': { position: [-5.6, 0.8, 5.6], target: [0, 1.1, 0] }
+};
+
+const LINE_LABEL = { gl: 'TÔN LẠNH · GL', crc: 'CÁN NGUỘI · CRC', hrc: 'CÁN NÓNG · HRC' };
+const SHORT = { gl: 'GL', crc: 'CRC', hrc: 'HRC' };
+
+const stage = document.querySelector('#stage');
+const canvas = document.querySelector('#world');
+const scene = start({
+  canvas, viewport: stage, look: LOOK, views: VIEWS, createScene,
+  onUnavailable() {
+    canvas.hidden = true;
+    document.querySelector('#fallback').classList.add('on');
+    document.querySelector('#view-pod').hidden = true;
+    document.querySelector('#model-note').hidden = true;
+  }
+});
+
+// ---- Authoritative page state; the scene and every readout derive from it. ----
+const state = { product: 'gl', tonnes: 10 };
+const nf0 = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
+const nf1 = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const nf2 = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
+const put = (id, text) => { document.getElementById(id).textContent = text; };
+
+function render() {
+  const d = deriveCoil(state.product, state.tonnes);
+  put('hud-line', LINE_LABEL[state.product]);
+  put('r-mass', `${nf1.format(state.tonnes)} tấn`);
+  put('r-od', `${nf0.format(d.odMm)} mm`);
+  put('r-len', `${nf0.format(d.lengthM)} m`);
+  put('r-gauge', `${nf2.format(GAUGE_MM[state.product])} mm`);
+  put('r-wraps', `${nf0.format(d.realWraps)} vòng`);
+  put('r-price', `${nf0.format(DEMO_PRICE_VND_PER_KG[state.product])} ₫/kg`);
+  put('r-total', `${nf0.format(d.priceVnd)} ₫`);
+  put('weight-out', `${nf1.format(state.tonnes)} tấn`);
+  for (const button of document.querySelectorAll('#product-seg button')) {
+    button.setAttribute('aria-pressed', String(button.dataset.line === state.product));
+  }
+  scene?.world.setState({ ...state }); // scene.setState calls invalidate()
+}
+
+// Product segmented buttons.
+const seg = document.querySelector('#product-seg');
+for (const key of ['gl', 'crc', 'hrc']) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.dataset.line = key;
+  button.textContent = SHORT[key];
+  button.setAttribute('aria-label', LINE_LABEL[key]);
+  button.addEventListener('click', () => { state.product = key; render(); });
+  seg.append(button);
+}
+
+// Product cards also load their line onto the model.
+for (const button of document.querySelectorAll('.card [data-line]')) {
+  button.addEventListener('click', () => {
+    state.product = button.dataset.line;
+    render();
+    stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+// Weight slider: geometry and readouts follow, visitor-driven so it works even while paused.
+const weight = document.querySelector('#weight');
+weight.setAttribute('aria-label', 'Khối lượng cuộn mục tiêu, từ 5 đến 20 tấn');
+weight.addEventListener('input', () => { state.tonnes = parseFloat(weight.value); render(); });
+
+// Named views + motion toggle (WebGL branch only).
+if (scene) {
+  const views = document.querySelector('#views');
+  for (const name of Object.keys(VIEWS)) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = name;
+    button.addEventListener('click', () => {
+      scene.setView(name);
+      for (const other of views.querySelectorAll('[data-view]')) other.setAttribute('aria-current', String(other === button));
+    });
+    button.dataset.view = name;
+    views.append(button);
+  }
+  views.querySelector('[data-view]').setAttribute('aria-current', 'true');
+
+  const motion = document.createElement('button');
+  motion.type = 'button';
+  const paintMotion = () => {
+    const running = !scene.isPaused();
+    motion.textContent = running ? '⏸ Dừng' : '▶ Chạy';
+    motion.setAttribute('aria-pressed', String(running));
+    motion.setAttribute('aria-label', running ? 'Dừng chuyển động của mô hình' : 'Bật chuyển động của mô hình');
+  };
+  motion.addEventListener('click', () => { scene.setPaused(!scene.isPaused()); paintMotion(); });
+  paintMotion();
+  views.append(motion);
+}
+
+// Demo price tape — same demo prices as the HUD, marked minh hoạ.
+const TAPE = [
+  { key: 'gl', delta: '+0,4%', dir: 'up' },
+  { key: 'crc', delta: '−0,2%', dir: 'down' },
+  { key: 'hrc', delta: '+0,1%', dir: 'up' }
+];
+function fillTape(list) {
+  for (const item of TAPE) {
+    const li = document.createElement('li');
+    li.innerHTML = `<b>${LINE_LABEL[item.key]}</b> ${nf0.format(DEMO_PRICE_VND_PER_KG[item.key])} ₫/kg `
+      + `<span class="${item.dir}">${item.delta}</span>`;
+    list.append(li);
+  }
+  const note = document.createElement('li');
+  note.innerHTML = '<span class="note-chip">SỐ LIỆU MINH HOẠ — KHÔNG PHẢI GIÁ CHÀO BÁN</span>';
+  list.append(note);
+}
+fillTape(document.querySelector('#tape'));
+fillTape(document.querySelector('#tape-dup'));
+
+render();
+</script>
+
+</body>
+</html>
