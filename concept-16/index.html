@@ -105,18 +105,57 @@
   .profile-card .meta{font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);margin-bottom:10px}
   .profile-card p{font-size:14px;color:var(--muted)}
 
-  .products{display:grid;grid-template-columns:1.35fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair)}
-  .prod{background:var(--white);padding:36px 32px}
-  .prod.hero-line{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,var(--white),#f3f6f0)}
-  .prod h3{font-family:var(--serif);font-weight:540;font-size:26px}
-  .prod .std{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px}
-  .prod p{color:var(--muted);font-size:14.5px;max-width:52ch}
-  .spec-list{margin-top:22px;border-top:1px solid var(--hair)}
-  .spec-list div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:14px}
-  .spec-list dt{color:var(--muted)}
-  .spec-list dd{font-weight:600;text-align:right}
-  .prod a{color:var(--green);font-size:13.5px;font-weight:600;text-decoration:none}
-  .prod a:hover{text-decoration:underline}
+  /* ——— danh mục sản phẩm: phụ lục quy cách kiểu tạp chí ——— */
+  .cat-intro{max-width:66ch;color:var(--muted);font-size:15px;margin:-16px 0 34px}
+  .catalog{border-top:1px solid var(--hair)}
+  .entry{display:grid;grid-template-columns:260px minmax(0,1fr);gap:48px;padding:52px 0;border-bottom:1px solid var(--hair)}
+  .entry-no{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold)}
+  .entry h3{font-family:var(--serif);font-weight:540;font-size:26px;line-height:1.25;margin-top:6px}
+  .entry .tag{display:inline-block;vertical-align:4px;background:var(--green);color:#fff;font-family:var(--sans);font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-left:8px}
+  .entry .std{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:12px;line-height:2}
+  .entry-body{min-width:0}
+  .entry .lede{color:var(--muted);font-size:14.5px;max-width:62ch}
+  .entry .apps{margin-top:12px;font-size:13.5px;color:var(--muted)}
+  .entry .apps b{color:var(--ink);font-weight:600}
+  .entry a{color:var(--green);font-size:13.5px;font-weight:600;text-decoration:none}
+  .entry a:hover{text-decoration:underline}
+  .entry.featured{background:linear-gradient(165deg,var(--white),#eef4ec);border:1px solid var(--hair);padding-left:40px;padding-right:40px;margin:-1px 0}
+
+  .table-scroll{overflow-x:auto;margin-top:22px}
+  table.spec{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.spec th{width:200px;padding:10px 18px 10px 0;color:var(--muted);font-weight:400;text-align:left;vertical-align:top;border-bottom:1px solid var(--hair);white-space:nowrap}
+  table.spec td{padding:10px 0;font-weight:500;text-align:left;border-bottom:1px solid var(--hair)}
+  table.coat{width:100%;border-collapse:collapse;font-size:13px;min-width:620px}
+  table.coat caption{caption-side:top;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);padding-bottom:10px}
+  table.coat th,table.coat td{padding:9px 14px;border-bottom:1px solid var(--hair);white-space:nowrap;text-align:right;font-weight:400}
+  table.coat thead th{font-family:var(--serif);font-weight:540;font-size:13.5px;color:var(--ink)}
+  table.coat th:first-child,table.coat td:first-child{text-align:left;padding-left:0;color:var(--muted)}
+  table.coat td{font-weight:500;font-variant-numeric:tabular-nums}
+  .lot-note{margin-top:14px;font-size:12px;font-style:italic;color:var(--muted)}
+
+  /* ——— bức tường màu: 12 tấm mẫu như bản in màu đóng khung ——— */
+  .palette-head{margin-top:30px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:24px}
+  .palette-head h4{font-family:var(--serif);font-weight:540;font-size:21px}
+  .palette-head span{font-size:12.5px;font-style:italic;color:var(--muted)}
+  .palette{margin-top:20px;display:grid;grid-template-columns:repeat(6,1fr);gap:20px 14px}
+  .swatch .chip{aspect-ratio:4/5;border:1px solid rgba(19,41,29,.14);box-shadow:inset 0 0 0 4px var(--white)}
+  .swatch b{display:block;font-family:var(--serif);font-weight:540;font-size:14.5px;margin-top:9px;line-height:1.3}
+  .swatch span{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+  /* ——— đóng gói & kiểm soát chất lượng ——— */
+  .pack{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .pack article{background:var(--white);padding:36px 34px}
+  .pack .lvl{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--gold)}
+  .pack h3{font-family:var(--serif);font-weight:540;font-size:23px;margin-top:8px}
+  .pack ul{list-style:none;margin-top:18px}
+  .pack li{padding:11px 0;border-bottom:1px solid var(--hair);font-size:14px;color:var(--muted);display:flex;gap:12px}
+  .pack li::before{content:'—';color:var(--gold);flex:none}
+  .keep-note{margin-top:20px;font-size:13px;font-style:italic;color:var(--muted);max-width:76ch}
+  .qc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .qc-step{background:var(--white);padding:30px 28px}
+  .qc-step .n{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:17px}
+  .qc-step h4{font-family:var(--serif);font-weight:540;font-size:19px;margin:10px 0 6px}
+  .qc-step p{font-size:13.5px;color:var(--muted)}
 
   .partner{border:1px solid var(--hair);background:var(--ink);color:#f2efe6;display:grid;grid-template-columns:1.2fr .8fr}
   .partner .txt{padding:52px 48px}
@@ -150,8 +189,11 @@
   @media(max-width:980px){
     nav ul{display:none}
     .profiles{grid-template-columns:minmax(0,1fr)}
-    .products{grid-template-columns:minmax(0,1fr)}
-    .prod.hero-line{grid-row:auto}
+    .entry{grid-template-columns:minmax(0,1fr);gap:22px;padding:44px 0}
+    .entry.featured{padding-left:26px;padding-right:26px}
+    .palette{grid-template-columns:repeat(4,1fr)}
+    .pack{grid-template-columns:minmax(0,1fr)}
+    .qc{grid-template-columns:1fr 1fr}
     .partner{grid-template-columns:1fr}
     .partner .facts{border-left:none;border-top:1px solid rgba(242,239,230,.2)}
     .usps{grid-template-columns:1fr 1fr;gap:28px}
@@ -168,6 +210,10 @@
     .stage-tools{top:auto;bottom:12px;right:12px}
     .scale-note{bottom:46px}
     .studio-controls{flex-direction:column;gap:18px}
+    .palette{grid-template-columns:repeat(3,1fr);gap:16px 10px}
+    .qc{grid-template-columns:minmax(0,1fr)}
+    table.spec th{width:132px;white-space:normal}
+    .entry.featured{padding-left:18px;padding-right:18px}
     .usps{grid-template-columns:1fr}
     .readouts{grid-template-columns:1fr 1fr}
     .readouts > div:nth-child(2n){border-right:none}
@@ -255,39 +301,213 @@
 
 <section id="products" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="no">— 03</span><h2>Hai dòng chủ lực, <em>một chuỗi cung</em></h2></div>
-    <div class="products">
-      <article class="prod hero-line">
-        <div>
-          <h3>Tôn lạnh — GL</h3>
-          <p class="std">JIS G3302 · EN 10327</p>
-          <p>Tôn mạ nhôm-kẽm cho mái và vách kiến trúc: bề mặt hoa mạ đều, phản xạ nhiệt tốt, cán được cả ba biên dạng ở trên. Nguồn cuộn trực tiếp từ nhà máy Tôn Tân Phước Khánh.</p>
-          <dl class="spec-list">
-            <div><dt>Độ dày</dt><dd>0,15 – 1,2 mm</dd></div>
-            <div><dt>Lớp mạ</dt><dd>60 – 275 g/m²</dd></div>
-            <div><dt>Dạng hàng</dt><dd>Cuộn · tấm cán sóng theo yêu cầu</dd></div>
-          </dl>
+    <div class="sec-head"><span class="no">— 03</span><h2>Danh mục sản phẩm — <em>phụ lục quy cách</em></h2></div>
+    <p class="cat-intro">Năm dòng hàng phân phối thường trực của KLC, ghi theo lối phụ lục kỹ thuật: quy cách, tiêu chuẩn, mác thép và ứng dụng của từng dòng. KLC là nhà thương mại — mọi cuộn hàng đi kèm chứng từ chất lượng của nhà máy sản xuất.</p>
+
+    <div class="catalog">
+
+      <article class="entry" id="po">
+        <div class="entry-head">
+          <span class="entry-no">01</span>
+          <h3>Thép cán nóng tẩy gỉ (PO)</h3>
+          <p class="std">JIS G3131 / G3101 · SAE J403 · EN 10111 · ASTM A1011</p>
         </div>
-        <p style="margin-top:24px"><a href="#quote">Báo giá tôn lạnh →</a></p>
+        <div class="entry-body">
+          <p class="lede">Thép cán nóng đã tẩy gỉ bằng axit và phủ dầu chống gỉ (Pickled &amp; Oiled): bề mặt sạch, đồng nhất, sẵn sàng cho hàn, dập và cắt laser mà không cần xử lý lại.</p>
+          <p class="apps"><b>Ứng dụng:</b> kết cấu, ống thép, bồn bể, chi tiết máy.</p>
+          <div class="table-scroll">
+            <table class="spec">
+              <tbody>
+                <tr><th scope="row">Độ dày</th><td>1,4 – 4,5 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td>850 – 1.550 mm</td></tr>
+                <tr><th scope="row">Đường kính trong cuộn</th><td>508 / 610 mm</td></tr>
+                <tr><th scope="row">Mác tiêu biểu</th><td>SPHC · SPHD · SPHE · SS400 · S235JR · DD11</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+        </div>
       </article>
-      <article class="prod">
-        <h3>Thép cán nguội — CRC</h3>
-        <p class="std">JIS G3141 · ASTM A1008</p>
-        <p>Nền phẳng, dung sai chặt cho chi tiết chấn gập, phụ kiện mái và cơ khí chính xác.</p>
-        <dl class="spec-list">
-          <div><dt>Độ dày</dt><dd>0,3 – 3,0 mm</dd></div>
-          <div><dt>Khổ rộng</dt><dd>600 – 1.250 mm</dd></div>
-        </dl>
+
+      <article class="entry" id="crc">
+        <div class="entry-head">
+          <span class="entry-no">02</span>
+          <h3>Thép cán nguội (CRC)</h3>
+          <p class="std">JIS G3141 · EN 10130 · ASTM A1008</p>
+        </div>
+        <div class="entry-body">
+          <p class="lede">Nền phẳng, dung sai độ dày chặt và bề mặt mịn cho chi tiết chấn gập, dập vuốt và cơ khí chính xác — từ mác thương phẩm SPCC đến các mác dập sâu đặc biệt.</p>
+          <p class="apps"><b>Ứng dụng:</b> gia dụng, nội thất, khung cửa, cơ khí chính xác.</p>
+          <div class="table-scroll">
+            <table class="spec">
+              <tbody>
+                <tr><th scope="row">Độ dày</th><td>0,18 – 2,5 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td>850 – 1.550 mm</td></tr>
+                <tr><th scope="row">Đường kính trong cuộn</th><td>508 / 610 mm</td></tr>
+                <tr><th scope="row">Mác tiêu biểu</th><td>SPCC → SPCG (JIS) · DC01 → DC06 (EN) · CS / DS (ASTM)</td></tr>
+                <tr><th scope="row">Ghi chú</th><td>Mác SPCF / SPCG và DC05 / DC06 có bảo đảm không hoá già 6 tháng</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+        </div>
       </article>
-      <article class="prod">
-        <h3>Thép cán nóng — HRC</h3>
-        <p class="std">JIS G3101 · ASTM A36</p>
-        <p>Dòng phụ trợ cho xà gồ, khung kèo và kết cấu đỡ chính bộ mái.</p>
-        <dl class="spec-list">
-          <div><dt>Độ dày</dt><dd>2,0 – 25 mm</dd></div>
-          <div><dt>Khổ rộng</dt><dd>600 – 2.000 mm</dd></div>
-        </dl>
+
+      <article class="entry" id="gi">
+        <div class="entry-head">
+          <span class="entry-no">03</span>
+          <h3>Tôn kẽm (GI)</h3>
+          <p class="std">JIS G3302 · EN 10346 · ASTM A653</p>
+        </div>
+        <div class="entry-body">
+          <p class="lede">Thép mạ kẽm nhúng nóng: lớp kẽm hy sinh bảo vệ nền thép cả ở mép cắt, độ mạ chọn theo môi trường công trình từ Z050 tới Z350.</p>
+          <p class="apps"><b>Ứng dụng:</b> mái, xà gồ, vì kèo, ống gió, thiết bị nông nghiệp.</p>
+          <div class="table-scroll">
+            <table class="spec">
+              <tbody>
+                <tr><th scope="row">Độ dày nền</th><td>0,16 – 3,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td>850 – 1.550 mm</td></tr>
+                <tr><th scope="row">Độ mạ</th><td>Z050 – Z350 (tổng 2 mặt)</td></tr>
+                <tr><th scope="row">Mác tiêu biểu</th><td>SGCC · SGC340 – 570 (JIS) · DX51D – DX54D · S220GD – S550GD (EN)</td></tr>
+                <tr><th scope="row">Xử lý bề mặt</th><td>Cromat · chống vân tay · phủ dầu</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll">
+            <table class="coat">
+              <caption>Độ mạ kẽm tiêu biểu — g/m², trung bình 3 điểm, tổng 2 mặt</caption>
+              <thead>
+                <tr><th scope="col">Ký hiệu</th><th scope="col">Z050</th><th scope="col">Z080</th><th scope="col">Z100</th><th scope="col">Z120</th><th scope="col">Z180</th><th scope="col">Z275</th><th scope="col">Z350</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Lượng mạ tối thiểu</td><td>50</td><td>80</td><td>100</td><td>120</td><td>180</td><td>275</td><td>350</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+        </div>
       </article>
+
+      <article class="entry featured" id="gl">
+        <div class="entry-head">
+          <span class="entry-no">04</span>
+          <h3>Tôn lạnh (GL) <span class="tag">Dòng chủ lực</span></h3>
+          <p class="std">JIS G3321 · ASTM A792 · EN 10346 · AS 1397</p>
+        </div>
+        <div class="entry-body">
+          <p class="lede">Thép mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si: hoa mạ đều, phản xạ nhiệt tốt, tuổi thọ ngoài trời vượt trội so với mạ kẽm cùng độ mạ. Nguồn cuộn trực tiếp từ nhà máy Tôn Tân Phước Khánh — chính là tấm tôn đang xoay trong <a href="#studio">xưởng biên dạng</a> đầu trang, cán được cả ba biên dạng sóng.</p>
+          <p class="apps"><b>Ứng dụng:</b> lợp mái, vách bao che, chống nóng, khung đỡ solar.</p>
+          <div class="table-scroll">
+            <table class="spec">
+              <tbody>
+                <tr><th scope="row">Độ dày nền</th><td>0,16 – 2,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td>850 – 1.550 mm</td></tr>
+                <tr><th scope="row">Độ mạ</th><td>AZ050 – AZ185 (tổng 2 mặt)</td></tr>
+                <tr><th scope="row">Mác tiêu biểu</th><td>SGLCC · SGLC400 – 570 (JIS) · G300 – G550 (AS)</td></tr>
+                <tr><th scope="row">Dạng hàng</th><td>Cuộn · tấm cán sóng theo yêu cầu</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll">
+            <table class="coat">
+              <caption>Độ mạ nhôm kẽm — g/m², trung bình 3 điểm</caption>
+              <thead>
+                <tr><th scope="col">Ký hiệu</th><th scope="col">AZ050</th><th scope="col">AZ070</th><th scope="col">AZ090</th><th scope="col">AZ100</th><th scope="col">AZ120</th><th scope="col">AZ150</th><th scope="col">AZ165</th><th scope="col">AZ185</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tổng 2 mặt</td><td>50</td><td>70</td><td>90</td><td>100</td><td>120</td><td>150</td><td>165</td><td>185</td></tr>
+                <tr><td>Tối thiểu 1 mặt</td><td>16</td><td>24</td><td>30</td><td>34</td><td>41</td><td>52</td><td>56</td><td>64</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+          <p style="margin-top:18px"><a href="#quote">Báo giá tôn lạnh →</a></p>
+        </div>
+      </article>
+
+      <article class="entry" id="ppgi">
+        <div class="entry-head">
+          <span class="entry-no">05</span>
+          <h3>Tôn mạ màu (PPGI / PPGL)</h3>
+          <p class="std">Nền GI / GL · hệ sơn PE / SMP / PVDF</p>
+        </div>
+        <div class="entry-body">
+          <p class="lede">Tôn nền mạ kẽm hoặc nhôm kẽm phủ hệ sơn nung: lớp lót 5 – 20 µm và lớp phủ 5 – 20 µm mặt trên, sơn lưng 3 – 10 µm — bề mặt hoàn thiện là lớp áo kiến trúc cuối cùng của mái và vách.</p>
+          <p class="apps"><b>Ứng dụng:</b> panel, mái / vách hoàn thiện, cửa cuốn, nhà tiền chế.</p>
+          <div class="table-scroll">
+            <table class="spec">
+              <tbody>
+                <tr><th scope="row">Độ dày nền</th><td>0,16 – 1,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td>850 – 1.300 mm</td></tr>
+                <tr><th scope="row">Hệ sơn</th><td>PE · SMP · PVDF</td></tr>
+                <tr><th scope="row">Lớp sơn</th><td>Lót 5 – 20 µm + phủ 5 – 20 µm (mặt trên) · sơn lưng 3 – 10 µm</td></tr>
+                <tr><th scope="row">Bề mặt</th><td>Bóng · nhám · vân</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+          <div class="palette-head">
+            <h4>Bảng màu tiêu biểu — mười hai tấm mẫu</h4>
+            <span>Nhận màu theo yêu cầu dự án · đối chiếu màu trên tấm mẫu thật trước khi đặt cuộn</span>
+          </div>
+          <div class="palette" role="list" aria-label="Bảng màu tôn mạ màu tiêu biểu">
+            <div class="swatch" role="listitem"><div class="chip" style="background:#f2f1ea"></div><b>Trắng ngọc</b><span>#f2f1ea</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#6b7076"></div><b>Xám thép</b><span>#6b7076</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#b9bdbf"></div><b>Xám nhạt</b><span>#b9bdbf</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#7a5641"></div><b>Nâu đất</b><span>#7a5641</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#b53329"></div><b>Đỏ</b><span>#b53329</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#7c2430"></div><b>Đỏ đô</b><span>#7c2430</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#2e4a38"></div><b>Xanh rêu đậm</b><span>#2e4a38</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#3e7a4e"></div><b>Xanh lá</b><span>#3e7a4e</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#79b5a1"></div><b>Xanh ngọc</b><span>#79b5a1</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#2b4d7e"></div><b>Xanh dương</b><span>#2b4d7e</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#7fa8cc"></div><b>Xanh da trời</b><span>#7fa8cc</span></div>
+            <div class="swatch" role="listitem"><div class="chip" style="background:#d9a441"></div><b>Vàng nghệ</b><span>#d9a441</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="packing">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">— 04</span><h2>Đóng gói &amp; <em>bảo quản</em></h2></div>
+    <div class="pack">
+      <article>
+        <p class="lvl">Mức i</p>
+        <h3>Đóng gói tiêu chuẩn</h3>
+        <ul>
+          <li>Bọc màng PE quanh cuộn</li>
+          <li>Giấy VCI chống ẩm, chống gỉ bên trong</li>
+          <li>Ốp mép bảo vệ chu vi cuộn</li>
+          <li>Đai thép quanh chu vi &amp; xỏ tâm cuộn</li>
+        </ul>
+      </article>
+      <article>
+        <p class="lvl">Mức ii</p>
+        <h3>Đóng gói gia cường</h3>
+        <ul>
+          <li>Toàn bộ hạng mục của mức tiêu chuẩn</li>
+          <li>Thêm vỏ tôn bọc ngoài cuộn</li>
+          <li>Ốp mép gia cường, đai nặng hơn</li>
+          <li>Pallet tuỳ chọn cho vận chuyển xa</li>
+        </ul>
+      </article>
+    </div>
+    <p class="keep-note">Lưu ý bảo quản: kho khô ráo, thông thoáng; kê cuộn cao khỏi nền; tránh va đập mép cuộn khi bốc xếp — mép móp là nguồn lỗi cán sóng thường gặp nhất.</p>
+  </div>
+</section>
+
+<section id="qc" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">— 05</span><h2>Kiểm soát chất lượng — <em>vai thương mại</em></h2></div>
+    <div class="qc">
+      <div class="qc-step"><span class="n">i.</span><h4>Kiểm định nguồn</h4><p>Chỉ nhập từ nhà máy đã kiểm định hồ sơ năng lực và ổn định chất lượng qua các lô trước.</p></div>
+      <div class="qc-step"><span class="n">ii.</span><h4>Đối chiếu CO / CQ</h4><p>Từng lô hàng được đối chiếu chứng chỉ xuất xứ và chất lượng với đơn đặt trước khi nhận.</p></div>
+      <div class="qc-step"><span class="n">iii.</span><h4>Kiểm quy cách nhập kho</h4><p>Đo lại độ dày, khổ rộng và độ mạ khi hàng về kho — sai quy cách là trả lô.</p></div>
+      <div class="qc-step"><span class="n">iv.</span><h4>Giao kèm hồ sơ</h4><p>Mỗi chuyến giao đi kèm bộ hồ sơ chất lượng đầy đủ của chính lô hàng đó.</p></div>
     </div>
   </div>
 </section>
@@ -311,7 +531,7 @@
 
 <section id="usp" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="no">— 04</span><h2>Chất lượng — <em>Uy tín</em> — Bền vững</h2></div>
+    <div class="sec-head"><span class="no">— 06</span><h2>Chất lượng — <em>Uy tín</em> — Bền vững</h2></div>
     <div class="usps">
       <div class="usp"><span class="n">i.</span><h4>Trực tiếp nhà máy</h4><p>Hợp tác Tôn Tân Phước Khánh — nguồn cuộn ổn định, không phụ thuộc chợ hàng.</p></div>
       <div class="usp"><span class="n">ii.</span><h4>Giá cạnh tranh</h4><p>Mua tận gốc nên báo giá sát biến động thị trường, giữ giá theo tiến độ.</p></div>
@@ -348,9 +568,11 @@
       </div>
       <div>
         <h4>Sản phẩm</h4>
-        <a href="#products">Tôn lạnh (GL)</a>
-        <a href="#products">Thép cán nguội (CRC)</a>
-        <a href="#products">Thép cán nóng (HRC)</a>
+        <a href="#po">Thép cán nóng tẩy gỉ (PO)</a>
+        <a href="#crc">Thép cán nguội (CRC)</a>
+        <a href="#gi">Tôn kẽm (GI)</a>
+        <a href="#gl">Tôn lạnh (GL)</a>
+        <a href="#ppgi">Tôn mạ màu (PPGI/PPGL)</a>
       </div>
     </div>
     <div class="colophon">
