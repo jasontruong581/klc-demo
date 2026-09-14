@@ -128,7 +128,9 @@ stay live when ambient motion is paused, because they are visitor-driven rather 
 Four independent directions built only from the company identity — the real logo (green oval,
 chrome KLC letters wound by a steel strip, gold ring), the green brand palette, the real product
 ranges and the real contact details from klcsteel.vercel.app — deliberately **not** derived from
-concepts 01–12. Each follows the same 3D rules: an authoritative state, readouts computed from the
+concepts 01–12. Unlike 01–12, these four carry KLC's actual distribution catalogue: five flat-steel
+lines (PO, CRC, GI, GL, PPGI/PPGL) with spec and grade tables, plus the packing levels, the
+four-step trader QC and the ordering process from the live site. Each follows the same 3D rules: an authoritative state, readouts computed from the
 geometry, named Vietnamese views, a no-WebGL fallback that keeps the page useful.
 
 ### 13 — Sàn giao dịch thép ([concept-13/](../concept-13/))
@@ -144,8 +146,8 @@ the mass — R = √(r² + m/(π·w·ρ)) — so the slider physically grows the
 π(R²−r²)/t, real wrap count and demo lot value are all derived from the same formula. Drawn wraps
 (14) vs real wraps (hundreds) is stated on the stage.
 
-**Controls:** three product switches, weight slider, run/pause, views "Toàn cảnh", "Mặt cuộn",
-"Sàn giao dịch".
+**Controls:** five product switches (PO/CRC/GI/GL/PPGI) plus a "Nạp lên mô hình" button on each
+order-book ticket, weight slider, run/pause, views "Toàn cảnh", "Mặt cuộn", "Sàn giao dịch".
 
 ### 14 — Kho hàng thông minh ([concept-14/](../concept-14/))
 
@@ -159,8 +161,8 @@ AGV cart drifting the aisle as ambient motion.
 over the drawn coils — tồn kho Σ π(R²−r²)·w·7850, mét dài Σ π(R²−r²)/t at a stated gauge, coil
 count = mesh count — so the slider and the panel cannot disagree.
 
-**Controls:** three product switches, stock slider, run/pause, views "Toàn kho", "Dãy kệ",
-"Cận cuộn".
+**Controls:** five product switches (PO/CRC/GI/GL/PPGI), stock slider, run/pause, views "Toàn kho",
+"Dãy kệ", "Cận cuộn".
 
 ### 15 — Chuỗi cung ứng liền mạch ([concept-15/](../concept-15/))
 

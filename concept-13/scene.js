@@ -1,8 +1,8 @@
 // Mẫu 13 — "Sàn giao dịch thép": a holographic steel coil floating above a glowing pedestal
 // in a dark HUD space — wireframe ground grid, a counter-rotating data ring with tick marks.
 //
-// Authoritative state: the selected product line (gl | crc | hrc) and the coil weight target in
-// tonnes. Geometry is derived, never typed in: mass = π(R² − r²)·w·ρ solved for R gives the coil
+// Authoritative state: the selected product line (po | crc | gi | gl | ppgi — the five distributed
+// flat-steel lines) and the coil weight target in tonnes. Geometry is derived, never typed in: mass = π(R² − r²)·w·ρ solved for R gives the coil
 // outer radius, and every readout on the page comes from the same annulus (see deriveCoil).
 // The drawn winding is exaggerated: DRAWN turns stand in for the hundreds of real wraps a strip
 // gauge implies, and the page states this next to the model.
@@ -15,18 +15,37 @@ import {
 /** Real coil proportions in metres: bore Ø508 mm, width 1200 mm. OD is derived from mass. */
 export const COIL = { boreRadius: 0.254, width: 1.2, drawnTurns: 14 };
 
+/** Catalogue order of the five distributed lines — the page builds its switches from this. */
+export const LINE_ORDER = ['po', 'crc', 'gi', 'gl', 'ppgi'];
+
 /** Representative strip gauge per product line (mm) — stated next to the length readout. */
-export const GAUGE_MM = { gl: 0.45, crc: 1.2, hrc: 3.0 };
+export const GAUGE_MM = { po: 3.0, crc: 1.2, gi: 0.5, gl: 0.45, ppgi: 0.45 };
 
 /** Demo unit prices in ₫/kg — marked "giá tham khảo, minh hoạ" everywhere they appear. */
-export const DEMO_PRICE_VND_PER_KG = { gl: 26500, crc: 21900, hrc: 18400 };
+export const DEMO_PRICE_VND_PER_KG = { po: 18400, crc: 21900, gi: 24600, gl: 26500, ppgi: 31800 };
 
-/** Holographic emissive tint per product line: emerald GL, chrome-blue CRC, gold HRC.
- *  Intensity is per line: HRC's dark, scaled surface must stay legible under the gold tint. */
+/**
+ * Surface identity of the five lines. scene-kit's STEEL only knows crc/hrc/gl, so the three
+ * newcomers are concept-owned art direction: PO is dark oiled hot-rolled strip, GI a bright
+ * spangled zinc coat, PPGI/PPGL an organic paint film (barely metallic) in a deep moss green
+ * from the brand palette. CRC and GL reuse the shared presets unchanged.
+ */
+export const SURFACES = {
+  po: { color: '#565d63', roughness: 0.5, metalness: 0.75 },
+  crc: STEEL.crc,
+  gi: { color: '#d9e0e3', roughness: 0.26, metalness: 0.9 },
+  gl: STEEL.gl,
+  ppgi: { color: '#2e5c40', roughness: 0.55, metalness: 0.15 }
+};
+
+/** Holographic emissive tint per product line. Intensity is tuned per surface: PO's dark oiled
+ *  strip needs the gold to stay legible, GI's bright zinc and PPGI's paint film need very little. */
 export const TINT = {
-  gl: { color: '#2fe08a', intensity: 0.24 },
+  po: { color: '#f2c33d', intensity: 0.1 },
   crc: { color: '#8fd8ff', intensity: 0.2 },
-  hrc: { color: '#f2c33d', intensity: 0.1 }
+  gi: { color: '#dfe8e3', intensity: 0.12 },
+  gl: { color: '#2fe08a', intensity: 0.24 },
+  ppgi: { color: '#2fe08a', intensity: 0.08 }
 };
 
 /**
@@ -162,7 +181,7 @@ export function createScene({ renderer, scene, look, invalidate }) {
   }
 
   function applyProduct(productKey) {
-    const surface = STEEL[productKey];
+    const surface = SURFACES[productKey];
     coilMaterial.color.set(surface.color);
     coilMaterial.roughness = surface.roughness;
     coilMaterial.metalness = surface.metalness;
@@ -174,7 +193,7 @@ export function createScene({ renderer, scene, look, invalidate }) {
   return {
     /**
      * The page's single entry point: pass the whole state, the scene derives the rest.
-     * @param {{product: 'gl'|'crc'|'hrc', tonnes: number}} next
+     * @param {{product: 'po'|'crc'|'gi'|'gl'|'ppgi', tonnes: number}} next
      */
     setState(next) {
       if (next.product !== state.product) { state.product = next.product; applyProduct(state.product); }

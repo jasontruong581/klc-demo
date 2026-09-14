@@ -11,6 +11,7 @@
     --void:#020a06;
     --void-2:#04180e;
     --panel:rgba(6,32,19,.62);
+    --panel-deep:rgba(2,10,6,.35);
     --line:rgba(47,224,138,.22);
     --line-strong:rgba(47,224,138,.5);
     --emerald:#2fe08a;
@@ -105,7 +106,7 @@
   .pod{border:1px solid var(--line);border-radius:12px;background:var(--panel);backdrop-filter:blur(12px);padding:12px 14px;flex:1;min-width:230px}
   .pod>span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--emerald);margin-bottom:9px}
   .seg{display:flex;gap:6px;flex-wrap:wrap}
-  .seg button{flex:1;min-width:72px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--dim);
+  .seg button{flex:1;min-width:58px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--dim);
     border-radius:8px;padding:9px 8px;font-family:var(--mono);font-size:12px;font-weight:500;cursor:pointer;transition:.18s}
   .seg button:hover{color:#fff;border-color:var(--emerald)}
   .seg button[aria-pressed="true"]{background:rgba(47,224,138,.16);border-color:var(--emerald);color:var(--emerald)}
@@ -116,7 +117,7 @@
 
   /* ---- price ticker strip ---- */
   .ticker{margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(4,24,14,.7);overflow:hidden}
-  .ticker-inner{display:flex;width:max-content;animation:tick 36s linear infinite}
+  .ticker-inner{display:flex;width:max-content;animation:tick 48s linear infinite}
   .ticker-inner:hover{animation-play-state:paused}
   @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion: reduce){.ticker-inner{animation:none}.tag::before{animation:none}}
@@ -129,21 +130,63 @@
   section{max-width:1180px;margin:0 auto;padding:88px 22px}
   .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px}
   section h2,.partner h2{font-weight:700;font-size:clamp(27px,3.4vw,42px);letter-spacing:-.015em;color:#fff;line-height:1.12}
-  .sub{margin-top:14px;color:var(--dim);max-width:600px;font-size:15.5px}
+  .sub{margin-top:14px;color:var(--dim);max-width:640px;font-size:15.5px}
 
-  .cards{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:26px;display:flex;flex-direction:column;position:relative;transition:.22s}
-  .card:hover,.card:focus-within{border-color:var(--line-strong);transform:translateY(-4px);box-shadow:0 24px 48px -26px rgba(0,0,0,.85)}
-  .card .code{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--emerald);text-transform:uppercase}
-  .card.gold .code{color:var(--gold)}
-  .card h3{font-size:22px;color:#fff;margin:10px 0 8px}
-  .card>p{font-size:14px;color:var(--dim);flex:1}
-  .specs{margin-top:16px;display:grid;gap:6px;font-family:var(--mono);font-size:12px}
-  .specs div{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed var(--line);padding-top:6px}
-  .specs span{color:var(--dim)} .specs b{color:#fff;font-weight:500;text-align:right}
-  .card button{margin-top:20px;border:1px solid var(--line);background:none;color:var(--emerald);border-radius:8px;
-    padding:10px;font-family:var(--mono);font-size:12.5px;cursor:pointer;transition:.18s}
-  .card button:hover{background:rgba(47,224,138,.14);border-color:var(--emerald)}
+  /* order book: one "ticket" per distributed product line */
+  .book{margin-top:44px;display:grid;gap:16px}
+  .ticket{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:26px;display:grid;gap:18px;position:relative;transition:.22s}
+  .ticket:hover,.ticket:focus-within{border-color:var(--line-strong);box-shadow:0 24px 48px -26px rgba(0,0,0,.85)}
+  .ticket-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .ticket-head>div:first-child{flex:1 1 320px}
+  .ticket .code{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--emerald);text-transform:uppercase}
+  .ticket.gold .code{color:var(--gold)}
+  .ticket h3{font-size:24px;color:#fff;margin-top:8px;line-height:1.2}
+  .ticket .key{font-family:var(--mono);font-size:12px;color:var(--emerald);border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:rgba(47,224,138,.08)}
+  .ticket.gold .key{color:var(--gold);border-color:rgba(242,195,61,.35);background:rgba(242,195,61,.08)}
+  .ticket-head button{border:1px solid var(--line-strong);background:none;color:var(--emerald);border-radius:8px;
+    padding:10px 14px;font-family:var(--mono);font-size:12.5px;cursor:pointer;transition:.18s}
+  .ticket-head button:hover{background:rgba(47,224,138,.14);border-color:var(--emerald)}
+  .ticket .intro{color:var(--dim);font-size:14.5px;max-width:880px}
+  .ticket h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+  .cols,.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid2>div{min-width:0}
+  .list{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--panel-deep);min-width:0}
+  .list ul{list-style:none}
+  .list li{font-size:13.5px;color:var(--chrome);padding:4px 0 4px 18px;position:relative}
+  .list li::before{content:'';position:absolute;left:2px;top:12px;width:6px;height:6px;background:var(--emerald);box-shadow:0 0 8px var(--emerald)}
+  .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel-deep)}
+  .ticket table{border-collapse:collapse;width:100%;min-width:420px;font-size:13px}
+  .ticket th,.ticket td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+  .ticket thead th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald);background:rgba(47,224,138,.08);font-weight:500}
+  .ticket tbody th{font-weight:600;font-size:12.5px;color:var(--dim)}
+  .ticket tbody tr:last-child th,.ticket tbody tr:last-child td{border-bottom:none}
+  .ticket td.mono{font-size:12.5px;color:#fff}
+  .lot-note{font-family:var(--mono);font-size:11px;color:var(--dim);border-top:1px dashed var(--line);padding-top:11px}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+  .sw{display:flex;align-items:center;gap:9px;font-size:12.5px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel-deep)}
+  .sw span{width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.18);flex:none}
+  .sw-note{font-size:12px;color:var(--dim);margin-top:10px}
+
+  /* packing levels */
+  .pack-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+  .pack{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:26px}
+  .pack h3{font-size:18px;color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:1.3}
+  .pack .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--void);background:var(--emerald);border-radius:4px;padding:4px 8px}
+  .pack.hard .lvl{background:var(--gold)}
+  .pack>p{margin-top:8px;font-size:13.5px;color:var(--dim)}
+  .pack ul{list-style:none;margin-top:14px}
+  .pack li{font-size:13.5px;color:var(--chrome);padding:5px 0 5px 22px;position:relative}
+  .pack li::before{content:'✓';position:absolute;left:0;color:var(--emerald);font-family:var(--mono)}
+  .pack-note{margin-top:16px;font-size:12.5px;color:var(--dim);border:1px dashed var(--line);border-radius:10px;padding:12px 16px}
+
+  /* QC and ordering steps — numbered like terminal commands */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;counter-reset:step}
+  .step{border:1px solid var(--line);border-left:3px solid var(--emerald);border-radius:12px;background:var(--panel);padding:20px}
+  .step::before{counter-increment:step;content:'QC-' counter(step,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--emerald);letter-spacing:.16em}
+  .steps.orders .step{border-left-color:var(--gold)}
+  .steps.orders .step::before{content:'LỆNH-' counter(step,decimal-leading-zero);color:var(--gold)}
+  .step h3{font-size:16.5px;color:#fff;margin:8px 0 6px}
+  .step p{font-size:13px;color:var(--dim)}
 
   .usps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
   .usp{border:1px solid var(--line);border-left:3px solid var(--emerald);border-radius:12px;background:var(--panel);padding:20px}
@@ -175,17 +218,19 @@
 
   @media(max-width:1000px){
     nav ul li:not(:last-child){display:none}
-    .cards,.usps{grid-template-columns:1fr 1fr}
+    .usps,.steps{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr}
     .hud{position:static;width:100%;margin:12px 0 0}
     .stage{height:clamp(340px,52vh,480px)}
     .partner{padding:30px}
   }
   @media(max-width:620px){
-    .cards,.usps{grid-template-columns:1fr}
+    .usps,.steps,.cols,.grid2,.pack-grid{grid-template-columns:1fr}
     section{padding:64px 18px}
     .hero-head{padding:20px 18px 14px}
     .stage-wrap,.console{padding:0 18px}
+    .ticket{padding:20px 16px}
+    .ticket-head button{width:100%}
   }
 </style>
 </head>
@@ -198,6 +243,8 @@
   </a>
   <ul>
     <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#packing">Đóng gói</a></li>
+    <li><a href="#qc">Kiểm soát</a></li>
     <li><a href="#partner">Nguồn hàng</a></li>
     <li><a href="#contact">Liên hệ</a></li>
     <li><a href="#contact" class="nav-cta">Báo giá</a></li>
@@ -208,11 +255,11 @@
   <div class="hero-head">
     <span class="tag">Phiên demo · KLC Trading Terminal</span>
     <h1>Thương mại thép <em>thế hệ mới</em> — chọn cuộn, xem số, chốt giá</h1>
-    <p>Đối tác thép tin cậy của mọi công trình. Chọn dòng sản phẩm và khối lượng cuộn mục tiêu:
+    <p>Đối tác thép tin cậy của mọi công trình. Chọn một trong năm dòng thép dẹt KLC phân phối và khối lượng cuộn mục tiêu:
       mô hình 3D và mọi thông số bên phải được tính trực tiếp từ công thức khối lượng thép — không có con số gõ tay.</p>
     <div class="hero-actions">
       <a class="btn btn-hot" href="#contact">Nhận báo giá →</a>
-      <a class="btn btn-ghost" href="#products">Xem ba dòng thép</a>
+      <a class="btn btn-ghost" href="#products">Xem năm dòng thép</a>
     </div>
   </div>
 
@@ -287,44 +334,409 @@
 </header>
 
 <section id="products">
-  <div class="eyebrow">Danh mục giao dịch</div>
-  <h2>Ba mã hàng, một chuẩn chứng từ</h2>
-  <p class="sub">Tôn lạnh và thép cán nguội là hai dòng chủ lực của KLC; thép cán nóng phục vụ kết cấu.
-    Đầy đủ CO/CQ theo lô. Bấm "Nạp lên mô hình" để xem bề mặt của dòng đó trên hologram.</p>
-  <div class="cards">
-    <article class="card">
-      <div class="code">GL · Tôn lạnh — chủ lực</div>
-      <h3>Tôn lạnh (GL)</h3>
-      <p>Mạ hợp kim nhôm–kẽm chống ăn mòn vượt trội cho mái lợp và vách công nghiệp. Nguồn trực tiếp từ nhà máy Tôn Tân Phước Khánh.</p>
-      <div class="specs">
-        <div><span>Độ dày</span><b>0,15 – 1,2 mm</b></div>
-        <div><span>Lớp mạ</span><b>60 – 275 g/m²</b></div>
-        <div><span>Tiêu chuẩn</span><b>JIS G3302 · EN 10327</b></div>
+  <div class="eyebrow">Sổ lệnh · Danh mục phân phối</div>
+  <h2>Năm mã hàng, một chuẩn chứng từ</h2>
+  <p class="sub">KLC là nhà thương mại: năm dòng thép dẹt dưới đây là hàng phân phối từ các nhà máy uy tín, giao kèm
+    CO/CQ theo từng lô, cắt tấm và xả băng theo quy cách yêu cầu. Tôn lạnh cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh.
+    Bấm "Nạp lên mô hình" để xem bề mặt dòng đó trên hologram.</p>
+  <div class="book">
+
+    <!-- 01 · PO -->
+    <article class="ticket gold" id="line-po">
+      <header class="ticket-head">
+        <div>
+          <div class="code">Mã 01 · PO — Pickled &amp; Oiled</div>
+          <h3>Thép cán nóng tẩy gỉ (PO)</h3>
+        </div>
+        <span class="key">Dày 1,4–4,5 mm · khổ 850–1.550 mm</span>
+        <button type="button" data-line="po">Nạp PO lên mô hình →</button>
+      </header>
+      <p class="intro">Thép cuộn cán nóng đã qua tẩy gỉ axit và phủ dầu chống gỉ. Bề mặt sạch, không còn vảy cán, sẵn sàng cho các nguyên công hàn, dập và cắt laser mà không cần xử lý lại tại xưởng.</p>
+      <div class="cols">
+        <div class="list">
+          <h4>Ứng dụng tiêu biểu</h4>
+          <ul>
+            <li>Kết cấu thép, chi tiết khung gầm</li>
+            <li>Ống thép hàn</li>
+            <li>Bồn bể, vỏ thiết bị</li>
+            <li>Chi tiết máy, cơ khí chế tạo</li>
+          </ul>
+        </div>
+        <div class="list">
+          <h4>Ưu điểm chính</h4>
+          <ul>
+            <li>Bề mặt sạch, đồng đều — không vảy cán</li>
+            <li>Lớp dầu bảo vệ chống gỉ khi lưu kho, vận chuyển</li>
+            <li>Dễ hàn, dập, cắt laser</li>
+            <li>Tiết kiệm công đoạn tẩy gỉ tại xưởng gia công</li>
+          </ul>
+        </div>
       </div>
-      <button type="button" data-line="gl">Nạp GL lên mô hình →</button>
-    </article>
-    <article class="card">
-      <div class="code">CRC · Cán nguội — chủ lực</div>
-      <h3>Thép cán nguội (CRC)</h3>
-      <p>Bề mặt mịn, dung sai thấp cho dập, chấn, thiết bị gia dụng, tủ điện và chi tiết cơ khí chính xác.</p>
-      <div class="specs">
-        <div><span>Độ dày</span><b>0,3 – 3,0 mm</b></div>
-        <div><span>Khổ rộng</span><b>600 – 1.250 mm</b></div>
-        <div><span>Tiêu chuẩn</span><b>JIS G3141 · ASTM A1008</b></div>
+      <div class="grid2">
+        <div>
+          <h4>Thông số kỹ thuật</h4>
+          <div class="tbl">
+            <table>
+              <tbody>
+                <tr><th scope="row">Độ dày</th><td class="mono">1,4–4,5 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+                <tr><th scope="row">Đường kính lỗ cuộn</th><td class="mono">508 / 610 mm</td></tr>
+                <tr><th scope="row">Bề mặt</th><td>Tẩy gỉ axit, phủ dầu chống gỉ</td></tr>
+                <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3131/G3101 · SAE J403 · EN 10111 · ASTM A1011</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Mác thép tiêu biểu</h4>
+          <div class="tbl">
+            <table>
+              <thead><tr><th scope="col">Tiêu chuẩn</th><th scope="col">Mác</th><th scope="col">Đặc điểm</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">JIS G3131</td><td class="mono">SPHC · SPHD · SPHE</td><td>Dập thường → dập sâu</td></tr>
+                <tr><td class="mono">JIS G3101</td><td class="mono">SS400</td><td>Kết cấu thông dụng</td></tr>
+                <tr><td class="mono">EN 10025 / EN 10111</td><td class="mono">S235JR · DD11</td><td>Kết cấu · tạo hình nguội</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <button type="button" data-line="crc">Nạp CRC lên mô hình →</button>
+      <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
     </article>
-    <article class="card gold">
-      <div class="code">HRC · Cán nóng</div>
-      <h3>Thép cán nóng (HRC)</h3>
-      <p>Chịu lực tốt, giá cạnh tranh cho kết cấu nhà xưởng, bồn bể và cơ khí chế tạo.</p>
-      <div class="specs">
-        <div><span>Độ dày</span><b>2,0 – 25 mm</b></div>
-        <div><span>Khổ rộng</span><b>600 – 2.000 mm</b></div>
-        <div><span>Tiêu chuẩn</span><b>JIS G3101 · ASTM A36</b></div>
+
+    <!-- 02 · CRC -->
+    <article class="ticket" id="line-crc">
+      <header class="ticket-head">
+        <div>
+          <div class="code">Mã 02 · CRC — Cold Rolled Coil</div>
+          <h3>Thép cán nguội (CRC)</h3>
+        </div>
+        <span class="key">Dày 0,18–2,5 mm · khổ 850–1.550 mm</span>
+        <button type="button" data-line="crc">Nạp CRC lên mô hình →</button>
+      </header>
+      <p class="intro">Thép cuộn cán nguội bề mặt mịn, dung sai độ dày chặt và độ phẳng cao — nền chuẩn cho dập vuốt, chấn gấp và các chi tiết yêu cầu độ chính xác bề mặt trước khi mạ hoặc sơn.</p>
+      <div class="cols">
+        <div class="list">
+          <h4>Ứng dụng tiêu biểu</h4>
+          <ul>
+            <li>Thiết bị gia dụng, vỏ tủ điện</li>
+            <li>Nội thất thép, kệ hàng</li>
+            <li>Khung cửa, phụ kiện xây dựng</li>
+            <li>Cơ khí chính xác, chi tiết dập</li>
+          </ul>
+        </div>
+        <div class="list">
+          <h4>Ưu điểm chính</h4>
+          <ul>
+            <li>Bề mặt mịn, dung sai độ dày chặt</li>
+            <li>Độ phẳng cao, ổn định khi chấn gấp</li>
+            <li>Dải mác từ dập thường đến dập vuốt cực sâu</li>
+            <li>Nền lý tưởng cho mạ kẽm, mạ điện, sơn phủ</li>
+          </ul>
+        </div>
       </div>
-      <button type="button" data-line="hrc">Nạp HRC lên mô hình →</button>
+      <div class="grid2">
+        <div>
+          <h4>Thông số kỹ thuật</h4>
+          <div class="tbl">
+            <table>
+              <tbody>
+                <tr><th scope="row">Độ dày</th><td class="mono">0,18–2,5 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+                <tr><th scope="row">Đường kính lỗ cuộn</th><td class="mono">508 / 610 mm</td></tr>
+                <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3141 · EN 10130 · ASTM A1008</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Mác thép tiêu biểu</h4>
+          <div class="tbl">
+            <table>
+              <thead><tr><th scope="col">Tiêu chuẩn</th><th scope="col">Mác</th><th scope="col">Đặc điểm</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">JIS G3141</td><td class="mono">SPCC → SPCG</td><td>Dập thường → dập vuốt cực sâu</td></tr>
+                <tr><td class="mono">EN 10130</td><td class="mono">DC01 → DC06</td><td>Tạo hình nguội → dập vuốt đặc biệt</td></tr>
+                <tr><td class="mono">ASTM A1008</td><td class="mono">CS · DS</td><td>Commercial / Drawing Steel</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="sw-note">Các mác SPCF/SPCG và DC05/DC06 có bảo đảm không hoá già trong 6 tháng.</p>
+        </div>
+      </div>
+      <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
     </article>
+
+    <!-- 03 · GI -->
+    <article class="ticket" id="line-gi">
+      <header class="ticket-head">
+        <div>
+          <div class="code">Mã 03 · GI — Galvanized</div>
+          <h3>Tôn kẽm (GI)</h3>
+        </div>
+        <span class="key">Dày nền 0,16–3,0 mm · độ mạ Z050–Z350</span>
+        <button type="button" data-line="gi">Nạp GI lên mô hình →</button>
+      </header>
+      <p class="intro">Thép cuộn mạ kẽm nhúng nóng — lớp kẽm bảo vệ điện hoá cho thép nền, phù hợp từ chi tiết dân dụng đến kết cấu bao che công nghiệp. Tuỳ chọn xử lý bề mặt cromat, chống vân tay hoặc phủ dầu.</p>
+      <div class="cols">
+        <div class="list">
+          <h4>Ứng dụng tiêu biểu</h4>
+          <ul>
+            <li>Mái lợp, bao che công trình</li>
+            <li>Xà gồ, vì kèo, khung phụ trợ</li>
+            <li>Ống gió, hệ thông gió điều hoà</li>
+            <li>Thiết bị nông nghiệp, silo</li>
+          </ul>
+        </div>
+        <div class="list">
+          <h4>Ưu điểm chính</h4>
+          <ul>
+            <li>Lớp kẽm bảo vệ điện hoá — bền với môi trường</li>
+            <li>Dải độ mạ rộng Z050–Z350, chọn theo môi trường sử dụng</li>
+            <li>Dễ gia công cán sóng, chấn gấp, hàn</li>
+            <li>Nhiều lựa chọn xử lý bề mặt: cromat / chống vân tay / dầu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <h4>Thông số kỹ thuật</h4>
+          <div class="tbl">
+            <table>
+              <tbody>
+                <tr><th scope="row">Độ dày nền</th><td class="mono">0,16–3,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+                <tr><th scope="row">Độ mạ (2 mặt)</th><td class="mono">Z050–Z350</td></tr>
+                <tr><th scope="row">Xử lý bề mặt</th><td>Cromat · chống vân tay · phủ dầu</td></tr>
+                <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3302 · EN 10346 · ASTM A653</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Mác thép tiêu biểu</h4>
+          <div class="tbl">
+            <table>
+              <thead><tr><th scope="col">Tiêu chuẩn</th><th scope="col">Mác</th><th scope="col">Đặc điểm</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">JIS G3302</td><td class="mono">SGCC · SGC340–570</td><td>Thông dụng · kết cấu theo độ bền</td></tr>
+                <tr><td class="mono">EN 10346</td><td class="mono">DX51D–DX54D · S220GD–S550GD</td><td>Tạo hình → dập sâu · kết cấu</td></tr>
+                <tr><td class="mono">ASTM A653</td><td class="mono">CS · SS Gr.230–550</td><td>Commercial / Structural Steel</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Độ mạ tiêu biểu (g/m², thử 3 điểm, tổng 2 mặt)</h4>
+        <div class="tbl">
+          <table>
+            <thead><tr><th scope="col">Ký hiệu</th><th scope="col">Z050</th><th scope="col">Z080</th><th scope="col">Z100</th><th scope="col">Z120</th><th scope="col">Z180</th><th scope="col">Z275</th><th scope="col">Z350</th></tr></thead>
+            <tbody>
+              <tr><td>Khối lượng mạ</td><td class="mono">50</td><td class="mono">80</td><td class="mono">100</td><td class="mono">120</td><td class="mono">180</td><td class="mono">275</td><td class="mono">350</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    </article>
+
+    <!-- 04 · GL -->
+    <article class="ticket" id="line-gl">
+      <header class="ticket-head">
+        <div>
+          <div class="code">Mã 04 · GL — Galvalume · nguồn Tôn Tân Phước Khánh</div>
+          <h3>Tôn lạnh (GL)</h3>
+        </div>
+        <span class="key">Dày nền 0,16–2,0 mm · độ mạ AZ050–AZ185</span>
+        <button type="button" data-line="gl">Nạp GL lên mô hình →</button>
+      </header>
+      <p class="intro">Thép cuộn mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si — chống ăn mòn và phản xạ nhiệt vượt trội so với mạ kẽm thuần ở cùng khối lượng mạ. Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh, đối tác chiến lược của KLC.</p>
+      <div class="cols">
+        <div class="list">
+          <h4>Ứng dụng tiêu biểu</h4>
+          <ul>
+            <li>Lợp mái nhà xưởng, dân dụng</li>
+            <li>Vách bao che, trần</li>
+            <li>Tấm chống nóng, cách nhiệt</li>
+            <li>Khung đỡ hệ điện mặt trời (solar)</li>
+          </ul>
+        </div>
+        <div class="list">
+          <h4>Ưu điểm chính</h4>
+          <ul>
+            <li>Tuổi thọ chống ăn mòn cao nhờ hợp kim nhôm kẽm</li>
+            <li>Phản xạ nhiệt tốt — mát hơn cho mái lợp</li>
+            <li>Bề mặt spangle sáng, đồng đều</li>
+            <li>Nền chuẩn cho cán sóng và sơn phủ màu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <h4>Thông số kỹ thuật</h4>
+          <div class="tbl">
+            <table>
+              <tbody>
+                <tr><th scope="row">Hợp kim mạ</th><td class="mono">55% Al – 43,4% Zn – 1,6% Si</td></tr>
+                <tr><th scope="row">Độ dày nền</th><td class="mono">0,16–2,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+                <tr><th scope="row">Độ mạ</th><td class="mono">AZ050–AZ185</td></tr>
+                <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3321 · ASTM A792 · EN 10346 · AS 1397</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Mác thép tiêu biểu</h4>
+          <div class="tbl">
+            <table>
+              <thead><tr><th scope="col">Tiêu chuẩn</th><th scope="col">Mác</th><th scope="col">Đặc điểm</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">JIS G3321</td><td class="mono">SGLCC · SGLC400–570</td><td>Thông dụng · kết cấu theo độ bền</td></tr>
+                <tr><td class="mono">AS 1397</td><td class="mono">G300 → G550</td><td>Kết cấu cường độ cao cho cán sóng</td></tr>
+                <tr><td class="mono">ASTM A792 · EN 10346</td><td class="mono">CS · DX51D+AZ…</td><td>Thương mại · tạo hình</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Độ mạ tiêu biểu (g/m², thử 3 điểm)</h4>
+        <div class="tbl">
+          <table>
+            <thead><tr><th scope="col">Ký hiệu</th><th scope="col">AZ050</th><th scope="col">AZ070</th><th scope="col">AZ090</th><th scope="col">AZ100</th><th scope="col">AZ120</th><th scope="col">AZ150</th><th scope="col">AZ185</th></tr></thead>
+            <tbody>
+              <tr><td>Tổng 2 mặt</td><td class="mono">50</td><td class="mono">70</td><td class="mono">90</td><td class="mono">100</td><td class="mono">120</td><td class="mono">150</td><td class="mono">185</td></tr>
+              <tr><td>Tối thiểu 1 mặt</td><td class="mono">16</td><td class="mono">24</td><td class="mono">30</td><td class="mono">34</td><td class="mono">41</td><td class="mono">52</td><td class="mono">64</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    </article>
+
+    <!-- 05 · PPGI/PPGL -->
+    <article class="ticket" id="line-ppgi">
+      <header class="ticket-head">
+        <div>
+          <div class="code">Mã 05 · PPGI / PPGL — Prepainted</div>
+          <h3>Tôn mạ màu (PPGI/PPGL)</h3>
+        </div>
+        <span class="key">Dày nền 0,16–1,0 mm · khổ 850–1.300 mm</span>
+        <button type="button" data-line="ppgi">Nạp PPGI lên mô hình →</button>
+      </header>
+      <p class="intro">Tôn nền mạ kẽm (GI) hoặc nhôm kẽm (GL) phủ hệ sơn nung nhiều lớp — vừa bảo vệ vừa hoàn thiện thẩm mỹ, dùng thẳng cho bề mặt hoàn thiện của công trình mà không cần sơn lại.</p>
+      <div class="cols">
+        <div class="list">
+          <h4>Ứng dụng tiêu biểu</h4>
+          <ul>
+            <li>Panel cách nhiệt, phòng sạch</li>
+            <li>Mái và vách hoàn thiện</li>
+            <li>Cửa cuốn, phụ kiện kiến trúc</li>
+            <li>Nhà thép tiền chế</li>
+          </ul>
+        </div>
+        <div class="list">
+          <h4>Ưu điểm chính</h4>
+          <ul>
+            <li>Hệ sơn nung bám chắc trên nền mạ — bền màu ngoài trời</li>
+            <li>Ba hệ sơn PE / SMP / PVDF theo cấp độ thời tiết</li>
+            <li>Bề mặt bóng, nhám hoặc vân theo yêu cầu thẩm mỹ</li>
+            <li>Giảm chi phí hoàn thiện — không cần sơn lại tại công trình</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <h4>Thông số kỹ thuật</h4>
+          <div class="tbl">
+            <table>
+              <tbody>
+                <tr><th scope="row">Nền</th><td>Tôn kẽm (GI) hoặc tôn lạnh (GL)</td></tr>
+                <tr><th scope="row">Độ dày nền</th><td class="mono">0,16–1,0 mm</td></tr>
+                <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.300 mm</td></tr>
+                <tr><th scope="row">Hệ sơn mặt trên</th><td class="mono">Lót 5–20 µm + phủ 5–20 µm</td></tr>
+                <tr><th scope="row">Sơn lưng</th><td class="mono">3–10 µm</td></tr>
+                <tr><th scope="row">Loại sơn</th><td class="mono">PE · SMP · PVDF</td></tr>
+                <tr><th scope="row">Bề mặt</th><td>Bóng · nhám · vân</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>Bảng màu tiêu biểu</h4>
+          <div class="swatches" role="list" aria-label="Bảng màu tôn mạ màu">
+            <div class="sw" role="listitem"><span style="background:#f0efe6"></span>Trắng ngọc</div>
+            <div class="sw" role="listitem"><span style="background:#5f6a72"></span>Xám thép</div>
+            <div class="sw" role="listitem"><span style="background:#b9c0c5"></span>Xám nhạt</div>
+            <div class="sw" role="listitem"><span style="background:#6f4a2f"></span>Nâu đất</div>
+            <div class="sw" role="listitem"><span style="background:#c0392b"></span>Đỏ</div>
+            <div class="sw" role="listitem"><span style="background:#7b1f2b"></span>Đỏ đô</div>
+            <div class="sw" role="listitem"><span style="background:#2e4a33"></span>Xanh rêu đậm</div>
+            <div class="sw" role="listitem"><span style="background:#2f8f46"></span>Xanh lá</div>
+            <div class="sw" role="listitem"><span style="background:#1f8a7a"></span>Xanh ngọc</div>
+            <div class="sw" role="listitem"><span style="background:#1f4f8f"></span>Xanh dương</div>
+            <div class="sw" role="listitem"><span style="background:#6aabd6"></span>Xanh da trời</div>
+            <div class="sw" role="listitem"><span style="background:#d99a1b"></span>Vàng nghệ</div>
+          </div>
+          <p class="sw-note">Màu hiển thị mang tính minh hoạ — nhận màu theo yêu cầu dự án (theo mã màu hoặc mẫu thực tế).</p>
+        </div>
+      </div>
+      <p class="lot-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    </article>
+  </div>
+</section>
+
+<section id="packing" style="padding-top:0">
+  <div class="eyebrow">Xuất kho · Đóng gói</div>
+  <h2>Hai mức đóng gói, chọn theo tuyến hàng</h2>
+  <p class="sub">Mức đóng gói đi theo cự ly vận chuyển và thời gian lưu kho của khách — ghi ngay trên lệnh khi chốt giá.</p>
+  <div class="pack-grid">
+    <article class="pack">
+      <h3><span class="lvl">Tiêu chuẩn</span> Vận chuyển nội địa, nhập kho ngay</h3>
+      <p>Phù hợp các tuyến giao ngắn và hàng đưa vào gia công ngay.</p>
+      <ul>
+        <li>Bọc màng PE quanh cuộn</li>
+        <li>Giấy chống ẩm VCI sát bề mặt thép</li>
+        <li>Ốp mép bảo vệ mép cuộn</li>
+        <li>Đai thép quanh chu vi &amp; xỏ tâm cuộn</li>
+      </ul>
+    </article>
+    <article class="pack hard">
+      <h3><span class="lvl">Gia cường</span> Lưu kho dài, trung chuyển nhiều chặng</h3>
+      <p>Toàn bộ hạng mục mức Tiêu chuẩn, gia cố thêm cho vận chuyển xa hoặc lưu kho dài ngày.</p>
+      <ul>
+        <li>Thêm vỏ tôn bọc ngoài toàn cuộn</li>
+        <li>Ốp mép gia cường chịu va đập</li>
+        <li>Đai thép loại nặng, tăng số vòng đai</li>
+        <li>Pallet gỗ / thép tuỳ chọn</li>
+      </ul>
+    </article>
+  </div>
+  <p class="pack-note"><b style="color:#fff">Khuyến nghị bảo quản:</b> kho khô ráo thông thoáng, kê cuộn/kiện cao khỏi mặt sàn, tránh va đập vào mép — mép cuộn là điểm dễ hư hại nhất khi bốc xếp.</p>
+</section>
+
+<section id="qc" style="padding-top:0">
+  <div class="eyebrow">Kiểm soát chất lượng</div>
+  <h2>QC ở vai một nhà thương mại</h2>
+  <p class="sub">KLC không sản xuất — KLC chọn nguồn và kiểm soát hàng hoá qua bốn bước trước khi lệnh được khớp và hàng lên xe.</p>
+  <div class="steps">
+    <div class="step"><h3>Kiểm định nguồn nhà máy</h3><p>Chỉ nhập hàng từ các nhà máy đã đánh giá năng lực và hệ thống chất lượng.</p></div>
+    <div class="step"><h3>Đối chiếu CO/CQ từng lô</h3><p>Mỗi lô nhập đều đối chiếu chứng chỉ xuất xứ và chất lượng với đơn đặt hàng.</p></div>
+    <div class="step"><h3>Kiểm quy cách khi nhập kho</h3><p>Đo kiểm độ dày, khổ rộng, độ mạ theo mẫu trước khi lên kệ.</p></div>
+    <div class="step"><h3>Giao hàng kèm hồ sơ chất lượng</h3><p>Xuất kho kèm đầy đủ CO/CQ và phiếu quy cách của đúng lô hàng giao.</p></div>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="eyebrow">Khớp lệnh · Quy trình đặt hàng</div>
+  <h2>Từ quy cách đến xe giao trong bốn lệnh</h2>
+  <div class="steps orders">
+    <div class="step"><h3>Gửi yêu cầu</h3><p>Gọi hotline hoặc email quy cách: dòng sản phẩm, độ dày, khổ, số lượng.</p></div>
+    <div class="step"><h3>Báo giá &amp; xác nhận</h3><p>KLC báo giá và chốt quy cách, tiến độ trong 24 giờ làm việc.</p></div>
+    <div class="step"><h3>Chuẩn bị hàng</h3><p>Xuất từ kho sẵn hoặc điều phối từ nguồn nhà máy đối tác — tôn lạnh cấp trực tiếp từ Tôn Tân Phước Khánh.</p></div>
+    <div class="step"><h3>Giao hàng + CO/CQ</h3><p>Giao trong 24–48 giờ kèm đầy đủ chứng chỉ xuất xưởng theo lô.</p></div>
   </div>
 </section>
 
@@ -368,13 +780,15 @@
   <div class="foot">
     <div>
       <div class="foot-brand"><img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel"><b>Công ty KLC</b></div>
-      <p>Thương mại thép &amp; tôn: tôn lạnh, thép cán nguội, thép cán nóng. Đối tác thép tin cậy của mọi công trình.</p>
+      <p>Thương mại thép dẹt &amp; tôn: thép cán nóng tẩy gỉ, thép cán nguội, tôn kẽm, tôn lạnh, tôn mạ màu. Đối tác thép tin cậy của mọi công trình.</p>
     </div>
     <div>
       <h4>Sản phẩm</h4>
-      <a href="#products">Tôn lạnh (GL)</a>
-      <a href="#products">Thép cán nguội (CRC)</a>
-      <a href="#products">Thép cán nóng (HRC)</a>
+      <a href="#line-po">Thép cán nóng tẩy gỉ (PO)</a>
+      <a href="#line-crc">Thép cán nguội (CRC)</a>
+      <a href="#line-gi">Tôn kẽm (GI)</a>
+      <a href="#line-gl">Tôn lạnh (GL)</a>
+      <a href="#line-ppgi">Tôn mạ màu (PPGI/PPGL)</a>
     </div>
     <div>
       <h4>Liên hệ</h4>
@@ -397,7 +811,7 @@
 </script>
 <script type="module">
 import { start } from '../assets/klc3d/runtime.js';
-import { createScene, deriveCoil, GAUGE_MM, DEMO_PRICE_VND_PER_KG } from './scene.js';
+import { createScene, deriveCoil, GAUGE_MM, DEMO_PRICE_VND_PER_KG, LINE_ORDER } from './scene.js';
 
 const LOOK = {
   toneMapping: 'ACESFilmicToneMapping',
@@ -415,8 +829,15 @@ const VIEWS = {
   'Sàn giao dịch': { position: [-5.6, 0.8, 5.6], target: [0, 1.1, 0] }
 };
 
-const LINE_LABEL = { gl: 'TÔN LẠNH · GL', crc: 'CÁN NGUỘI · CRC', hrc: 'CÁN NÓNG · HRC' };
-const SHORT = { gl: 'GL', crc: 'CRC', hrc: 'HRC' };
+// The five distributed flat-steel lines, in catalogue order (PO → CRC → GI → GL → PPGI).
+const LINE_LABEL = {
+  po: 'CÁN NÓNG TẨY GỈ · PO',
+  crc: 'CÁN NGUỘI · CRC',
+  gi: 'TÔN KẼM · GI',
+  gl: 'TÔN LẠNH · GL',
+  ppgi: 'TÔN MẠ MÀU · PPGI'
+};
+const SHORT = { po: 'PO', crc: 'CRC', gi: 'GI', gl: 'GL', ppgi: 'PPGI' };
 
 const stage = document.querySelector('#stage');
 const canvas = document.querySelector('#world');
@@ -431,6 +852,7 @@ const scene = start({
 });
 
 // ---- Authoritative page state; the scene and every readout derive from it. ----
+// GL opens the session: it is the flagship line sourced from Tôn Tân Phước Khánh.
 const state = { product: 'gl', tonnes: 10 };
 const nf0 = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -456,7 +878,7 @@ function render() {
 
 // Product segmented buttons.
 const seg = document.querySelector('#product-seg');
-for (const key of ['gl', 'crc', 'hrc']) {
+for (const key of LINE_ORDER) {
   const button = document.createElement('button');
   button.type = 'button';
   button.dataset.line = key;
@@ -466,8 +888,8 @@ for (const key of ['gl', 'crc', 'hrc']) {
   seg.append(button);
 }
 
-// Product cards also load their line onto the model.
-for (const button of document.querySelectorAll('.card [data-line]')) {
+// Order-book tickets also load their line onto the model.
+for (const button of document.querySelectorAll('.ticket [data-line]')) {
   button.addEventListener('click', () => {
     state.product = button.dataset.line;
     render();
@@ -511,9 +933,11 @@ if (scene) {
 
 // Demo price tape — same demo prices as the HUD, marked minh hoạ.
 const TAPE = [
-  { key: 'gl', delta: '+0,4%', dir: 'up' },
+  { key: 'po', delta: '+0,1%', dir: 'up' },
   { key: 'crc', delta: '−0,2%', dir: 'down' },
-  { key: 'hrc', delta: '+0,1%', dir: 'up' }
+  { key: 'gi', delta: '+0,3%', dir: 'up' },
+  { key: 'gl', delta: '+0,4%', dir: 'up' },
+  { key: 'ppgi', delta: '−0,1%', dir: 'down' }
 ];
 function fillTape(list) {
   for (const item of TAPE) {

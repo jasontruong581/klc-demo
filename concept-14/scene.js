@@ -2,7 +2,8 @@
 //
 // Subject: one bay of a KLC warehouse from a 3/4 view — a floor slab, two steel racks with coils
 // resting in V-cradles, two banded sheet-stack pallets, and a small AGV drifting down the aisle
-// as the ambient motion. Authoritative state: the selected product line (gl | crc | hrc) and the
+// as the ambient motion. Authoritative state: the selected product line
+// (po | crc | gi | gl | ppgi — the five distributed flat-steel lines) and the
 // stock level (4–16 coils). Every readout is derived from the drawn geometry:
 //   tồn kho (kg)  = Σ π(R² − r²) · w · 7850           over the visible coils
 //   mét dài (m)   = Σ π(R² − r²) / t                   at the stated gauge per product line
@@ -20,7 +21,21 @@ import {
 export const MAX_COILS = 16;
 export const MIN_COILS = 4;
 /** Stated strip gauge per product line, in mm — the t in "mét dài = π(R² − r²) / t". */
-export const GAUGE_MM = { gl: 0.5, crc: 1.2, hrc: 3.0 };
+export const GAUGE_MM = { po: 3.0, crc: 1.2, gi: 0.5, gl: 0.45, ppgi: 0.45 };
+
+/**
+ * Surface identity of the five distributed lines. scene-kit's STEEL only knows crc/hrc/gl, so
+ * the three newcomers are concept-owned art direction: PO is dark oiled hot-rolled strip, GI a
+ * bright spangled zinc coat, PPGI/PPGL an organic paint film (barely metallic) in a deep moss
+ * green from the brand palette. CRC and GL reuse the shared presets unchanged.
+ */
+export const SURFACES = {
+  po: { label: 'Thép cán nóng tẩy gỉ (PO)', color: '#565d63', roughness: 0.5, metalness: 0.75 },
+  crc: STEEL.crc,
+  gi: { label: 'Tôn kẽm (GI)', color: '#d9e0e3', roughness: 0.26, metalness: 0.9 },
+  gl: STEEL.gl,
+  ppgi: { label: 'Tôn mạ màu (PPGI/PPGL)', color: '#2e5c40', roughness: 0.55, metalness: 0.15 }
+};
 
 const BORE = 0.254; // 508 mm ID
 const RACK_X = 1.7; // rack centreline distance from the aisle
@@ -203,9 +218,9 @@ export function createScene({ renderer, scene, look, invalidate }) {
   let agvPhase = 0;
 
   function applyProduct(id) {
-    if (!STEEL[id]) return;
+    if (!SURFACES[id]) return;
     productId = id;
-    const preset = STEEL[id];
+    const preset = SURFACES[id];
     const shellMaterial = materials.get({
       color: preset.color, roughness: preset.roughness, metalness: preset.metalness, side: THREE.DoubleSide
     });

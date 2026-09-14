@@ -32,7 +32,9 @@ logo and the real contact details published on [klcsteel.vercel.app](https://klc
 
 Concepts 05–08 and 09–12 are 3D takes on 01–04 in the same order. Concepts 13–16 are the **KLC
 Brand Edition**: four independent directions built only from the company identity (real logo,
-green brand palette, real product ranges), deliberately not derived from concepts 01–12. See
+green brand palette, real product ranges), deliberately not derived from concepts 01–12. They carry
+the real five-line distribution catalogue (PO, CRC, GI, GL, PPGI/PPGL) with packing, QC and
+ordering sections, where 01–12 use the original three-line placeholder catalogue. See
 [docs/concepts.md](docs/concepts.md) for what each one is trying to prove, and
 [docs/3d-architecture.md](docs/3d-architecture.md) for how the 3D pages are built.
 
