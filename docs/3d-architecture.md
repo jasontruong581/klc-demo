@@ -1,7 +1,8 @@
 # 3D concept architecture
 
-How concepts 09–12 are built, and where the line falls between shared code and a concept's own
-work. Read this before adding or editing a 3D concept.
+How concepts 09–17 share a runtime while keeping each experience independent, and where the line
+falls between shared code and a concept's own work. Concepts 05–08 predate this shared-runtime
+contract and remain self-contained. Read this before adding or editing a 3D concept.
 
 ## Origin
 
@@ -10,8 +11,8 @@ contract and the lighting rig values follow the [3dviz-pro-max](https://github.c
 agent skill's Vite + Three.js scaffold and `templates/rigs/`, adapted to this repository's
 no-build, one-file-per-page shape. The workflow that skill prescribes — decide the subject and its
 proportions before picking a template, tie behaviour to authoritative state, keep display
-exaggeration explicit, then run the scene and inspect real frames — is the workflow these four
-pages were built with.
+exaggeration explicit, then run the scene and inspect real frames — is the workflow these nine
+shared-runtime pages were built with.
 
 What is *not* borrowed: there is no Vite scaffold, no `postprocessing` stack, no kit library and no
 Blender step. Every scene here is procedural Three.js geometry authored in its own `scene.js`.
@@ -51,7 +52,13 @@ Three.js versions means one of them is running the shared modules against a buil
 written for. Import maps and ES modules do not work over `file://` — serve over HTTP.
 
 Nothing else is fetched at runtime except the Google Fonts stylesheet each concept already used.
-Every texture is drawn into a canvas in JavaScript; there are no image, model or HDR assets.
+Every 3D texture is drawn into a canvas in JavaScript; there are no model or HDR assets. Brand
+marks are local SVG files under `assets/brand/`.
+
+Concept 17 defers `start()` until its stage approaches the viewport through
+`IntersectionObserver`. Its catalogue and quote controls work before the scene boots, and its
+HTML fallback remains visible if WebGL initialization fails. Keep that separation intact: 3D is
+supporting evidence, not a prerequisite for using the page.
 
 ## `runtime.js`
 
@@ -121,6 +128,10 @@ Composable pieces, not a framework:
 - **Real thinness is invisible.** Sheet products are millimetres thick next to metres of plan size.
   Pick one answer and say so on the page: move the camera in (concept 10) or scale the thickness
   axis with the factor on screen (concepts 09, 11).
+- **Catalogue state is not generic scene state.** Concepts 13–17 expose six families, but ZM has no
+  invented dimension matrix. Keep supplier-confirmed data in the page contract and pass only the
+  selected surface/geometry state into the scene. Capability limits and disclosures belong in
+  accessible HTML, not only on canvas.
 - **`dt` is capped at 50 ms.** On a slow or software renderer a 0.8 s view tween takes several real
   seconds. That is the intended guard, not a bug — but it matters when scripting screenshots.
 
