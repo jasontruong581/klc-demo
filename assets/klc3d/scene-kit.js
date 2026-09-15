@@ -2,7 +2,7 @@
 // material direction, deterministic jitter, a gradient sky and an HTML label layer.
 //
 // Light values follow the 3dviz-pro-max lighting rigs (dark-studio and dusk-golden-hour), retuned
-// for the KLC palette. Change elevation and azimuth before intensity: they set where shadows point.
+// for the K&C palette. Change elevation and azimuth before intensity: they set where shadows point.
 import * as THREE from 'three';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';

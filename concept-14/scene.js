@@ -1,6 +1,6 @@
 // Mẫu 14 — Kho hàng thông minh (smart-warehouse hero).
 //
-// Subject: one bay of a KLC warehouse from a 3/4 view — a floor slab, two steel racks with coils
+// Subject: one bay of a K&C warehouse from a 3/4 view — a floor slab, two steel racks with coils
 // resting in V-cradles, two banded sheet-stack pallets, and a small AGV drifting down the aisle
 // as the ambient motion. Authoritative state: the selected product line
 // (po | crc | gi | gl | ppgi — the five distributed flat-steel lines) and the

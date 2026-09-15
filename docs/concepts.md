@@ -1,14 +1,14 @@
 # Concept catalogue
 
 What each concept is proposing, so a review can argue about the direction instead of the details.
-Every page carries the same underlying content — three product lines, the Tân Phước Khanh
-partnership, capability figures, a quote path — and differs in how that content is framed.
+Concepts 01–12 retain their original three-line placeholder catalogue for visual comparison.
+Concepts 13–17 use the expanded six-line K&C catalogue and add supplier-confirmation disclosures.
 
 Shared content spine, in the order it appears on every page:
 
 1. Hero with the positioning line and the primary quote CTA.
-2. The three product lines: CRC (cán nguội), HRC (cán nóng), GL (tôn lạnh), each with real
-   thickness ranges, widths and grades.
+2. A product catalogue appropriate to the concept: three placeholder lines in 01–12; PO, CRC,
+   GI, GL, ZM and PPGI/PPGL in 13–17.
 3. The Tôn Tân Phước Khanh partnership as the sourcing proof.
 4. Capability figures or an ordering process.
 5. Contact footer.
@@ -38,13 +38,12 @@ sheet as a bordered table, and a title block in the footer. Aimed at buyers who 
 Deep green radial gradients, a floating glass navbar, a metallic gradient headline and
 frosted-glass cards. Centred hero, marketing-led rather than spec-led.
 
-## 3D concepts
+## 3D concepts (05–17)
 
-Each 3D concept takes one flat concept's visual system unchanged and replaces its hero graphic
-with a real WebGL scene. The rule they all follow: the scene must be worth rotating. Every one has
-a subject with correct proportions, a control that changes the represented state, named views, a
-readout computed from the geometry rather than typed in, and a no-WebGL fallback that keeps the
-page useful.
+Concepts 05–12 reinterpret the first four visual systems with WebGL; Concepts 13–17 are independent
+3D directions. Their common rule is that 3D must explain product, stock, specification or supply —
+not exist as decoration. Where a page presents numeric geometry, its readout is derived from the
+same state as the scene. Every page keeps useful HTML content when WebGL is unavailable.
 
 ### 09 — Industrial Dark 3D ([concept-9/](../concept-9/))
 
@@ -123,14 +122,13 @@ stay live when ambient motion is paused, because they are visitor-driven rather 
 
 **Controls:** three surface switches, three named views, motion stop/start.
 
-## KLC Brand Edition (13–16)
+## K&C Brand Edition (13–16)
 
-Four independent directions built only from the company identity — the real logo (green oval,
-chrome KLC letters wound by a steel strip, gold ring), the green brand palette, the real product
-ranges and the real contact details from klcsteel.vercel.app — deliberately **not** derived from
-concepts 01–12. Unlike 01–12, these four carry KLC's actual distribution catalogue: five flat-steel
-lines (PO, CRC, GI, GL, PPGI/PPGL) with spec and grade tables, plus the packing levels, the
-four-step trader QC and the ordering process from the live site. Each follows the same 3D rules: an authoritative state, readouts computed from the
+Four independent directions built from the proposed K&C identity, green palette and expanded
+catalogue — deliberately **not** derived from concepts 01–12. Unlike 01–12, these four carry six
+flat-steel lines (PO, CRC, GI, GL, ZM, PPGI/PPGL) with capability matrices, packing, trader QC and
+ordering sections. Figures are references only and require confirmation by CO/CQ and current lot
+availability. Each follows the same 3D rules: an authoritative state, readouts computed from the
 geometry, named Vietnamese views, a no-WebGL fallback that keeps the page useful.
 
 ### 13 — Sàn giao dịch thép ([concept-13/](../concept-13/))
@@ -146,8 +144,9 @@ the mass — R = √(r² + m/(π·w·ρ)) — so the slider physically grows the
 π(R²−r²)/t, real wrap count and demo lot value are all derived from the same formula. Drawn wraps
 (14) vs real wraps (hundreds) is stated on the stage.
 
-**Controls:** five product switches (PO/CRC/GI/GL/PPGI) plus a "Nạp lên mô hình" button on each
-order-book ticket, weight slider, run/pause, views "Toàn cảnh", "Mặt cuộn", "Sàn giao dịch".
+**Controls:** five modeled product switches (PO/CRC/GI/GL/PPGI), weight slider, run/pause and views
+"Toàn cảnh", "Mặt cuộn", "Sàn giao dịch". ZM remains catalogue-only until geometry inputs are
+confirmed by a supplier.
 
 ### 14 — Kho hàng thông minh ([concept-14/](../concept-14/))
 
@@ -161,14 +160,14 @@ AGV cart drifting the aisle as ambient motion.
 over the drawn coils — tồn kho Σ π(R²−r²)·w·7850, mét dài Σ π(R²−r²)/t at a stated gauge, coil
 count = mesh count — so the slider and the panel cannot disagree.
 
-**Controls:** five product switches (PO/CRC/GI/GL/PPGI), stock slider, run/pause, views "Toàn kho",
-"Dãy kệ", "Cận cuộn".
+**Controls:** five modeled product switches (PO/CRC/GI/GL/PPGI), stock slider, run/pause and views
+"Toàn kho", "Dãy kệ", "Cận cuộn". ZM remains catalogue-only pending supplier confirmation.
 
 ### 15 — Chuỗi cung ứng liền mạch ([concept-15/](../concept-15/))
 
 Warm-paper corporate: rounded cards, organic shapes, Be Vietnam Pro.
 
-**Subject:** a low-poly island diorama of the supply route — Tân Phước Khánh mill → KLC warehouse
+**Subject:** a low-poly island diorama of the supply route — mill → K&C warehouse
 → construction site — with a flatbed truck looping the road.
 
 **Authoritative state:** journey stage and truck progress on the road curve. Leg distances are
@@ -176,8 +175,8 @@ sampled from the same CatmullRom curve the truck drives (stated scale 1 m ≈ 2 
 minutes derived at 40 km/h. Station buttons swap the story panel, the 3D highlight and the
 matching named view together.
 
-**Controls:** three station buttons, truck run/pause, views "Toàn cảnh", "Nhà máy Tân Phước
-Khánh", "Kho KLC", "Công trình".
+**Controls:** three station buttons, truck run/pause, views "Toàn cảnh", "Nhà máy", "Kho K&C",
+"Công trình".
 
 ### 16 — Kiến trúc sóng tôn ([concept-16/](../concept-16/))
 
@@ -193,3 +192,23 @@ renders the same polylines as SVG.
 
 **Controls:** three profile switches, three gauge chips, turntable run/pause, views "Phối cảnh",
 "Mặt cắt sóng", "Trên mái".
+
+## Final direction
+
+### 17 — K&C Steel Supply Desk ([concept-17/](../concept-17/))
+
+A bright executive-industrial experience combining Concept 14's source, stock, QC and logistics
+trust signals with Concept 10's live specification and quote workflow.
+
+**Subject:** one restrained daylight warehouse stage whose selected bay and product sample respond
+to the same product state as the catalogue and quote desk. Visitors can switch between warehouse
+and product views; ambient auto-spin is off by default.
+
+**Authoritative state:** the selected family, gauge and width drive the visible sample and
+theoretical kg/m readout. The calculation uses a flat-strip assumption and is labelled
+theoretical. ZM has no dimension matrix: its specification is explicitly supplier-confirmed.
+
+**Controls:** six product families, warehouse/product view, capability-matrix selector, gauge,
+width and intended tonnage, plus a demo enquiry form that never claims a real submission without
+a backend. The page includes reduced-motion behaviour, keyboard focus, responsive cards and a
+no-WebGL content fallback.
