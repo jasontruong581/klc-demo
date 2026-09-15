@@ -101,12 +101,45 @@ export function createScene({ renderer, scene, look, invalidate }) {
     }
   }
 
-  const inventoryMaterial = materials.get({ color: '#aeb8b8', roughness: 0.42, metalness: 0.78 });
-  const ringGeometry = track(new THREE.TorusGeometry(0.52, 0.22, 18, 48));
+  // Warehouse coils use the same industrial construction as Concept 14: a wound strip with
+  // flat end faces, a deep 508 mm bore, steel bands and V-cradles. A torus reads as a donut
+  // because it has a round tube section and no axial width, so it is deliberately not used here.
+  const inventoryMaterial = materials.get({ color: '#aeb8b8', roughness: 0.42, metalness: 0.78, side: THREE.DoubleSide });
+  const inventoryFaceMaterial = materials.get({ color: '#bbc4c4', roughness: 0.56, metalness: 0.72 });
+  const boreMaterial = materials.get({ color: '#435049', roughness: 0.82, metalness: 0.55, side: THREE.BackSide });
+  const bandMaterial = materials.get({ color: '#737e82', roughness: 0.38, metalness: 0.9 });
+  const inventoryOuterRadius = 0.58;
+  const inventoryWidth = 1.08;
+  const inventoryShellGeometry = track(coilStripGeometry({
+    innerRadius: 0.254, outerRadius: inventoryOuterRadius,
+    width: inventoryWidth, turns: 15, segmentsPerTurn: 36
+  }));
+  const inventoryFaceGeometry = track(new THREE.RingGeometry(0.254, inventoryOuterRadius, 56));
+  const inventoryBoreGeometry = track(new THREE.CylinderGeometry(0.254, 0.254, inventoryWidth + 0.02, 28, 1, true));
+  const inventoryBandGeometry = track(new THREE.TorusGeometry(inventoryOuterRadius + 0.005, 0.012, 6, 56));
+  const inventoryCradleGeometry = track(new THREE.BoxGeometry(1.2, 0.065, 0.18));
   for (const side of [-1, 1]) {
-    for (const y of [0.96, 2.38]) {
+    for (const beamY of [0.38, 1.82]) {
       for (const z of [-1.85, 0, 1.85]) {
-        mesh(ringGeometry, inventoryMaterial, [side * 2.3, y, z], [0, Math.PI / 2, 0], warehouse);
+        for (const sign of [-1, 1]) {
+          mesh(inventoryCradleGeometry, darkMaterial,
+            [side * 2.3, beamY + 0.045, z + sign * inventoryOuterRadius * 0.43],
+            [sign * -0.32, 0, 0], warehouse);
+        }
+        const roll = new THREE.Group();
+        roll.position.set(side * 2.3, beamY + 0.07 + inventoryOuterRadius * 0.82, z);
+        roll.rotation.x = z * 0.035;
+        warehouse.add(roll);
+        mesh(inventoryShellGeometry, inventoryMaterial, [0, 0, 0], [0, 0, Math.PI / 2], roll);
+        for (const sign of [-1, 1]) {
+          mesh(inventoryFaceGeometry, inventoryFaceMaterial,
+            [sign * (inventoryWidth / 2 - 0.006), 0, 0], [0, sign * Math.PI / 2, 0], roll);
+        }
+        mesh(inventoryBoreGeometry, boreMaterial, [0, 0, 0], [0, 0, Math.PI / 2], roll);
+        for (const offset of [-0.27, 0.27]) {
+          mesh(inventoryBandGeometry, bandMaterial,
+            [offset * inventoryWidth, 0, 0], [0, Math.PI / 2, 0], roll);
+        }
       }
     }
   }
@@ -116,17 +149,33 @@ export function createScene({ renderer, scene, look, invalidate }) {
   product.position.set(0, 0, 1.55);
   scene.add(product);
   mesh(track(new THREE.BoxGeometry(1.7, 0.14, 1.25)), woodMaterial, [0, 0.08, 0], [0, 0, 0], product);
+  const selectedCradleGeometry = track(new THREE.BoxGeometry(1.5, 0.07, 0.18));
+  for (const sign of [-1, 1]) {
+    mesh(selectedCradleGeometry, darkMaterial, [0, 0.18, sign * 0.31], [sign * -0.34, 0, 0], product);
+  }
   const selectedMaterial = new THREE.MeshStandardMaterial({ color: PRODUCTS.gl.color, roughness: PRODUCTS.gl.roughness, metalness: PRODUCTS.gl.metalness, side: THREE.DoubleSide });
-  const coil = mesh(track(coilStripGeometry({ innerRadius: 0.254, outerRadius: 0.68, width: 1.2, turns: 18, segmentsPerTurn: 48 })), selectedMaterial, [0, 0.86, 0], [0, 0, Math.PI / 2], product);
+  const selectedFaceMaterial = new THREE.MeshStandardMaterial({ color: PRODUCTS.gl.color, roughness: Math.min(1, PRODUCTS.gl.roughness + 0.16), metalness: Math.max(0, PRODUCTS.gl.metalness - 0.06) });
+  const selectedRoll = new THREE.Group();
+  selectedRoll.position.set(0, 0.86, 0);
+  product.add(selectedRoll);
+  mesh(track(coilStripGeometry({ innerRadius: 0.254, outerRadius: 0.68, width: 1.2, turns: 18, segmentsPerTurn: 48 })), selectedMaterial, [0, 0, 0], [0, 0, Math.PI / 2], selectedRoll);
   const faceGeometry = track(new THREE.RingGeometry(0.254, 0.68, 64));
-  const faces = [-1, 1].map((sign) => mesh(faceGeometry, selectedMaterial, [sign * 0.602, 0.86, 0], [0, sign * Math.PI / 2, 0], product));
+  for (const sign of [-1, 1]) {
+    mesh(faceGeometry, selectedFaceMaterial, [sign * 0.594, 0, 0], [0, sign * Math.PI / 2, 0], selectedRoll);
+  }
+  mesh(track(new THREE.CylinderGeometry(0.254, 0.254, 1.22, 32, 1, true)), boreMaterial,
+    [0, 0, 0], [0, 0, Math.PI / 2], selectedRoll);
+  const selectedBandGeometry = track(new THREE.TorusGeometry(0.686, 0.014, 7, 64));
+  for (const offset of [-0.27, 0.27]) {
+    mesh(selectedBandGeometry, bandMaterial, [offset * 1.2, 0, 0], [0, Math.PI / 2, 0], selectedRoll);
+  }
   const label = document.createElement('canvas');
   label.width = 512; label.height = 160;
   const labelContext = label.getContext('2d');
   const labelTexture = new THREE.CanvasTexture(label);
   labelTexture.colorSpace = THREE.SRGBColorSpace;
   const labelMaterial = new THREE.MeshBasicMaterial({ map: labelTexture, transparent: true, side: THREE.DoubleSide });
-  const placard = mesh(track(new THREE.PlaneGeometry(1.15, 0.36)), labelMaterial, [0, 0.92, 0.692], [0, 0, 0], product);
+  mesh(track(new THREE.PlaneGeometry(1.05, 0.32)), labelMaterial, [0, 0.34, 0.72], [0, 0, 0], product);
 
   let activeProduct = 'gl';
   let activeWidth = 1200;
@@ -156,10 +205,11 @@ export function createScene({ renderer, scene, look, invalidate }) {
     selectedMaterial.color.set(preset.color);
     selectedMaterial.roughness = preset.roughness;
     selectedMaterial.metalness = preset.metalness;
+    selectedFaceMaterial.color.set(preset.color);
+    selectedFaceMaterial.roughness = Math.min(1, preset.roughness + 0.16);
+    selectedFaceMaterial.metalness = Math.max(0, preset.metalness - 0.06);
     const widthScale = Math.max(0.72, Math.min(1.28, widthMm / 1200));
-    coil.scale.x = widthScale;
-    for (const face of faces) face.position.x = Math.sign(face.position.x) * 0.602 * widthScale;
-    placard.position.z = 0.692;
+    selectedRoll.scale.x = widthScale;
     redrawLabel();
     invalidate();
   }
@@ -184,6 +234,7 @@ export function createScene({ renderer, scene, look, invalidate }) {
       studio.dispose();
       for (const geometry of geometries) geometry.dispose();
       selectedMaterial.dispose();
+      selectedFaceMaterial.dispose();
       labelMaterial.dispose();
       labelTexture.dispose();
       materials.dispose();
