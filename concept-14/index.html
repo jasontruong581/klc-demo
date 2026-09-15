@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KLC Steel — Concept 14: Kho hàng thông minh</title>
+<title>K&amp;C Steel — Concept 14: Kho hàng thông minh</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -208,8 +209,8 @@
 
 <nav aria-label="Điều hướng chính">
   <a class="brand" href="#top">
-    <img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel">
-    <span><b>KLC <span>Steel</span></b><small>Thương mại thép &amp; tôn</small></span>
+    <img src="../assets/brand/kc-steel-mark.svg" alt="Logo K&amp;C Steel">
+    <span><b>K&amp;C <span>Steel</span></b><small>Thương mại thép &amp; tôn</small></span>
   </a>
   <ul>
     <li><a href="#kho">Kho 3D</a></li>
@@ -223,7 +224,7 @@
 <header class="hero" id="top">
   <span class="eyebrow">Đối tác thép tin cậy của mọi công trình</span>
   <h1>Nguồn hàng ổn định — <em>kho luôn sẵn</em>, đơn luôn đúng hẹn</h1>
-  <p class="hero-sub">KLC Steel phân phối 5 dòng thép dẹt — PO, cán nguội, tôn kẽm, tôn lạnh và tôn mạ màu — với kho hàng thường trực; riêng tôn lạnh cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh. Xem tồn kho mô phỏng bên dưới — mọi con số được tính từ đúng những cuộn thép đang hiển thị.</p>
+  <p class="hero-sub">K&amp;C Steel phân phối 6 dòng thép dẹt — PO, cán nguội, tôn kẽm, tôn lạnh, tôn mạ màu và ZM theo yêu cầu — với nguồn hàng được xác nhận theo từng lô. Xem tồn kho mô phỏng bên dưới — mọi con số được tính từ đúng những cuộn thép đang hiển thị.</p>
   <div class="hero-actions">
     <a class="btn btn-solid" href="#contact">Yêu cầu báo giá</a>
     <a class="btn btn-line" href="#products">Xem quy cách</a>
@@ -232,9 +233,9 @@
 
 <div class="dash" id="kho">
   <div class="stage" id="stage">
-    <div class="stage-tag">Kho KLC — mô phỏng tương tác</div>
+    <div class="stage-tag">Kho K&amp;C — mô phỏng tương tác</div>
     <div class="views" id="views" role="group" aria-label="Góc nhìn kho"></div>
-    <canvas id="world" role="img" aria-label="Mô hình 3D một khoang kho KLC: hai dãy kệ thép xanh đỡ các cuộn thép trong giá chữ V, hai kiện tấm thép đóng đai trên pallet và một xe AGV chạy dọc lối đi"></canvas>
+    <canvas id="world" role="img" aria-label="Mô hình 3D một khoang kho K&amp;C: hai dãy kệ thép xanh đỡ các cuộn thép trong giá chữ V, hai kiện tấm thép đóng đai trên pallet và một xe AGV chạy dọc lối đi"></canvas>
     <div class="stage-hint">Kéo để quay · cuộn chuột để phóng</div>
     <div class="stage-fallback" id="fallback">
       <svg viewBox="0 0 420 190" role="img" aria-label="Minh hoạ kho thép: kệ hai tầng với các cuộn thép và pallet tấm">
@@ -292,7 +293,7 @@
         <button type="button" class="btn btn-solid" id="run" aria-pressed="true">Tạm dừng AGV</button>
         <button type="button" class="btn btn-line" id="reset">Về góc mặc định</button>
       </div>
-      <p class="disclosure">Cuộn thép vẽ theo tỷ lệ thật: lỗ 508 mm, đường kính ngoài 1.200–1.500 mm, khổ 1.000–1.250 mm. Chọn một trong 5 dòng hàng phân phối sẽ đổi bề mặt vật liệu của toàn bộ cuộn và độ dày danh nghĩa dùng để tính mét dài; kéo thanh trượt sẽ thêm hoặc bớt cuộn trên kệ.</p>
+      <p class="disclosure">Cuộn thép vẽ theo tỷ lệ thật: lỗ 508 mm, đường kính ngoài 1.200–1.500 mm, khổ 1.000–1.250 mm. Năm dòng có dữ liệu mô phỏng đổi bề mặt vật liệu và độ dày danh nghĩa dùng để tính mét dài; ZM chỉ hiển thị trong catalogue chờ xác nhận nguồn hàng. Kéo thanh trượt sẽ thêm hoặc bớt cuộn trên kệ.</p>
     </div>
   </div>
 </div>
@@ -303,12 +304,12 @@
   <div class="chip" role="listitem"><span class="n mono">98<span>%</span></span><span class="l">Đơn giao đúng hẹn*</span></div>
   <div class="chip" role="listitem"><span class="n mono">10<span>+ năm</span></span><span class="l">Kinh nghiệm ngành thép</span></div>
 </div>
-<p class="stats-note">* Số liệu minh hoạ cho bản demo, không phải số liệu thực của KLC.</p>
+<p class="stats-note">* Số liệu minh hoạ cho bản demo, không phải số liệu thực của K&amp;C.</p>
 
 <section id="products">
   <div class="sec-head">
-    <h2>Năm dòng thép dẹt <em>phân phối</em></h2>
-    <p class="sec-note">KLC là đơn vị thương mại: hàng phân phối từ các nhà máy uy tín, giao kèm chứng chỉ CO/CQ theo từng lô. Cắt tấm, xả băng theo quy cách yêu cầu.</p>
+    <h2>Sáu dòng thép dẹt <em>phân phối</em></h2>
+    <p class="sec-note">K&amp;C là đơn vị thương mại: hàng phân phối từ các nhà máy uy tín, giao kèm chứng chỉ CO/CQ theo từng lô. Cắt tấm, xả băng theo quy cách yêu cầu.</p>
   </div>
 
   <!-- 01 · PO -->
@@ -348,9 +349,9 @@
           <tbody>
             <tr><th scope="row">Độ dày</th><td class="mono">1,4–4,5 mm</td></tr>
             <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
-            <tr><th scope="row">Đường kính lỗ cuộn</th><td class="mono">508 / 610 mm</td></tr>
+            <tr><th scope="row">Đường kính lỗ cuộn</th><td class="mono">610 mm tham chiếu · xác nhận theo lô</td></tr>
             <tr><th scope="row">Bề mặt</th><td>Tẩy gỉ axit, phủ dầu chống gỉ</td></tr>
-            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3131/G3101 · SAE J403 · EN 10111 · ASTM A1011</td></tr>
+            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3131/G3101/G3113/G3132/G3134 · SAE J403 · EN 10111/10025-2 · ASTM A1011</td></tr>
           </tbody>
         </table>
       </div>
@@ -368,7 +369,7 @@
         </table>
       </div>
     </div>
-    <p class="tbl-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    <p class="tbl-note">Thông số tham chiếu theo catalogue nhà sản xuất; xác nhận theo CO/CQ và tồn kho từng lô khi đặt hàng.</p>
   </article>
 
   <!-- 02 · CRC -->
@@ -406,10 +407,10 @@
       <div class="tbl-scroll">
         <table>
           <tbody>
-            <tr><th scope="row">Độ dày</th><td class="mono">0,18–2,5 mm</td></tr>
-            <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+            <tr><th scope="row">Độ dày</th><td class="mono">0,18–2,50 mm</td></tr>
+            <tr><th scope="row">Ma trận năng lực</th><td class="mono">0,18–0,30 mm: 850–1.250 mm · 0,30–2,50 mm: 850–1.550 mm</td></tr>
             <tr><th scope="row">Đường kính lỗ cuộn</th><td class="mono">508 / 610 mm</td></tr>
-            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3141 · EN 10130 · ASTM A1008</td></tr>
+            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3141 · EN 10130 · ASTM A1008 · BIS IS513 · SAE J403</td></tr>
           </tbody>
         </table>
       </div>
@@ -426,9 +427,9 @@
           </tbody>
         </table>
       </div>
-      <p class="sw-note">Các mác SPCF/SPCG và DC05/DC06 có bảo đảm không hoá già trong 6 tháng.</p>
+      <p class="sw-note">Đặc tính không hoá già của mác dập sâu phải được xác nhận trên CO/CQ của từng lô.</p>
     </div>
-    <p class="tbl-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    <p class="tbl-note">Thông số tham chiếu theo catalogue nhà sản xuất; xác nhận theo CO/CQ và tồn kho từng lô khi đặt hàng.</p>
   </article>
 
   <!-- 03 · GI -->
@@ -467,10 +468,10 @@
         <table>
           <tbody>
             <tr><th scope="row">Độ dày nền</th><td class="mono">0,16–3,0 mm</td></tr>
-            <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+            <tr><th scope="row">Ma trận năng lực</th><td class="mono">0,16–0,40 mm: 850–1.300 mm · 0,40–2,50 mm: 850–1.550 mm · 2,50–3,00 mm: 850–1.250 mm</td></tr>
             <tr><th scope="row">Độ mạ (2 mặt)</th><td class="mono">Z050–Z350</td></tr>
             <tr><th scope="row">Xử lý bề mặt</th><td>Cromat · chống vân tay · phủ dầu</td></tr>
-            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3302 · EN 10346 · ASTM A653</td></tr>
+            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3302 · EN 10346 · ASTM A653 · AS 1397</td></tr>
           </tbody>
         </table>
       </div>
@@ -486,6 +487,7 @@
         </table>
       </div>
     </div>
+    <p class="sw-note">Các mức đặt hàng bổ sung: Z060 · Z140 · Z200 · Z220 · Z250; xác nhận theo CO/CQ từng lô.</p>
     <div>
       <h4>Mác thép tiêu biểu</h4>
       <div class="tbl-scroll">
@@ -499,7 +501,7 @@
         </table>
       </div>
     </div>
-    <p class="tbl-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    <p class="tbl-note">Thông số tham chiếu theo catalogue nhà sản xuất; xác nhận theo CO/CQ và tồn kho từng lô khi đặt hàng.</p>
   </article>
 
   <!-- 04 · GL -->
@@ -511,7 +513,7 @@
       </div>
       <span class="pl-key">Dày nền 0,16–2,0 mm · độ mạ AZ050–AZ185</span>
     </header>
-    <p class="pl-intro">Thép cuộn mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si — chống ăn mòn và phản xạ nhiệt vượt trội so với mạ kẽm thuần ở cùng khối lượng mạ. Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh, đối tác chiến lược của KLC.</p>
+    <p class="pl-intro">Thép cuộn mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si — chống ăn mòn và phản xạ nhiệt vượt trội so với mạ kẽm thuần ở cùng khối lượng mạ. Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh, đối tác chiến lược của K&amp;C.</p>
     <div class="pl-cols">
       <div class="pl-list">
         <h4>Ứng dụng tiêu biểu</h4>
@@ -539,7 +541,7 @@
           <tbody>
             <tr><th scope="row">Hợp kim mạ</th><td class="mono">55% Al – 43,4% Zn – 1,6% Si</td></tr>
             <tr><th scope="row">Độ dày nền</th><td class="mono">0,16–2,0 mm</td></tr>
-            <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.550 mm</td></tr>
+            <tr><th scope="row">Ma trận năng lực</th><td class="mono">0,16–0,40 mm: 850–1.300 mm · 0,40–2,00 mm: 850–1.550 mm</td></tr>
             <tr><th scope="row">Độ mạ</th><td class="mono">AZ050–AZ185</td></tr>
             <tr><th scope="row">Tiêu chuẩn</th><td class="mono">JIS G3321 · ASTM A792 · EN 10346 · AS 1397</td></tr>
           </tbody>
@@ -558,6 +560,7 @@
         </table>
       </div>
     </div>
+    <p class="sw-note">Có thể yêu cầu AZ165, skin-pass và xử lý bề mặt theo chứng từ lô hàng.</p>
     <div>
       <h4>Mác thép tiêu biểu</h4>
       <div class="tbl-scroll">
@@ -571,7 +574,7 @@
         </table>
       </div>
     </div>
-    <p class="tbl-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    <p class="tbl-note">Thông số tham chiếu theo catalogue nhà sản xuất; xác nhận theo CO/CQ và tồn kho từng lô khi đặt hàng.</p>
   </article>
 
   <!-- 05 · PPGI/PPGL -->
@@ -614,8 +617,10 @@
             <tr><th scope="row">Khổ rộng</th><td class="mono">850–1.300 mm</td></tr>
             <tr><th scope="row">Hệ sơn mặt trên</th><td class="mono">Lót 5–20 µm + phủ 5–20 µm</td></tr>
             <tr><th scope="row">Sơn lưng</th><td class="mono">3–10 µm</td></tr>
-            <tr><th scope="row">Loại sơn</th><td class="mono">PE · SMP · PVDF</td></tr>
-            <tr><th scope="row">Bề mặt</th><td>Bóng · nhám · vân</td></tr>
+            <tr><th scope="row">Loại sơn</th><td class="mono">PE · SMP · PVDF · Epoxy</td></tr>
+            <tr><th scope="row">Bề mặt</th><td>Bóng · nhám · wrinkle · patterned</td></tr>
+            <tr><th scope="row">Tiêu chuẩn</th><td class="mono">ASTM A755 · JIS G3312/G3322 · EN 10169 · AS/NZS 2728</td></tr>
+            <tr><th scope="row">Tổng chiều dày màng sơn</th><td class="mono">20–50 µm · tối đa 25 µm/mặt</td></tr>
           </tbody>
         </table>
       </div>
@@ -636,9 +641,16 @@
         <div class="sw" role="listitem"><span style="background:#6aabd6"></span>Xanh da trời</div>
         <div class="sw" role="listitem"><span style="background:#d99a1b"></span>Vàng nghệ</div>
       </div>
-      <p class="sw-note">Màu hiển thị mang tính minh hoạ — nhận màu theo yêu cầu dự án (theo mã màu hoặc mẫu thực tế).</p>
+      <p class="sw-note">Màu hiển thị mang tính minh hoạ — bổ sung Vàng kim, Trắng ngà và Xanh chàm; chốt theo mã màu hoặc mẫu thực tế.</p>
     </div>
-    <p class="tbl-note">Quy cách phổ biến của hàng phân phối — xác nhận tồn kho &amp; chứng chỉ CO/CQ theo từng lô khi đặt hàng.</p>
+    <p class="tbl-note">Thông số tham chiếu theo catalogue nhà sản xuất; xác nhận theo CO/CQ và tồn kho từng lô khi đặt hàng.</p>
+  </article>
+
+  <!-- 06 · ZM -->
+  <article class="pl" id="pl-zm">
+    <header class="pl-head"><div><span class="prod-tag">06 · ZM — Zinc Aluminium Magnesium</span><h3>Thép mạ kẽm nhôm magie (ZM)</h3></div><span class="pl-key">Cung ứng theo yêu cầu</span></header>
+    <p class="pl-intro">Dòng thép phủ hợp kim kẽm–nhôm–magie cho giá đỡ điện mặt trời, máng cáp và kết cấu ngoài trời. K&amp;C chỉ chào quy cách sau khi xác nhận tiêu chuẩn, CO/CQ và nguồn hàng từng lô.</p>
+    <p class="tbl-note">Catalogue nguồn chỉ nhận diện dòng ZM, chưa công bố ma trận kích thước; không sử dụng số liệu suy đoán.</p>
   </article>
 </section>
 
@@ -673,7 +685,7 @@
 <section id="qc">
   <div class="sec-head">
     <h2>Kiểm soát chất lượng ở <em>vai thương mại</em></h2>
-    <p class="sec-note">KLC không sản xuất — KLC chọn nguồn và kiểm soát hàng hoá qua 4 bước trước khi đến tay khách.</p>
+    <p class="sec-note">K&amp;C không sản xuất — K&amp;C chọn nguồn và kiểm soát hàng hoá qua 4 bước trước khi đến tay khách.</p>
   </div>
   <div class="steps">
     <div class="step"><h3>Kiểm định nguồn nhà máy</h3><p>Chỉ nhập hàng từ các nhà máy đã đánh giá năng lực và hệ thống chất lượng.</p></div>
@@ -689,7 +701,7 @@
   </div>
   <div class="steps">
     <div class="step"><h3>Gửi yêu cầu</h3><p>Gọi hotline hoặc email quy cách: dòng sản phẩm, độ dày, khổ, số lượng.</p></div>
-    <div class="step"><h3>Báo giá &amp; xác nhận</h3><p>KLC báo giá và chốt quy cách, tiến độ trong 24 giờ làm việc.</p></div>
+    <div class="step"><h3>Báo giá &amp; xác nhận</h3><p>K&amp;C báo giá và chốt quy cách, tiến độ trong 24 giờ làm việc.</p></div>
     <div class="step"><h3>Chuẩn bị hàng</h3><p>Xuất từ kho sẵn hoặc điều phối từ nguồn nhà máy đối tác — tôn lạnh cấp trực tiếp từ Tôn Tân Phước Khánh.</p></div>
     <div class="step"><h3>Giao hàng + CO/CQ</h3><p>Giao trong 24–48 giờ kèm đầy đủ chứng chỉ xuất xưởng theo lô.</p></div>
   </div>
@@ -700,7 +712,7 @@
     <div>
       <span class="p-tag">Đối tác chiến lược</span>
       <h3>Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh</h3>
-      <p>Hợp tác trực tiếp với nhà máy giúp KLC chủ động nguồn tôn lạnh chất lượng cao, giá gốc nhà máy, tiến độ ổn định — và ổn định đầu ra cho chính nhà máy.</p>
+      <p>Hợp tác trực tiếp với nhà máy giúp K&amp;C chủ động nguồn tôn lạnh chất lượng cao, giá gốc nhà máy, tiến độ ổn định — và ổn định đầu ra cho chính nhà máy.</p>
     </div>
     <a class="btn" href="#contact">Trao đổi hợp tác</a>
   </div>
@@ -721,7 +733,7 @@
 <section>
   <div class="cta">
     <h2>Nhận báo giá trong <em>24 giờ làm việc</em></h2>
-    <p>Gửi quy cách cần mua — đội ngũ KLC phản hồi kèm giá, tồn kho khả dụng và tiến độ giao.</p>
+    <p>Gửi quy cách cần mua — đội ngũ K&amp;C phản hồi kèm giá, tồn kho khả dụng và tiến độ giao.</p>
     <div class="hero-actions">
       <a class="btn btn-solid" href="tel:0902351396">Gọi 0902 351 396</a>
       <a class="btn btn-line" href="mailto:ctykc@gmail.com">ctykc@gmail.com</a>
@@ -733,10 +745,10 @@
   <div class="foot">
     <div>
       <a class="brand" href="#top" style="margin-bottom:14px">
-        <img src="../assets/img/klc-logo-512.png" alt="Logo KLC Steel">
-        <span><b style="color:#fff">KLC <span>Steel</span></b><small style="color:#8b988f">Thương mại thép &amp; tôn</small></span>
+        <img src="../assets/brand/kc-steel-mark.svg" alt="Logo K&amp;C Steel">
+        <span><b style="color:#fff">K&amp;C <span>Steel</span></b><small style="color:#8b988f">Thương mại thép &amp; tôn</small></span>
       </a>
-      <p>Công ty KLC — thương mại thép &amp; tôn: thép cán nóng tẩy gỉ (PO), thép cán nguội, tôn kẽm, tôn lạnh và tôn mạ màu cho công nghiệp và xây dựng.</p>
+      <p>Công ty K&amp;C — thương mại thép &amp; tôn: thép cán nóng tẩy gỉ (PO), thép cán nguội, tôn kẽm, tôn lạnh và tôn mạ màu cho công nghiệp và xây dựng.</p>
     </div>
     <div>
       <h4>Liên hệ</h4>
@@ -752,7 +764,7 @@
     </div>
   </div>
   <div class="copyright">
-    <span>© 2026 Công ty KLC. Dữ liệu năng lực chỉ mang tính minh hoạ.</span>
+    <span>© 2026 Công ty K&amp;C. Dữ liệu năng lực chỉ mang tính minh hoạ.</span>
     <span>Concept 14 — Kho hàng thông minh</span>
   </div>
 </footer>

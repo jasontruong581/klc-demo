@@ -383,7 +383,7 @@ function initScene(container) {
     renderer.toneMappingExposure = 1.08;
   } catch (error) {
     container.dataset.sceneState = 'fallback';
-    console.warn(`[KLC 3D] WebGL unavailable for ${sceneName}.`, error);
+    console.warn(`[K&C 3D] WebGL unavailable for ${sceneName}.`, error);
     return;
   }
 
@@ -397,7 +397,7 @@ function initScene(container) {
   } catch (error) {
     renderer.dispose();
     container.dataset.sceneState = 'fallback';
-    console.warn(`[KLC 3D] Scene setup failed for ${sceneName}.`, error);
+    console.warn(`[K&C 3D] Scene setup failed for ${sceneName}.`, error);
     return;
   }
 
@@ -544,7 +544,7 @@ function initScene(container) {
     renderFrame(false);
     schedule();
   } catch (error) {
-    console.warn(`[KLC 3D] Initial render failed for ${sceneName}.`, error);
+    console.warn(`[K&C 3D] Initial render failed for ${sceneName}.`, error);
     dispose();
   }
 }
