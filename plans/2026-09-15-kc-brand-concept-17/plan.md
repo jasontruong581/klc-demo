@@ -17,7 +17,7 @@ One reviewable PR: all 16 concepts display K&C; 13–16 carry accurate six-famil
 
 ## Guardrails
 
-- PDF is reference data only. Do not copy Vina One identity, capacity, factory claims, certifications, warranty, or guarantees.
+- PDF is reference data only. Do not copy the reference publisher's identity, capacity, factory claims, certifications, warranty, or guarantees.
 - Preserve 01–12 layouts and comparison purpose; brand copy only.
 - Keep `assets/klc3d/` path to avoid needless import churn. Rename only user-facing strings.
 - Product figures are reference capability, qualified by supplier CO/CQ and lot availability.

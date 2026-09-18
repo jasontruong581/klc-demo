@@ -1,6 +1,6 @@
 // Mẫu 15 — "Chuỗi cung ứng liền mạch": đảo diorama tuyến cung ứng của K&C.
 //
-// Authoritative state: (1) journey stage — 0 nhà máy Tân Phước Khánh, 1 kho K&C, 2 công trình —
+// Authoritative state: (1) journey stage — 0 nhà máy Tân Phước Khanh, 1 kho K&C, 2 công trình —
 // and (2) the truck's arc-length progress along ONE closed CatmullRom road. Every number the page
 // shows (chặng km, thời gian giao, toàn tuyến) is derived from that same curve through routeInfo(),
 // so the readouts and the road the truck actually drives can never disagree.
@@ -30,7 +30,7 @@ const ROAD_LENGTH_M = road.getLength();
  * and the named view the page's stage buttons fly the camera to.
  */
 export const STATIONS = [
-  { name: 'Nhà máy Tân Phước Khánh', at: [-4.2, DECK_Y, -1.9], t: 0 / 8,
+  { name: 'Nhà máy Tân Phước Khanh', at: [-4.2, DECK_Y, -1.9], t: 0 / 8,
     view: { position: [-9.8, 4.6, 4.4], target: [-4.2, DECK_Y + 0.5, -1.9] } },
   { name: 'Kho K&C', at: [0.6, DECK_Y, 2.35], t: 2 / 8,
     view: { position: [5.2, 3.8, -2.0], target: [0.6, DECK_Y + 0.4, 2.35] } },
@@ -160,7 +160,7 @@ export function createScene({ scene, camera, look, invalidate, viewport }) {
   asphalt.receiveShadow = true;
   scene.add(asphalt);
 
-  // ---- Station 1: nhà máy Tôn Tân Phước Khánh — hall, stack, two coils at the gate.
+  // ---- Station 1: nhà máy Tôn Tân Phước Khanh — hall, stack, two coils at the gate.
   const factory = new THREE.Group();
   factory.position.set(...STATIONS[0].at);
   scene.add(factory);

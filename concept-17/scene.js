@@ -11,7 +11,17 @@ export const PRODUCTS = {
     short: 'PO', name: 'Thép cán nóng tẩy gỉ', code: 'PO · Pickled & Oiled', form: 'coil',
     color: '#56605e', roughness: 0.5, metalness: 0.78,
     matrices: [{ label: '1,40–4,50 mm · 850–1.550 mm', minGauge: 1.4, maxGauge: 4.5, minWidth: 850, maxWidth: 1550, defaultGauge: 3, defaultWidth: 1250 }],
-    standards: 'JIS G3113 / G3132 / G3134 · EN 10025-2'
+    standards: 'JIS G3131 · G3101 · G3113 · G3132 · G3134 · SAE J403 · EN 10025-2 · EN 10111 · ASTM A1011',
+    finishLabel: 'Xử lý bề mặt',
+    finishes: [
+      { value: 'oiled', label: 'Tẩy gỉ + phủ dầu (tiêu chuẩn)' },
+      { value: 'dry', label: 'Tẩy gỉ, không phủ dầu (theo yêu cầu)' }
+    ],
+    coil: 'ID 610 mm · OD tối đa 2.100 mm',
+    extras: [
+      ['Giới hạn bền', '270–700 MPa tuỳ mác'],
+      ['Giới hạn chảy', '170–700 MPa tuỳ mác']
+    ]
   },
   crc: {
     short: 'CRC', name: 'Thép cán nguội', code: 'CRC · Cold Rolled', form: 'coil',
@@ -20,7 +30,17 @@ export const PRODUCTS = {
       { label: '0,18–0,30 mm · 850–1.250 mm', minGauge: 0.18, maxGauge: 0.3, minWidth: 850, maxWidth: 1250, defaultGauge: 0.25, defaultWidth: 1200 },
       { label: '0,30–2,50 mm · 850–1.550 mm', minGauge: 0.3, maxGauge: 2.5, minWidth: 850, maxWidth: 1550, defaultGauge: 1.2, defaultWidth: 1250 }
     ],
-    standards: 'JIS G3141 · ASTM A1008 · EN 10130 · BIS IS 513 · SAE J403'
+    standards: 'JIS G3141 · ASTM A1008 · EN 10130 · BIS IS 513 · SAE J403',
+    finishLabel: 'Bề mặt',
+    finishes: [
+      { value: 'dull', label: 'Dull — bề mặt mờ' },
+      { value: 'bright', label: 'Bright — bề mặt bóng' }
+    ],
+    coil: 'ID 508 / 610 mm · OD tối đa 2.000 mm',
+    extras: [
+      ['Phủ bề mặt', 'Màng dầu chống gỉ'],
+      ['Non-aging', 'SPCF, SPCG, DC05, DC06 — 6 tháng kể từ ngày sản xuất']
+    ]
   },
   gi: {
     short: 'GI', name: 'Tôn mạ kẽm', code: 'GI · Galvanized', form: 'coil',
@@ -30,7 +50,20 @@ export const PRODUCTS = {
       { label: '0,40–2,50 mm · 850–1.550 mm', minGauge: 0.4, maxGauge: 2.5, minWidth: 850, maxWidth: 1550, defaultGauge: 0.5, defaultWidth: 1250 },
       { label: '2,50–3,00 mm · 850–1.250 mm', minGauge: 2.5, maxGauge: 3, minWidth: 850, maxWidth: 1250, defaultGauge: 2.8, defaultWidth: 1250 }
     ],
-    standards: 'JIS G3302 · ASTM A653 · EN 10346 · AS 1397'
+    standards: 'JIS G3302 · ASTM A653 · EN 10346 · AS 1397',
+    finishLabel: 'Độ mạ kẽm — 2 mặt (g/m²)',
+    finishes: [
+      { value: 'Z050', label: 'Z050 — 50 g/m²' }, { value: 'Z080', label: 'Z080 — 80 g/m²' },
+      { value: 'Z100', label: 'Z100 — 100 g/m²' }, { value: 'Z120', label: 'Z120 — 120 g/m²' },
+      { value: 'Z180', label: 'Z180 — 180 g/m²' }, { value: 'Z220', label: 'Z220 — 220 g/m²' },
+      { value: 'Z275', label: 'Z275 — 275 g/m²' }, { value: 'Z350', label: 'Z350 — 350 g/m²' }
+    ],
+    coil: 'ID 508 / 610 mm · OD 1.000–2.100 mm · 3–30 tấn/cuộn',
+    extras: [
+      ['Thành phần mạ', '99% Zn'],
+      ['Xử lý sau mạ', 'Chromate / chống vân tay / phủ dầu (tuỳ chọn)'],
+      ['Độ bám uốn', 'T-bend 0–3T']
+    ]
   },
   gl: {
     short: 'GL', name: 'Tôn mạ hợp kim nhôm kẽm', code: 'GL · Galvalume', form: 'coil',
@@ -39,20 +72,67 @@ export const PRODUCTS = {
       { label: '0,16–0,40 mm · 850–1.300 mm', minGauge: 0.16, maxGauge: 0.4, minWidth: 850, maxWidth: 1300, defaultGauge: 0.35, defaultWidth: 1200 },
       { label: '0,40–2,00 mm · 850–1.550 mm', minGauge: 0.4, maxGauge: 2, minWidth: 850, maxWidth: 1550, defaultGauge: 0.5, defaultWidth: 1250 }
     ],
-    standards: 'JIS G3321 · ASTM A792 · EN 10346 · AS 1397'
+    standards: 'JIS G3321 · ASTM A792 · EN 10346 · AS 1397',
+    finishLabel: 'Độ mạ nhôm kẽm — 2 mặt (g/m²)',
+    finishes: [
+      { value: 'AZ050', label: 'AZ050 — 50 g/m²' }, { value: 'AZ070', label: 'AZ070 — 70 g/m²' },
+      { value: 'AZ090', label: 'AZ090 — 90 g/m²' }, { value: 'AZ100', label: 'AZ100 — 100 g/m²' },
+      { value: 'AZ120', label: 'AZ120 — 120 g/m²' }, { value: 'AZ150', label: 'AZ150 — 150 g/m²' },
+      { value: 'AZ165', label: 'AZ165 — 165 g/m²' }, { value: 'AZ185', label: 'AZ185 — 185 g/m²' }
+    ],
+    coil: 'ID 508 / 610 mm · OD 1.000–2.100 mm · 3–30 tấn/cuộn',
+    extras: [
+      ['Hợp kim mạ', 'Al 55,0% · Zn 43,4% · Si 1,6%'],
+      ['Xử lý sau mạ', 'Chromate / chống vân tay / phủ dầu (tuỳ chọn)'],
+      ['Độ bám uốn', 'T-bend 0–3T']
+    ]
   },
   zm: {
     short: 'ZM', name: 'Tôn mạ kẽm–nhôm–magiê', code: 'ZM · Zn-Al-Mg', form: 'coil',
     color: '#cbd8d1', roughness: 0.32, metalness: 0.86,
-    matrices: [], standards: 'Quy cách và tiêu chuẩn xác nhận theo nguồn hàng từng lô'
+    matrices: [
+      { label: '0,16–0,40 mm · 850–1.300 mm', minGauge: 0.16, maxGauge: 0.4, minWidth: 850, maxWidth: 1300, defaultGauge: 0.35, defaultWidth: 1200 },
+      { label: '0,40–2,50 mm · 850–1.550 mm', minGauge: 0.4, maxGauge: 2.5, minWidth: 850, maxWidth: 1550, defaultGauge: 0.5, defaultWidth: 1250 },
+      { label: '2,50–3,00 mm · 850–1.250 mm', minGauge: 2.5, maxGauge: 3, minWidth: 850, maxWidth: 1250, defaultGauge: 2.8, defaultWidth: 1250 }
+    ],
+    standards: 'JIS G3323 · EN 10346 · ASTM A1046',
+    finishLabel: 'Độ mạ Zn-Al-Mg — 2 mặt (g/m²)',
+    finishes: [
+      { value: 'ZM060', label: 'ZM060 — 60 g/m²' }, { value: 'ZM080', label: 'ZM080 — 80 g/m²' },
+      { value: 'ZM100', label: 'ZM100 — 100 g/m²' }, { value: 'ZM120', label: 'ZM120 — 120 g/m²' },
+      { value: 'ZM175', label: 'ZM175 — 175 g/m²' }, { value: 'ZM250', label: 'ZM250 — 250 g/m²' },
+      { value: 'ZM310', label: 'ZM310 — 310 g/m²' }
+    ],
+    coil: 'ID 508 / 610 mm · OD 1.000–2.100 mm · 3–30 tấn/cuộn',
+    extras: [
+      ['Hợp kim mạ', 'Zn nền · Al · Mg — tỷ lệ theo mác đặt hàng'],
+      ['Ưu thế', 'Chống ăn mòn cạnh cắt tốt hơn GI ở cùng khối lượng mạ'],
+      ['Xử lý sau mạ', 'Chromate / chống vân tay / phủ dầu (tuỳ chọn)']
+    ]
   },
   ppgi: {
     short: 'PPGI/PPGL', name: 'Tôn mạ màu', code: 'PPGI / PPGL · Pre-painted', form: 'coil',
     color: '#245b39', roughness: 0.5, metalness: 0.18,
     matrices: [{ label: '0,16–1,00 mm BMT · 850–1.300 mm', minGauge: 0.16, maxGauge: 1, minWidth: 850, maxWidth: 1300, defaultGauge: 0.45, defaultWidth: 1200 }],
-    standards: 'ASTM A755 · JIS G3312 / G3322 · EN 10169 · AS/NZS 2728'
+    standards: 'ASTM A755 · JIS G3312 / G3322 · EN 10169 · AS/NZS 2728',
+    finishLabel: 'Hệ sơn',
+    finishes: [
+      { value: 'PE', label: 'PE — polyester thông dụng' },
+      { value: 'SMP', label: 'SMP — silicon modified polyester' },
+      { value: 'PVDF', label: 'PVDF — bền màu ngoài trời' },
+      { value: 'EPOXY', label: 'Epoxy — lớp lót / mặt sau' }
+    ],
+    coil: 'ID 508 / 610 mm · OD thành phẩm 1.000–1.500 mm · tối đa 10 tấn/cuộn',
+    extras: [
+      ['Nền mạ', 'GI hoặc GL theo yêu cầu'],
+      ['Chiều dày màng sơn', 'Lót 5–20 µm + phủ 5–20 µm · tổng 2 mặt 20–50 µm'],
+      ['Số lớp sơn', 'Tối đa 4 lớp (lót/phủ mặt trước, lót/phủ mặt sau)'],
+      ['Bề mặt', 'Bóng, nhám, wrinkle, patterned'],
+      ['Màu', 'Dải màu tiêu chuẩn và đặt màu riêng theo mẫu duyệt']
+    ]
   }
 };
+
 
 export function theoreticalMassPerMetre(gaugeMm, widthMm) {
   return (gaugeMm / 1000) * (widthMm / 1000) * STEEL_DENSITY_KG_M3;

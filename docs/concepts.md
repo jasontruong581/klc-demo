@@ -128,7 +128,7 @@ Four independent directions built from the proposed K&C identity, green palette 
 catalogue — deliberately **not** derived from concepts 01–12. Unlike 01–12, these four carry six
 flat-steel lines (PO, CRC, GI, GL, ZM, PPGI/PPGL) with capability matrices, packing, trader QC and
 ordering sections. Figures are references only and require confirmation by CO/CQ and current lot
-availability. Each follows the same 3D rules: an authoritative state, readouts computed from the
+availability. Prices are never published — enquiries route to the sales line. Each follows the same 3D rules: an authoritative state, readouts computed from the
 geometry, named Vietnamese views, a no-WebGL fallback that keeps the page useful.
 
 ### 13 — Sàn giao dịch thép ([concept-13/](../concept-13/))
@@ -145,8 +145,7 @@ the mass — R = √(r² + m/(π·w·ρ)) — so the slider physically grows the
 (14) vs real wraps (hundreds) is stated on the stage.
 
 **Controls:** five modeled product switches (PO/CRC/GI/GL/PPGI), weight slider, run/pause and views
-"Toàn cảnh", "Mặt cuộn", "Sàn giao dịch". ZM remains catalogue-only until geometry inputs are
-confirmed by a supplier.
+"Toàn cảnh", "Mặt cuộn", "Sàn giao dịch". ZM is stocked; it shares GI surface data in the scene.
 
 ### 14 — Kho hàng thông minh ([concept-14/](../concept-14/))
 
@@ -161,7 +160,7 @@ over the drawn coils — tồn kho Σ π(R²−r²)·w·7850, mét dài Σ π(R�
 count = mesh count — so the slider and the panel cannot disagree.
 
 **Controls:** five modeled product switches (PO/CRC/GI/GL/PPGI), stock slider, run/pause and views
-"Toàn kho", "Dãy kệ", "Cận cuộn". ZM remains catalogue-only pending supplier confirmation.
+"Toàn kho", "Dãy kệ", "Cận cuộn". ZM is stocked; it shares GI surface data in the scene.
 
 ### 15 — Chuỗi cung ứng liền mạch ([concept-15/](../concept-15/))
 
@@ -204,11 +203,16 @@ trust signals with Concept 10's live specification and quote workflow.
 to the same product state as the catalogue and quote desk. Visitors can switch between warehouse
 and product views; ambient auto-spin is off by default.
 
-**Authoritative state:** the selected family, gauge and width drive the visible sample and
-theoretical kg/m readout. The calculation uses a flat-strip assumption and is labelled
-theoretical. ZM has no dimension matrix: its specification is explicitly supplier-confirmed.
+**Authoritative state:** the selected family, gauge, width, coating class and intended tonnage
+drive the visible sample, the theoretical kg/m readout, the derived total strip length and the
+quote draft. The calculation uses a flat-strip assumption and is labelled theoretical. All six
+families — ZM included — carry a confirmed dimension matrix, a coating or finish list, coil
+geometry and the documents that ship with the lot.
 
 **Controls:** six product families, warehouse/product view, capability-matrix selector, gauge,
-width and intended tonnage, plus a demo enquiry form that never claims a real submission without
-a backend. The page includes reduced-motion behaviour, keyboard focus, responsive cards and a
-no-WebGL content fallback.
+width, coating/finish class and intended tonnage, plus a demo enquiry form that never claims a
+real submission without a backend. The quote draft is composed from the same spec-desk state the
+scene reads, so the summary and the configurator cannot disagree. The page carries the packing,
+storage and handling section, names Tôn Tân Phước Khanh as the sourcing partner, routes pricing
+to the sales line rather than publishing figures, and includes reduced-motion behaviour, keyboard
+focus, responsive cards and a no-WebGL content fallback.

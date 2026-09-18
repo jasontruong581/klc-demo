@@ -28,12 +28,13 @@ B2B enquiries.
 | 14 | [Kho hàng thông minh](concept-14/) | New direction: bright logistics dashboard, warehouse bay with geometry-derived inventory |
 | 15 | [Chuỗi cung ứng liền mạch](concept-15/) | New direction: low-poly supply-route diorama, mill → K&C warehouse → site |
 | 16 | [Kiến trúc sóng tôn](concept-16/) | New direction: architectural editorial, parametric roofing-profile studio |
-| 17 | [K&C Steel Supply Desk](concept-17/) | Final direction: Concept 14 supply trust + Concept 10 quote configurator |
+| 17 | [K&C Steel Supply Desk](concept-17/) | Final direction: Concept 14 supply trust + Concept 10 quote configurator, full six-line spec sheet |
 
 Concepts 05–08 and 09–12 are 3D takes on 01–04 in the same order. Concepts 13–16 are the **K&C
 Brand Edition**: four independent directions built from the proposed company identity. They carry
 the six-line distribution catalogue (PO, CRC, GI, GL, ZM, PPGI/PPGL) with packing, QC and
 ordering sections; all capability figures require confirmation by CO/CQ and lot availability.
+K&C does not publish prices: every page routes pricing to the sales line.
 Concept 17 combines the most suitable directions for the target B2B audience. See
 [docs/concepts.md](docs/concepts.md) for what each one is trying to prove, and
 [docs/3d-architecture.md](docs/3d-architecture.md) for how the 3D pages are built.

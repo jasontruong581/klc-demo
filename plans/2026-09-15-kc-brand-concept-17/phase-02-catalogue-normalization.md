@@ -36,7 +36,7 @@
 
 - [x] All four concepts show six families and K&C identity.
 - [x] CRC/GI/GL capability matrices cannot imply unsupported width at extreme gauges.
-- [x] No Vina One brand/factory/capacity/warranty claim is presented as K&C's.
+- [x] No third-party brand/factory/capacity/warranty claim is presented as K&C's.
 - [x] ZM explicitly requires supplier confirmation.
 - [x] Product controls and 3D scenes remain functional at implementation handoff; final browser QA remains in Phase 05.
 
