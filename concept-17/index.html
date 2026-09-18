@@ -30,6 +30,7 @@
     .nav-links{display:flex;align-items:center;gap:28px}
     .nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600}
     .nav-links a:hover{color:var(--green)}
+    .nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:#fff}
     .btn{min-height:44px;border:1px solid transparent;border-radius:8px;padding:11px 20px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:700;cursor:pointer;transition:background .18s,color .18s,border-color .18s,transform .18s}
     .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:var(--action);color:#fff}
@@ -77,23 +78,37 @@
     .workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}.workflow article{background:#fff;padding:28px;border-right:1px solid var(--line)}.workflow article:last-child{border:0}.workflow .mono{color:var(--brass);font-size:12px}.workflow h3{margin:11px 0 7px;font-size:17px}.workflow p{margin:0;color:var(--muted);font-size:13px}
     .quote-section{padding:88px 0}.quote-box{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;padding:48px;border-radius:18px;background:var(--ink);color:#fff}.quote-box h2{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.1}.quote-box .copy{color:#bcc9c1}.quote-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.quote-form .field{margin:0}.quote-form label{color:#cbd5cf}.quote-form input,.quote-form textarea{background:#203229;border-color:#43574a;color:#fff}.quote-form input::placeholder,.quote-form textarea::placeholder{color:#8fa095}.quote-form .wide{grid-column:1/-1}.form-result{display:none;grid-column:1/-1;margin:0;padding:13px 15px;border-radius:8px;background:#e9f3ed;color:#0b5c2a;font-weight:700}.form-result.on{display:block}
     footer{border-top:1px solid var(--line);padding:34px 0 92px;color:var(--muted);font-size:13px}.footer-grid{display:flex;justify-content:space-between;gap:28px;align-items:center}.footer-grid .brand{color:var(--ink)}
+    .spec-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0}
+    .spec-list dt{grid-column:1;color:var(--muted);font-size:13px;padding:11px 0;border-bottom:1px solid var(--line)}
+    .spec-list dd{grid-column:2;margin:0;font-weight:600;font-size:13px;padding:11px 0;border-bottom:1px solid var(--line)}
+    .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+    .chip{padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font:500 12px "IBM Plex Mono",monospace;color:var(--muted)}
+    .care-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+    .care{padding:24px;border:1px solid var(--line);border-radius:12px;background:#fff}
+    .care h3{margin:0 0 10px;font-size:16px}
+    .care ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+    .care li{margin-bottom:6px}
+    .partner{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-top:30px;padding:26px 28px;border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:12px;background:#fff}
+    .partner .mono{color:var(--brass);font-size:12px}
+    .partner h3{margin:8px 0 6px;font-size:20px}
+    .partner p{margin:0;color:var(--muted);font-size:13px}
     .mobile-cta{display:none}
-    @media(max-width:1040px){.hero-grid,.desk,.product-sheet,.quote-box{grid-template-columns:1fr}.desk{padding-top:12px}.panel{position:static}.stage{min-height:520px}.signal-grid,.workflow{grid-template-columns:1fr 1fr}.workflow article:nth-child(2){border-right:0}.workflow article{border-bottom:1px solid var(--line)}.workflow article:nth-child(n+3){border-bottom:0}}
-    @media(max-width:720px){.shell{width:min(100% - 32px,1380px)}.utility,.nav-links>a:not(.btn){display:none}nav .shell{height:66px}.brand img{width:38px;height:38px}.hero{padding-top:44px}.hero-grid{gap:28px}h1{font-size:clamp(36px,11vw,52px)}.lede{font-size:16px}.desk{padding-bottom:64px}.stage{min-height:390px}.stage-top{inset:10px 10px auto}.scene-status{display:none}.scene-caption{right:10px;left:10px;bottom:10px}.panel-body,.panel-head{padding-left:20px;padding-right:20px}.section{padding:66px 0}.section-head{display:block}.section-head>p{margin-top:14px}.signal-grid,.workflow{grid-template-columns:1fr}.workflow article{border-right:0;border-bottom:1px solid var(--line)!important}.workflow article:last-child{border:0!important}.product-intro,.product-data{padding:24px}.product-data dl{grid-template-columns:1fr}.product-data dt{padding-bottom:3px;border:0}.product-data dd{padding-top:0}.quote-box{padding:28px 22px}.quote-form{grid-template-columns:1fr}.quote-form .wide{grid-column:auto}.footer-grid{align-items:flex-start;flex-direction:column}.mobile-cta{position:fixed;display:block;left:12px;right:12px;bottom:12px;z-index:40}.mobile-cta .btn{width:100%;box-shadow:0 12px 30px rgba(20,35,26,.25)}footer{padding-bottom:104px}}
+    @media(max-width:1040px){.hero-grid,.desk,.product-sheet,.quote-box{grid-template-columns:1fr}.desk{padding-top:12px}.panel{position:static}.stage{min-height:520px}.signal-grid,.workflow{grid-template-columns:1fr 1fr}.care-grid{grid-template-columns:1fr}.workflow article:nth-child(2){border-right:0}.workflow article{border-bottom:1px solid var(--line)}.workflow article:nth-child(n+3){border-bottom:0}}
+    @media(max-width:720px){.shell{width:min(100% - 32px,1380px)}.utility,.nav-links>a:not(.btn),.nav-links .btn-quiet{display:none}.nav-links{gap:0}nav .shell{height:66px}.brand img{width:38px;height:38px}.hero{padding-top:44px}.hero-grid{gap:28px}h1{font-size:clamp(36px,11vw,52px)}.lede{font-size:16px}.desk{padding-bottom:64px}.stage{min-height:390px}.stage-top{inset:10px 10px auto}.scene-status{display:none}.scene-caption{right:10px;left:10px;bottom:10px}.panel-body,.panel-head{padding-left:20px;padding-right:20px}.section{padding:66px 0}.section-head{display:block}.section-head>p{margin-top:14px}.signal-grid,.workflow,.care-grid{grid-template-columns:1fr}.partner{grid-template-columns:1fr;gap:14px}.spec-list{grid-template-columns:1fr}.spec-list dt{grid-column:1;padding-bottom:2px;border:0}.spec-list dd{grid-column:1;padding-top:0}.workflow article{border-right:0;border-bottom:1px solid var(--line)!important}.workflow article:last-child{border:0!important}.product-intro,.product-data{padding:24px}.product-data dl{grid-template-columns:1fr}.product-data dt{padding-bottom:3px;border:0}.product-data dd{padding-top:0}.quote-box{padding:28px 22px}.quote-form{grid-template-columns:1fr}.quote-form .wide{grid-column:auto}.footer-grid{align-items:flex-start;flex-direction:column}.mobile-cta{position:fixed;display:block;left:12px;right:12px;bottom:12px;z-index:40}.mobile-cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mobile-cta .btn{width:100%;box-shadow:0 12px 30px rgba(20,35,26,.25)}footer{padding-bottom:104px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
-  <div class="utility"><div class="shell"><span>Hồ sơ lô hàng: <strong>CO/CQ · Lot ID · ngày sản xuất</strong></span><span>Concept 17 · Bản mẫu trải nghiệm</span></div></div>
+  <div class="utility"><div class="shell"><span>Hồ sơ lô hàng: <strong>CO/CQ · Lot ID · ngày sản xuất</strong></span><span>Hotline &amp; Zalo <strong><a href="tel:0902351396" style="text-decoration:none">0902 351 396</a></strong> · <a href="mailto:ctykc@gmail.com" style="text-decoration:none">ctykc@gmail.com</a></span></div></div>
   <nav aria-label="Điều hướng chính"><div class="shell">
     <a class="brand" href="#top"><img src="../assets/brand/kc-steel-mark.svg" alt=""><span>K&amp;C Steel<small>Industrial supply</small></span></a>
-    <div class="nav-links"><a href="#supply">Năng lực cung ứng</a><a href="#products">Sản phẩm</a><a href="#process">QC &amp; giao hàng</a><a class="btn btn-primary" href="#quote">Yêu cầu báo giá</a></div>
+    <div class="nav-links"><a href="#supply">Năng lực cung ứng</a><a href="#products">Sản phẩm</a><a href="#packing">Đóng gói</a><a href="#process">QC &amp; giao hàng</a><a class="btn btn-quiet" href="tel:0902351396">Gọi 0902 351 396</a><a class="btn btn-primary" href="#quote">Yêu cầu báo giá</a></div>
   </div></nav>
 
   <main id="top">
     <header class="hero"><div class="shell hero-grid">
       <div><p class="eyebrow">K&amp;C Steel Supply Desk</p><h1>Đúng quy cách.<br>Rõ nguồn hàng.<br>Chủ động tiến độ.</h1><p class="lede">Một bàn làm việc số cho đội mua hàng B2B: đối chiếu dải sản xuất, hình dung lô hàng và chuẩn bị yêu cầu báo giá trong cùng một luồng.</p></div>
-      <div class="hero-proof"><strong>Quyết định dựa trên hồ sơ lô hàng</strong>Thông số được xác nhận lại theo CO/CQ, tồn kho và điều kiện giao nhận của từng đơn.</div>
+      <div class="hero-proof"><strong>Hợp tác cùng Tôn Tân Phước Khanh</strong>Nguồn hàng trực tiếp, không qua trung gian. Thông số được xác nhận lại theo CO/CQ, tồn kho và điều kiện giao nhận của từng đơn.</div>
     </div></header>
 
     <div class="shell desk" id="configurator">
@@ -108,21 +123,30 @@
         <div class="field"><label for="product">Dòng sản phẩm</label><select id="product"></select></div>
         <div class="field"><label for="matrix">Dải quy cách có thể tham chiếu</label><select id="matrix"></select></div>
         <div class="pair"><div class="field"><label for="gauge">Độ dày (mm)</label><input id="gauge" type="number" inputmode="decimal" step="0.01"></div><div class="field"><label for="width">Khổ rộng (mm)</label><input id="width" type="number" inputmode="numeric" step="10"></div></div>
+        <div class="field"><label for="finish" id="finish-label">Lớp phủ / bề mặt</label><select id="finish"></select></div>
         <div class="field"><label for="quantity">Nhu cầu dự kiến (tấn)</label><input id="quantity" type="number" min="1" step="1" value="20"></div>
-        <div class="readout"><div><span>Tiêu chuẩn tham chiếu</span><b id="out-standard">—</b></div><div><span>Khối lượng lý thuyết / mét dài</span><b id="out-mass">—</b></div><div><span>Trạng thái quy cách</span><b id="out-status">—</b></div></div>
+        <div class="readout"><div><span>Tiêu chuẩn tham chiếu</span><b id="out-standard">—</b></div><div><span>Khối lượng lý thuyết / mét dài</span><b id="out-mass">—</b></div><div><span>Ước tính tổng chiều dài</span><b id="out-length">—</b></div><div><span>Quy cách cuộn</span><b id="out-coil">—</b></div><div><span>Trạng thái quy cách</span><b id="out-status">—</b></div></div>
         <a class="btn btn-primary" style="width:100%" href="#quote">Chuẩn bị yêu cầu báo giá</a>
         <p class="note">Khối lượng lý thuyết dùng khối lượng riêng thép 7.850 kg/m³, chưa gồm dung sai cán, lớp phủ và bao bì. Không phải báo giá hoặc cam kết tồn kho.</p>
       </div></aside>
     </div>
 
-    <section class="section" id="supply"><div class="shell"><div class="section-head"><div><p class="eyebrow">Nền tảng của Concept 14</p><h2>Tín hiệu tin cậy cho quyết định mua hàng.</h2></div><p>Thay vì chỉ nói “có hàng”, mỗi bước đều gắn với dữ liệu mà bộ phận mua hàng, kỹ thuật và tài chính có thể đối chiếu.</p></div><div class="signal-grid">
-      <article class="signal"><span class="num">01</span><h3>Nguồn hàng theo lô</h3><p>Nhà sản xuất, tiêu chuẩn, mác thép và Lot ID được xác nhận trước khi chốt đơn.</p></article>
+    <section class="section" id="supply"><div class="shell"><div class="section-head"><div><p class="eyebrow">Năng lực cung ứng</p><h2>Tín hiệu tin cậy cho quyết định mua hàng.</h2></div><p>Thay vì chỉ nói “có hàng”, mỗi bước đều gắn với dữ liệu mà bộ phận mua hàng, kỹ thuật và tài chính có thể đối chiếu.</p></div><div class="signal-grid">
+      <article class="signal"><span class="num">01</span><h3>Nguồn hàng theo lô</h3><p>Hợp tác trực tiếp với Tôn Tân Phước Khanh. Nhà sản xuất, tiêu chuẩn, mác thép và Lot ID được xác nhận trước khi chốt đơn.</p></article>
       <article class="signal"><span class="num">02</span><h3>Tồn kho có thời điểm</h3><p>Quy cách và khối lượng khả dụng luôn đi kèm thời điểm kiểm tra, không dùng số liệu tĩnh.</p></article>
       <article class="signal"><span class="num">03</span><h3>Kiểm soát chất lượng</h3><p>Đối chiếu ngoại quan, kích thước, lớp mạ hoặc màu theo yêu cầu đã duyệt.</p></article>
       <article class="signal"><span class="num">04</span><h3>Kế hoạch giao nhận</h3><p>Chốt địa điểm, lịch giao, phương tiện và điều kiện bốc dỡ trước khi điều xe.</p></article>
-    </div></div></section>
+    </div>
+    <div class="partner"><img src="../assets/brand/kc-steel-mark.svg" alt="" width="64" height="64"><div><span class="mono">ĐỐI TÁC NGUỒN HÀNG</span><h3>Tôn Tân Phước Khanh × K&amp;C Steel</h3><p>K&amp;C lấy hàng trực tiếp từ Tôn Tân Phước Khanh — không qua trung gian. Mỗi lô đi kèm CO/CQ, nhãn cuộn và Lot ID để bộ phận kỹ thuật của bên mua đối chiếu được trước khi nhập kho.</p></div></div>
+    </div></section>
 
-    <section class="section catalogue" id="products"><div class="shell"><div class="section-head"><div><p class="eyebrow">Danh mục 6 dòng sản phẩm</p><h2>Tra cứu theo ma trận năng lực.</h2></div><p>Dải khổ thay đổi theo độ dày; vì vậy dữ liệu được trình bày theo từng ô thay vì gộp thành một khoảng min–max dễ gây hiểu nhầm.</p></div><div class="product-tabs" id="product-tabs" role="tablist" aria-label="Dòng sản phẩm"></div><article class="product-sheet" aria-live="polite"><div class="product-intro"><span class="mono" id="sheet-code">—</span><h3 id="sheet-name">—</h3><p id="sheet-copy">—</p></div><div class="product-data"><dl><dt>Ma trận quy cách</dt><dd id="sheet-matrix">—</dd><dt>Tiêu chuẩn</dt><dd id="sheet-standard">—</dd><dt>Chứng từ</dt><dd>CO/CQ, Lot ID và nhãn lô theo nguồn hàng thực tế</dd><dt>Dạng cung ứng</dt><dd>Cuộn; gia công/xả băng/cắt tấm theo xác nhận đơn hàng</dd></dl><p class="disclose">Thông số tham chiếu theo catalogue nhà sản xuất. K&amp;C xác nhận lại theo CO/CQ, dung sai, tồn kho và năng lực gia công của từng lô trước khi báo giá.</p></div></article></div></section>
+    <section class="section catalogue" id="products"><div class="shell"><div class="section-head"><div><p class="eyebrow">Danh mục 6 dòng thép dẹt</p><h2>Tra cứu theo ma trận năng lực.</h2></div><p>Dải khổ thay đổi theo độ dày; vì vậy dữ liệu được trình bày theo từng ô thay vì gộp thành một khoảng min–max dễ gây hiểu nhầm.</p></div><div class="product-tabs" id="product-tabs" role="tablist" aria-label="Dòng sản phẩm"></div><article class="product-sheet" aria-live="polite"><div class="product-intro"><span class="mono" id="sheet-code">—</span><h3 id="sheet-name">—</h3><p id="sheet-copy">—</p></div><div class="product-data"><dl class="spec-list" id="sheet-specs"></dl><p class="disclose">K&amp;C xác nhận lại theo CO/CQ, dung sai, tồn kho và năng lực gia công của từng lô trước khi báo giá. K&amp;C không niêm yết giá trên website — gọi <a href="tel:0902351396"><b>0902 351 396</b></a> để nhận giá theo lô.</p></div></article></div></section>
+
+    <section class="section" id="packing"><div class="shell"><div class="section-head"><div><p class="eyebrow">Đóng gói &amp; bảo quản</p><h2>Hàng giữ nguyên trạng tới chân công trình.</h2></div><p>Thép dẹt hỏng vì nước đọng và thao tác nâng hạ sai nhiều hơn là vì bản thân vật liệu. Hai mức đóng gói được chọn theo tuyến vận chuyển và thời gian lưu kho.</p></div><div class="care-grid">
+      <article class="care"><h3>Đóng gói tiêu chuẩn</h3><ul><li>Màng PE / giấy bảo vệ</li><li>Giấy chống ăn mòn VCI</li><li>Ke góc giấy hoặc kim loại</li><li>Nắp che thành cuộn</li><li>Đai chu vi và đai xuyên lòng</li></ul></article>
+      <article class="care"><h3>Đóng gói tăng cường</h3><ul><li>Bao gồm toàn bộ lớp tiêu chuẩn</li><li>Vỏ bọc thép bên ngoài</li><li>Ke góc gia cường</li><li>Đai chu vi và đai lòng loại nặng</li><li>Pallet đỡ khi cần</li></ul><p class="note" style="margin-top:12px">Dùng cho tuyến dài, lưu kho kéo dài hoặc điều kiện bốc dỡ khắc nghiệt.</p></article>
+      <article class="care"><h3>Lưu kho &amp; nâng hạ</h3><ul><li>Che mưa và tránh ngưng tụ hơi nước</li><li>Kê cao, không đặt trực tiếp nền ẩm</li><li>Nâng bằng đúng dụng cụ, không kéo lê</li><li>Tháo màng bảo vệ đúng hạn</li><li>Xuất theo FIFO — lô cũ đi trước</li></ul></article>
+    </div></div></section>
 
     <section class="section" id="process"><div class="shell"><div class="section-head"><div><p class="eyebrow">QC &amp; logistics</p><h2>Một đường kiểm soát từ yêu cầu đến giao nhận.</h2></div><p>Thông tin kỹ thuật chỉ có giá trị khi được giữ xuyên suốt giữa tư vấn, kho, gia công và vận chuyển.</p></div><div class="workflow">
       <article><span class="mono">01 · VERIFY</span><h3>Chốt spec</h3><p>Tiêu chuẩn, mác, kích thước, bề mặt, lớp mạ/màu và khối lượng.</p></article>
@@ -131,11 +155,11 @@
       <article><span class="mono">04 · DELIVER</span><h3>Điều phối giao</h3><p>Bảo vệ khỏi mưa/ngưng tụ, nâng đúng dụng cụ và không kéo lê vật liệu.</p></article>
     </div></div></section>
 
-    <section class="quote-section" id="quote"><div class="shell quote-box"><div><p class="eyebrow" style="color:#b9d9c5">Yêu cầu báo giá</p><h2>Đưa dữ liệu đúng cho đúng người phụ trách.</h2><p class="copy">Bản concept này chưa kết nối CRM hoặc gửi dữ liệu ra ngoài. Sau khi duyệt giao diện, biểu mẫu có thể nối tới quy trình kinh doanh thực tế.</p></div><form class="quote-form" id="quote-form"><div class="field"><label for="company">Doanh nghiệp *</label><input id="company" name="company" required autocomplete="organization" placeholder="Tên công ty"></div><div class="field"><label for="contact">Người liên hệ *</label><input id="contact" name="contact" required autocomplete="name" placeholder="Họ và tên"></div><div class="field"><label for="phone">Điện thoại *</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="Số điện thoại"></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="email@congty.vn"></div><div class="field"><label for="province">Tỉnh/thành giao hàng *</label><input id="province" name="province" required autocomplete="address-level1" placeholder="Ví dụ: Bình Dương"></div><div class="field"><label for="delivery">Ngày cần hàng dự kiến</label><input id="delivery" name="delivery" type="date"></div><div class="field wide"><label for="request-note">Ghi chú kỹ thuật / giao nhận</label><textarea id="request-note" name="request-note" placeholder="Mác thép, lớp mạ, màu, dung sai, quy cách gia công..."></textarea></div><button class="btn btn-primary wide" type="submit">Xem bản tóm tắt yêu cầu</button><p class="form-result" id="form-result" role="status"></p></form></div></section>
+    <section class="quote-section" id="quote"><div class="shell quote-box"><div><p class="eyebrow" style="color:#b9d9c5">Yêu cầu báo giá</p><h2>Đưa dữ liệu đúng cho đúng người phụ trách.</h2><p class="copy">K&amp;C không niêm yết giá trên website: giá phụ thuộc quy cách, lớp phủ, khối lượng và thời điểm lấy hàng. Gọi <a href="tel:0902351396" style="color:#fff"><b>0902 351 396</b></a> để nhận giá trực tiếp, hoặc điền phiếu để đội bán hàng chuẩn bị trước.</p><p class="copy" style="margin-top:14px;font-size:13px">Bản concept này chưa kết nối CRM hoặc gửi dữ liệu ra ngoài.</p></div><form class="quote-form" id="quote-form"><div class="field"><label for="company">Doanh nghiệp *</label><input id="company" name="company" required autocomplete="organization" placeholder="Tên công ty"></div><div class="field"><label for="contact">Người liên hệ *</label><input id="contact" name="contact" required autocomplete="name" placeholder="Họ và tên"></div><div class="field"><label for="phone">Điện thoại *</label><input id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="Số điện thoại"></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="ctykc@gmail.com"></div><div class="field"><label for="province">Tỉnh/thành giao hàng *</label><input id="province" name="province" required autocomplete="address-level1" placeholder="Ví dụ: Bình Dương"></div><div class="field"><label for="delivery">Ngày cần hàng dự kiến</label><input id="delivery" name="delivery" type="date"></div><div class="field wide"><label for="request-note">Ghi chú kỹ thuật / giao nhận</label><textarea id="request-note" name="request-note" placeholder="Mác thép, lớp mạ, màu, dung sai, quy cách gia công..."></textarea></div><button class="btn btn-primary wide" type="submit">Xem bản tóm tắt yêu cầu</button><p class="form-result" id="form-result" role="status"></p></form></div></section>
   </main>
 
   <footer><div class="shell footer-grid"><a class="brand" href="#top"><img src="../assets/brand/kc-steel-mark.svg" alt=""><span>K&amp;C Steel<small>Industrial supply</small></span></a><span>© 2026 K&amp;C Steel · Concept 17 — Steel Supply Desk</span><span>Bản concept, không phải website giao dịch.</span></div></footer>
-  <div class="mobile-cta"><a class="btn btn-primary" href="#quote">Yêu cầu báo giá</a></div>
+  <div class="mobile-cta"><a class="btn btn-quiet" href="tel:0902351396">Gọi ngay</a><a class="btn btn-primary" href="#quote">Yêu cầu báo giá</a></div>
 
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
   <script type="module">
@@ -145,10 +169,13 @@
     const els = {
       product:document.getElementById('product'), matrix:document.getElementById('matrix'),
       gauge:document.getElementById('gauge'), width:document.getElementById('width'), quantity:document.getElementById('quantity'),
+      finish:document.getElementById('finish'), finishLabel:document.getElementById('finish-label'),
+      outLength:document.getElementById('out-length'), outCoil:document.getElementById('out-coil'),
+      sheetSpecs:document.getElementById('sheet-specs'),
       outStandard:document.getElementById('out-standard'), outMass:document.getElementById('out-mass'), outStatus:document.getElementById('out-status'),
       sceneStatus:document.getElementById('scene-status'), fallback:document.getElementById('fallback'), fallbackTitle:document.getElementById('fallback-title'),
       productTabs:document.getElementById('product-tabs'), sheetCode:document.getElementById('sheet-code'), sheetName:document.getElementById('sheet-name'),
-      sheetCopy:document.getElementById('sheet-copy'), sheetMatrix:document.getElementById('sheet-matrix'), sheetStandard:document.getElementById('sheet-standard')
+      sheetCopy:document.getElementById('sheet-copy')
     };
     const number = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
     const descriptions = {
@@ -156,7 +183,7 @@
       crc:'Bề mặt và độ chính xác kích thước phù hợp cho dập, chấn, cán định hình và các chi tiết công nghiệp.',
       gi:'Lớp mạ kẽm bảo vệ nền thép; lựa chọn coating và xử lý bề mặt cần được xác nhận theo ứng dụng.',
       gl:'Lớp mạ hợp kim nhôm kẽm cho các ứng dụng xây dựng và công nghiệp yêu cầu khả năng bảo vệ bề mặt.',
-      zm:'Dòng mạ kẽm–nhôm–magiê được cung ứng theo yêu cầu; chưa công bố ma trận quy cách khi chưa có xác nhận nhà cung cấp.',
+      zm:'Lớp mạ kẽm–nhôm–magiê chống ăn mòn tốt hơn mạ kẽm thường ở cùng khối lượng mạ, đặc biệt tại cạnh cắt và lỗ khoan.',
       ppgi:'Nền GI hoặc GL có hệ sơn hoàn thiện; hỗ trợ bề mặt trơn, epoxy, wrinkle/patterned và màu theo xác nhận mẫu.'
     };
     let viewer = null;
@@ -196,10 +223,30 @@
       els.sheetCode.textContent = product.code;
       els.sheetName.textContent = product.name;
       els.sheetCopy.textContent = descriptions[id];
-      els.sheetMatrix.innerHTML = product.matrices.length ? product.matrices.map(m => m.label).join('<br>') : 'Theo yêu cầu — K&C chỉ xác nhận sau khi kiểm tra nguồn hàng';
-      els.sheetStandard.textContent = product.standards;
+      renderSpecSheet(product);
+      renderFinishes(product);
       setMatrix(0);
       if (syncScene) viewer?.world.setProduct(id, Number(els.width.value) || 1200);
+    }
+
+    // Ma trận quy cách + lớp phủ + quy cách cuộn, dựng từ cùng dữ liệu mà spec desk dùng.
+    function renderSpecSheet(product) {
+      const rows = [
+        ['Ma trận quy cách', product.matrices.map(m => m.label).join('<br>')],
+        [product.finishLabel, '<div class="chip-row">' + product.finishes.map(f => `<span class="chip">${f.label}</span>`).join('') + '</div>'],
+        ['Quy cách cuộn', product.coil],
+        ...product.extras,
+        ['Tiêu chuẩn', product.standards],
+        ['Chứng từ', 'CO/CQ, Lot ID và nhãn lô theo nguồn hàng thực tế'],
+        ['Dạng cung ứng', 'Cuộn; gia công / xả băng / cắt tấm theo xác nhận đơn hàng']
+      ];
+      els.sheetSpecs.innerHTML = rows.map(([term, detail]) => `<dt>${term}</dt><dd>${detail}</dd>`).join('');
+    }
+
+    function renderFinishes(product) {
+      els.finishLabel.textContent = product.finishLabel;
+      els.finish.replaceChildren();
+      for (const option of product.finishes) els.finish.add(new Option(option.label, option.value));
     }
 
     function updateState() {
@@ -207,15 +254,16 @@
       const matrix = product.matrices[Number(els.matrix.value) || 0];
       const gauge = Number(els.gauge.value), width = Number(els.width.value);
       els.outStandard.textContent = product.standards.split(' · ').slice(0, 2).join(' · ');
-      if (!matrix) {
-        els.outMass.textContent = 'Chờ xác nhận'; els.outStatus.textContent = 'Theo yêu cầu';
-        els.outStatus.style.color = 'var(--brass)';
-      } else {
-        const valid = gauge >= matrix.minGauge && gauge <= matrix.maxGauge && width >= matrix.minWidth && width <= matrix.maxWidth;
-        els.outMass.textContent = Number.isFinite(gauge) && Number.isFinite(width) ? `${number.format(theoreticalMassPerMetre(gauge, width))} kg/m` : '—';
-        els.outStatus.textContent = valid ? 'Trong ô tham chiếu' : 'Cần kiểm tra lại';
-        els.outStatus.style.color = valid ? 'var(--green)' : '#9a5318';
-      }
+      els.outCoil.textContent = product.coil;
+      const massPerMetre = Number.isFinite(gauge) && Number.isFinite(width) ? theoreticalMassPerMetre(gauge, width) : NaN;
+      els.outMass.textContent = Number.isFinite(massPerMetre) ? `${number.format(massPerMetre)} kg/m` : '—';
+      // Tổng chiều dài = khối lượng đặt hàng / khối lượng mỗi mét dài.
+      const tonnes = Number(els.quantity.value);
+      els.outLength.textContent = Number.isFinite(massPerMetre) && massPerMetre > 0 && tonnes > 0
+        ? `≈ ${number.format(Math.round(tonnes * 1000 / massPerMetre))} m` : '—';
+      const valid = matrix && gauge >= matrix.minGauge && gauge <= matrix.maxGauge && width >= matrix.minWidth && width <= matrix.maxWidth;
+      els.outStatus.textContent = valid ? 'Trong ô tham chiếu' : 'Cần kiểm tra lại';
+      els.outStatus.style.color = valid ? 'var(--green)' : '#9a5318';
       els.sceneStatus.textContent = `${product.short} · ${width ? number.format(width) + ' mm' : 'theo yêu cầu'}`;
       els.fallbackTitle.textContent = `${product.short} · ${product.name}`;
       viewer?.world.setProduct(selectedId, width || 1200);
@@ -225,6 +273,8 @@
     els.matrix.addEventListener('change', () => setMatrix(Number(els.matrix.value)));
     els.gauge.addEventListener('input', updateState);
     els.width.addEventListener('input', updateState);
+    els.quantity.addEventListener('input', updateState);
+    els.finish.addEventListener('change', updateState);
     chooseProduct('gl', false);
 
     const look = {
@@ -256,7 +306,16 @@
       const product = PRODUCTS[selectedId];
       const quantity = Number(els.quantity.value) || 0;
       const result = document.getElementById('form-result');
-      result.textContent = `Bản nháp: ${company} · ${product.short} · ${quantity ? number.format(quantity) + ' tấn' : 'chưa nhập khối lượng'}. Đây là bản demo, yêu cầu chưa được gửi ra ngoài.`;
+      // Tóm tắt phải trùng với spec desk — cùng một trạng thái, không nhập lại.
+      const spec = [
+        product.short,
+        els.gauge.value ? `${els.gauge.value} mm` : null,
+        els.width.value ? `khổ ${number.format(Number(els.width.value))} mm` : null,
+        els.finish.selectedOptions[0]?.value,
+        quantity ? `${number.format(quantity)} tấn` : 'chưa nhập khối lượng'
+      ].filter(Boolean).join(' · ');
+      result.textContent = `Bản nháp: ${company || 'chưa nhập doanh nghiệp'} — ${spec}. `
+        + `Gọi 0902 351 396 để nhận giá ngay. Đây là bản demo, yêu cầu chưa được gửi ra ngoài.`;
       result.classList.add('on'); result.scrollIntoView({block:'nearest'});
     });
   </script>

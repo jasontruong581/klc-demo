@@ -48,7 +48,7 @@ Hướng tối ưu là dùng Concept 14 làm nền tảng tin cậy, đưa confi
 
 ## 5. Đối chiếu catalogue sản phẩm
 
-Nguồn đối chiếu là tài liệu **Catalogue Vina One Steel 2026_final_view_updated.pdf** do khách hàng cung cấp. Tài liệu này chỉ được dùng để kiểm tra phạm vi sản phẩm và ma trận quy cách; mọi tuyên bố riêng về nhà máy, công nghệ, chứng nhận, công suất, bảo hành hoặc cam kết của Vina One đều nằm ngoài phạm vi thương hiệu K&C.
+Nguồn đối chiếu là tài liệu catalogue quy cách thép dẹt do khách hàng cung cấp. Tài liệu này chỉ được dùng để kiểm tra phạm vi sản phẩm và ma trận quy cách; mọi tuyên bố riêng về nhà máy, công nghệ, chứng nhận, công suất, bảo hành hoặc cam kết của bên phát hành tài liệu đều nằm ngoài phạm vi thương hiệu K&C.
 
 Catalogue tham chiếu gồm sáu nhóm cần xuất hiện trong trải nghiệm hoàn chỉnh:
 

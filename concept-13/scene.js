@@ -21,8 +21,7 @@ export const LINE_ORDER = ['po', 'crc', 'gi', 'gl', 'ppgi'];
 /** Representative strip gauge per product line (mm) — stated next to the length readout. */
 export const GAUGE_MM = { po: 3.0, crc: 1.2, gi: 0.5, gl: 0.45, ppgi: 0.45 };
 
-/** Demo unit prices in ₫/kg — marked "giá tham khảo, minh hoạ" everywhere they appear. */
-export const DEMO_PRICE_VND_PER_KG = { po: 18400, crc: 21900, gi: 24600, gl: 26500, ppgi: 31800 };
+
 
 /**
  * Surface identity of the five lines. scene-kit's STEEL only knows crc/hrc/gl, so the three
@@ -64,8 +63,7 @@ export function deriveCoil(productKey, tonnes) {
     outerRadiusM: R,
     odMm: R * 2000,
     lengthM: (Math.PI * annulus) / gauge,
-    realWraps: (R - r) / gauge,
-    priceVnd: kg * DEMO_PRICE_VND_PER_KG[productKey]
+    realWraps: (R - r) / gauge
   };
 }
 

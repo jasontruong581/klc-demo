@@ -22,7 +22,7 @@
 ## Acceptance
 
 - [ ] All 17 routes load over HTTP with no blocking console error.
-- [x] No accidental KLC/Vina One claim or temporary catalogue artifact is staged.
+- [x] No accidental third-party claim or temporary catalogue artifact is staged.
 - [ ] Concept 17 passes responsive/accessibility/reduced-motion smoke checks.
 - [ ] Code reviewer has no unresolved high-severity finding.
 - [ ] New PR URL exists, targets `main`, and lists verification evidence.

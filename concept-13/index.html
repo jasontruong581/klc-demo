@@ -116,7 +116,7 @@
   .weight output{font-family:var(--mono);font-size:13px;color:#fff;min-width:74px;text-align:right}
   .seg button[aria-current="true"]{background:rgba(47,224,138,.16);border-color:var(--emerald);color:var(--emerald)}
 
-  /* ---- price ticker strip ---- */
+  /* ---- availability ticker strip ---- */
   .ticker{margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(4,24,14,.7);overflow:hidden}
   .ticker-inner{display:flex;width:max-content;animation:tick 48s linear infinite}
   .ticker-inner:hover{animation-play-state:paused}
@@ -125,7 +125,7 @@
   .ticker ul{display:flex;list-style:none;gap:0}
   .ticker li{display:flex;align-items:center;gap:10px;padding:12px 28px;border-right:1px solid var(--line);font-family:var(--mono);font-size:12.5px;white-space:nowrap}
   .ticker li b{color:#fff;font-weight:500}
-  .up{color:var(--emerald)} .down{color:#ff7d6b} .note-chip{color:var(--gold)}
+  .up{color:var(--emerald)} .down{color:#ff7d6b} .note{color:var(--gold)} .note-chip{color:var(--gold)}
 
   /* ---- sections ---- */
   section{max-width:1180px;margin:0 auto;padding:88px 22px}
@@ -300,10 +300,11 @@
         <dt>Chiều dài dải ≈</dt><dd id="r-len">—</dd>
         <dt>Độ dày tính toán</dt><dd id="r-gauge">—</dd>
         <dt>Số vòng thực ≈</dt><dd id="r-wraps">—</dd>
-        <dt class="price">Đơn giá demo</dt><dd class="price"><b id="r-price">—</b></dd>
-        <dt>Giá trị lô ≈</dt><dd id="r-total">—</dd>
+        <dt class="price">Trạng thái</dt><dd class="price"><b id="r-status">—</b></dd>
+        <dt>Báo giá</dt><dd>Gọi 0902 351 396</dd>
       </dl>
-      <small>Đơn giá là <b>giá tham khảo minh hoạ</b>, không phải giá chào bán. Kích thước suy ra từ
+      <small><b>K&amp;C không niêm yết giá trên website.</b> Giá phụ thuộc quy cách, độ mạ, khối lượng
+        và thời điểm lấy hàng — gọi để nhận giá theo lô. Kích thước suy ra từ
         khối lượng = π(R²−r²)·khổ·7.850 kg/m³.</small>
     </aside>
 
@@ -326,7 +327,7 @@
     </div>
   </div>
 
-  <div class="ticker" aria-label="Bảng giá trực tiếp (số liệu minh hoạ)">
+  <div class="ticker" aria-label="Tình trạng nguồn hàng theo dòng sản phẩm">
     <div class="ticker-inner">
       <ul id="tape"></ul>
       <ul id="tape-dup" aria-hidden="true"></ul>
@@ -338,7 +339,7 @@
   <div class="eyebrow">Sổ lệnh · Danh mục phân phối</div>
   <h2>Sáu mã hàng, một chuẩn chứng từ</h2>
   <p class="sub">K&amp;C là nhà thương mại: sáu dòng thép dẹt dưới đây là hàng phân phối từ các nhà máy uy tín, giao kèm
-    CO/CQ theo từng lô, cắt tấm và xả băng theo quy cách yêu cầu. Tôn lạnh cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh.
+    CO/CQ theo từng lô, cắt tấm và xả băng theo quy cách yêu cầu. Tôn lạnh cấp trực tiếp từ nhà máy Tôn Tân Phước Khanh.
     Bấm "Nạp lên mô hình" để xem bề mặt dòng đó trên hologram.</p>
   <div class="book">
 
@@ -547,13 +548,13 @@
     <article class="ticket" id="line-gl">
       <header class="ticket-head">
         <div>
-          <div class="code">Mã 04 · GL — Galvalume · nguồn Tôn Tân Phước Khánh</div>
+          <div class="code">Mã 04 · GL — Galvalume · nguồn Tôn Tân Phước Khanh</div>
           <h3>Tôn lạnh (GL)</h3>
         </div>
         <span class="key">Dày nền 0,16–2,0 mm · độ mạ AZ050–AZ185</span>
         <button type="button" data-line="gl">Nạp GL lên mô hình →</button>
       </header>
-      <p class="intro">Thép cuộn mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si — chống ăn mòn và phản xạ nhiệt vượt trội so với mạ kẽm thuần ở cùng khối lượng mạ. Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khánh, đối tác chiến lược của K&amp;C.</p>
+      <p class="intro">Thép cuộn mạ hợp kim nhôm kẽm 55% Al – 43,4% Zn – 1,6% Si — chống ăn mòn và phản xạ nhiệt vượt trội so với mạ kẽm thuần ở cùng khối lượng mạ. Nguồn cấp trực tiếp từ nhà máy Tôn Tân Phước Khanh, đối tác chiến lược của K&amp;C.</p>
       <div class="cols">
         <div class="list">
           <h4>Ứng dụng tiêu biểu</h4>
@@ -693,7 +694,7 @@
 
     <!-- 06 · ZM -->
     <article class="ticket gold" id="line-zm">
-      <header class="ticket-head"><div><div class="code">Mã 06 · ZM — Zinc Aluminium Magnesium</div><h3>Thép mạ kẽm nhôm magie (ZM)</h3></div><span class="key">Cung ứng theo yêu cầu</span></header>
+      <header class="ticket-head"><div><div class="code">Mã 06 · ZM — Zinc Aluminium Magnesium</div><h3>Thép mạ kẽm nhôm magie (ZM)</h3></div><span class="key">Có nguồn hàng</span></header>
       <p class="intro">Dòng thép phủ hợp kim kẽm–nhôm–magie dành cho các ứng dụng cần khả năng bảo vệ mép cắt và chống ăn mòn cao. K&amp;C tiếp nhận quy cách dự án và xác nhận nguồn hàng trước khi báo giá.</p>
       <div class="cols"><div class="list"><h4>Ứng dụng tham khảo</h4><ul><li>Giá đỡ điện mặt trời</li><li>Kết cấu ngoài trời, máng cáp</li></ul></div><div class="list"><h4>Điều kiện cung ứng</h4><ul><li>Quy cách và lớp phủ theo yêu cầu dự án</li><li>Xác nhận tiêu chuẩn, CO/CQ và tồn kho từng lô</li></ul></div></div>
       <p class="lot-note">Catalogue nguồn chỉ nhận diện dòng ZM; không công bố ma trận kích thước. Mọi thông số phải được nhà cung cấp xác nhận trước khi chào hàng.</p>
@@ -748,7 +749,7 @@
   <div class="steps orders">
     <div class="step"><h3>Gửi yêu cầu</h3><p>Gọi hotline hoặc email quy cách: dòng sản phẩm, độ dày, khổ, số lượng.</p></div>
     <div class="step"><h3>Báo giá &amp; xác nhận</h3><p>K&amp;C báo giá và chốt quy cách, tiến độ trong 24 giờ làm việc.</p></div>
-    <div class="step"><h3>Chuẩn bị hàng</h3><p>Xuất từ kho sẵn hoặc điều phối từ nguồn nhà máy đối tác — tôn lạnh cấp trực tiếp từ Tôn Tân Phước Khánh.</p></div>
+    <div class="step"><h3>Chuẩn bị hàng</h3><p>Xuất từ kho sẵn hoặc điều phối từ nguồn nhà máy đối tác — tôn lạnh cấp trực tiếp từ Tôn Tân Phước Khanh.</p></div>
     <div class="step"><h3>Giao hàng + CO/CQ</h3><p>Giao trong 24–48 giờ kèm đầy đủ chứng chỉ xuất xưởng theo lô.</p></div>
   </div>
 </section>
@@ -757,7 +758,7 @@
   <div class="eyebrow">Vì sao chọn K&amp;C</div>
   <h2>Chất lượng – Uy tín – Bền vững</h2>
   <div class="usps">
-    <div class="usp"><span class="mono">USP-01</span><h3>Trực tiếp từ nhà máy</h3><p>Hợp tác trực tiếp với nhà máy Tôn Tân Phước Khánh — không qua trung gian.</p></div>
+    <div class="usp"><span class="mono">USP-01</span><h3>Trực tiếp từ nhà máy</h3><p>Hợp tác trực tiếp với nhà máy Tôn Tân Phước Khanh — không qua trung gian.</p></div>
     <div class="usp"><span class="mono">USP-02</span><h3>Giá cạnh tranh</h3><p>Cơ chế giá sát thị trường, cập nhật theo phiên như một sàn giao dịch thực thụ.</p></div>
     <div class="usp"><span class="mono">USP-03</span><h3>Nguồn hàng chất lượng</h3><p>CO/CQ đầy đủ theo từng lô, kiểm soát tiêu chuẩn JIS / ASTM / EN.</p></div>
     <div class="usp"><span class="mono">USP-04</span><h3>Ổn định đầu ra</h3><p>Sản lượng cam kết cho đại lý và nhà thầu — kế hoạch giao hàng dài hạn.</p></div>
@@ -768,7 +769,7 @@
   <div class="partner">
     <div>
       <span class="mono">Chuỗi cung ứng · Sourcing</span>
-      <h2>Tôn Tân Phước Khánh × K&amp;C</h2>
+      <h2>Tôn Tân Phước Khanh × K&amp;C</h2>
       <p>Quan hệ hợp tác trực tiếp với nhà máy giúp K&amp;C chủ động nguồn tôn lạnh: giá gốc, sản lượng
         ổn định và truy xuất được lô hàng từ dây chuyền mạ đến kho giao — nền tảng cho cam kết
         "ổn định đầu ra" với khách dự án.</p>
@@ -824,7 +825,7 @@
 </script>
 <script type="module">
 import { start } from '../assets/klc3d/runtime.js';
-import { createScene, deriveCoil, GAUGE_MM, DEMO_PRICE_VND_PER_KG, LINE_ORDER } from './scene.js';
+import { createScene, deriveCoil, GAUGE_MM, LINE_ORDER } from './scene.js';
 
 const LOOK = {
   toneMapping: 'ACESFilmicToneMapping',
@@ -842,7 +843,7 @@ const VIEWS = {
   'Sàn giao dịch': { position: [-5.6, 0.8, 5.6], target: [0, 1.1, 0] }
 };
 
-// The five lines with confirmed scene geometry; ZM stays catalogue-only pending supplier data.
+// The five lines that have modelled scene geometry; ZM is stocked but shares GI surface data.
 const LINE_LABEL = {
   po: 'CÁN NÓNG TẨY GỈ · PO',
   crc: 'CÁN NGUỘI · CRC',
@@ -865,12 +866,18 @@ const scene = start({
 });
 
 // ---- Authoritative page state; the scene and every readout derive from it. ----
-// GL opens the session: it is the flagship line sourced from Tôn Tân Phước Khánh.
+// GL opens the session: it is the flagship line sourced from Tôn Tân Phước Khanh.
 const state = { product: 'gl', tonnes: 10 };
 const nf0 = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const nf2 = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
 const put = (id, text) => { document.getElementById(id).textContent = text; };
+
+// Tình trạng nguồn hàng theo dòng — dùng chung cho HUD và dải thông tin.
+const STOCK_STATUS = {
+  po: 'Sẵn kho', crc: 'Sẵn kho', gi: 'Sẵn kho',
+  gl: 'Sẵn kho', zm: 'Đặt theo lô', ppgi: 'Đặt theo màu'
+};
 
 function render() {
   const d = deriveCoil(state.product, state.tonnes);
@@ -880,8 +887,7 @@ function render() {
   put('r-len', `${nf0.format(d.lengthM)} m`);
   put('r-gauge', `${nf2.format(GAUGE_MM[state.product])} mm`);
   put('r-wraps', `${nf0.format(d.realWraps)} vòng`);
-  put('r-price', `${nf0.format(DEMO_PRICE_VND_PER_KG[state.product])} ₫/kg`);
-  put('r-total', `${nf0.format(d.priceVnd)} ₫`);
+  put('r-status', STOCK_STATUS[state.product]);
   put('weight-out', `${nf1.format(state.tonnes)} tấn`);
   for (const button of document.querySelectorAll('#product-seg button')) {
     button.setAttribute('aria-pressed', String(button.dataset.line === state.product));
@@ -944,23 +950,24 @@ if (scene) {
   views.append(motion);
 }
 
-// Demo price tape — same demo prices as the HUD, marked minh hoạ.
+// Availability tape — nguồn hàng và thời gian giao, không phải giá.
 const TAPE = [
-  { key: 'po', delta: '+0,1%', dir: 'up' },
-  { key: 'crc', delta: '−0,2%', dir: 'down' },
-  { key: 'gi', delta: '+0,3%', dir: 'up' },
-  { key: 'gl', delta: '+0,4%', dir: 'up' },
-  { key: 'ppgi', delta: '−0,1%', dir: 'down' }
+  { key: 'po', lead: 'giao 24–48h', dir: 'up' },
+  { key: 'crc', lead: 'giao 24–48h', dir: 'up' },
+  { key: 'gi', lead: 'giao 24–48h', dir: 'up' },
+  { key: 'gl', lead: 'giao 24–48h', dir: 'up' },
+  { key: 'zm', lead: 'đặt theo lô', dir: 'note' },
+  { key: 'ppgi', lead: 'đặt theo màu', dir: 'note' }
 ];
 function fillTape(list) {
   for (const item of TAPE) {
     const li = document.createElement('li');
-    li.innerHTML = `<b>${LINE_LABEL[item.key]}</b> ${nf0.format(DEMO_PRICE_VND_PER_KG[item.key])} ₫/kg `
-      + `<span class="${item.dir}">${item.delta}</span>`;
+    li.innerHTML = `<b>${LINE_LABEL[item.key]}</b> ${STOCK_STATUS[item.key]} `
+      + `<span class="${item.dir}">${item.lead}</span>`;
     list.append(li);
   }
   const note = document.createElement('li');
-  note.innerHTML = '<span class="note-chip">SỐ LIỆU MINH HOẠ — KHÔNG PHẢI GIÁ CHÀO BÁN</span>';
+  note.innerHTML = '<span class="note-chip">K&C KHÔNG NIÊM YẾT GIÁ — GỌI 0902 351 396 ĐỂ NHẬN BÁO GIÁ THEO LÔ</span>';
   list.append(note);
 }
 fillTape(document.querySelector('#tape'));

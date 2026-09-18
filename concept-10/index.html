@@ -33,6 +33,7 @@
   nav ul{display:flex;gap:30px;list-style:none;align-items:center}
   nav a{text-decoration:none;color:var(--gray);font-size:14.5px;font-weight:500;transition:color .2s}
   nav a:hover{color:var(--green)}
+  .mobile-bar{display:none}
   .nav-cta{background:var(--green);color:#fff!important;padding:11px 24px;border-radius:8px;font-weight:600}
   .nav-cta:hover{background:var(--green-dark)}
 
@@ -143,18 +144,40 @@
     .why-grid{grid-template-columns:1fr 1fr}
     .foot{grid-template-columns:1fr 1fr}
     nav{padding:0 22px}
-    nav ul{display:none}
+    /* Keep the quote CTA reachable once the nav links collapse. */
+    nav ul{gap:0}
+    nav ul li:not(:last-child){display:none}
     .topbar{display:none}
     section,.hero,.build{padding-left:22px;padding-right:22px}
     footer{padding-left:22px;padding-right:22px}
   }
+  /* Phone layout: single column everywhere, plus a persistent call/quote bar. */
+  @media(max-width:640px){
+    section,.hero,.build,footer{padding-left:16px;padding-right:16px}
+    nav{padding:0 16px}
+    .hero{padding-top:34px}
+    h1{font-size:clamp(28px,8.5vw,40px)}
+    .hero-lede{font-size:15.5px}
+    .stage{aspect-ratio:1/1;min-height:230px}
+    .quote-body{padding:18px 18px}
+    .pair{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr;gap:24px}
+    .foot{grid-template-columns:1fr;gap:26px}
+    .nav-cta{padding:10px 16px;font-size:13.5px}
+    .mobile-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .mobile-bar a{min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:9px;text-decoration:none;font-weight:700;box-shadow:0 12px 30px rgba(12,40,22,.24)}
+    .mobile-bar .call{background:#fff;border:1px solid var(--line,#dfe5e1);color:var(--ink,#13251b)}
+    .mobile-bar .quote{background:var(--green);color:#fff}
+    footer{padding-bottom:96px}
+  }
+
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div>Hotline: <b>0900 000 000</b> · sales@kcsteel.vn</div>
-  <div>Giá thép cập nhật ngày <b>17/07/2026</b></div>
+  <div>Hotline: <b>0902 351 396</b> · ctykc@gmail.com</div>
+  <div>Báo giá theo lô — gọi <b>0902 351 396</b> để nhận giá</div>
 </div>
 
 <nav>
@@ -225,7 +248,7 @@
         <div class="total"><span>Tổng khối lượng</span><b id="out-total">—</b></div>
       </div>
       <button type="submit" class="btn btn-solid">Gửi yêu cầu báo giá</button>
-      <div class="quote-note">Hoặc gọi trực tiếp: 0900 000 000 (Zalo)</div>
+      <div class="quote-note">Hoặc gọi trực tiếp: 0902 351 396 (Zalo)</div>
       <div class="submitted" id="submitted"></div>
     </div>
     <p class="disclosure">Khối lượng lý thuyết theo khối lượng riêng 7.850 kg/m³, chưa gồm dung sai cán và dung sai cắt. Mô hình dựng ở tỷ lệ thật — độ dày không phóng đại, nên hãy dùng góc nhìn “Cạnh bó” để thấy lớp tấm.</p>
@@ -317,8 +340,8 @@
     </div>
     <div>
       <h4>Liên hệ</h4>
-      <p>Hotline: 0900 000 000</p>
-      <p>sales@kcsteel.vn</p>
+      <p>Hotline: 0902 351 396</p>
+      <p>ctykc@gmail.com</p>
       <p>KCN ..., TP. Hồ Chí Minh</p>
     </div>
   </div>
@@ -509,5 +532,6 @@ if (scene) {
 }
 </script>
 
+<div class="mobile-bar"><a class="call" href="tel:0902351396">Gọi 0902 351 396</a><a class="quote" href="#quote">Nhận báo giá</a></div>
 </body>
 </html>
